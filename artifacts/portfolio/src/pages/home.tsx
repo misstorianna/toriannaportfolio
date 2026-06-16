@@ -43,9 +43,6 @@ const skillColors = [
 ];
 
 // Placeholder for images while generating
-import cyberImg from "@/assets/images/cyber.png";
-import homelabImg from "@/assets/images/homelab.png";
-import pcbuildImg from "@/assets/images/pcbuild.png";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -229,24 +226,48 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-24 relative">
         <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="border-mythic p-8 bg-card/50 backdrop-blur-sm">
-              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">About Me</h2>
-              <p className="mb-4 text-muted-foreground leading-relaxed">
-                I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the parts of security that sit at intersections — how systems connect, how alerts tell a story, how people actually interact with security controls, and how the right technical decisions quietly protect an environment.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Outside of work I experiment with a Raspberry Pi homelab, tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
-              </p>
+          <div className="grid md:grid-cols-3 gap-10 items-start">
+            {/* Profile photo slot */}
+            <div className="flex flex-col items-center md:items-start">
+              <div className="relative w-full max-w-[260px] mx-auto md:mx-0 aspect-[3/4] rounded-xl overflow-hidden border-2 border-primary/40 bg-card/60 box-glow group">
+                <img
+                  src="/profile.jpg"
+                  alt="Torianna"
+                  className="w-full h-full object-cover"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+                {/* Placeholder shown when no photo */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 pointer-events-none">
+                  <div className="w-16 h-16 rounded-full border-2 border-dashed border-primary/40 flex items-center justify-center mb-3">
+                    <svg className="w-7 h-7 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                  </div>
+                  <p className="font-mono text-xs text-primary/40 leading-relaxed">Add <code className="text-primary/60">profile.jpg</code> to <code className="text-primary/60">public/</code></p>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 className="font-mono text-xl text-secondary mb-4 uppercase tracking-widest border-b border-border pb-2">Skills & Tools</h3>
-              <div className="flex flex-wrap gap-2">
-                {["Rapid7 InsightIDR", "KnowBe4", "Microsoft Entra ID", "Active Directory", "SAML / SSO", "LEQL", "MITRE ATT&CK", "Nmap", "OSINT", "DNS / DHCP", "TCP/IP", "Linux", "SSH", "Nginx", "Python", "Phishing Analysis"].map((skill, i) => (
-                  <Badge key={skill} variant="outline" className={`${skillColors[i % skillColors.length]} border font-mono py-1 hover:opacity-80 transition-opacity`}>
-                    {skill}
-                  </Badge>
-                ))}
+
+            {/* Bio + skills */}
+            <div className="md:col-span-2 space-y-8">
+              <div className="border-mythic p-8 bg-card/50 backdrop-blur-sm">
+                <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">About Me</h2>
+                <p className="mb-4 text-muted-foreground leading-relaxed">
+                  I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the parts of security that sit at intersections — how systems connect, how alerts tell a story, how people actually interact with security controls, and how the right technical decisions quietly protect an environment.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Outside of work I experiment with a Raspberry Pi homelab, tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-mono text-xl text-secondary mb-4 uppercase tracking-widest border-b border-border pb-2">Skills & Tools</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Rapid7 InsightIDR", "KnowBe4", "Microsoft Entra ID", "Active Directory", "SAML / SSO", "LEQL", "MITRE ATT&CK", "Nmap", "OSINT", "DNS / DHCP", "TCP/IP", "Linux", "SSH", "Nginx", "Python", "Phishing Analysis"].map((skill, i) => (
+                    <Badge key={skill} variant="outline" className={`${skillColors[i % skillColors.length]} border font-mono py-1 hover:opacity-80 transition-opacity`}>
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -261,11 +282,6 @@ export default function Home() {
             <h2 className="font-serif text-4xl text-foreground">Threat Intelligence</h2>
           </div>
           
-          <div className="mb-12 rounded-xl overflow-hidden border border-border box-glow aspect-video relative">
-             <img src={cyberImg} alt="Cybersecurity Lab" className="w-full h-full object-cover opacity-80" />
-             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-          </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="bg-background border-border/50 hover:border-ember/50 transition-colors group">
               <CardHeader>
@@ -329,8 +345,7 @@ export default function Home() {
             <h2 className="font-serif text-4xl text-foreground">Infrastructure & Homelab</h2>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-8 items-center">
-            <div className="lg:col-span-2 space-y-6">
+          <div className="grid md:grid-cols-3 gap-6">
               <div className="border-mythic p-6 bg-card/40">
                 <h3 className="font-serif text-xl text-primary mb-2">Raspberry Pi Setup</h3>
                 <p className="text-sm text-muted-foreground mb-4">
@@ -364,10 +379,6 @@ export default function Home() {
                   <Badge variant="outline" className="border-ember text-ember">DNS</Badge>
                 </div>
               </div>
-            </div>
-            <div className="lg:col-span-3 rounded-xl overflow-hidden border border-border box-glow aspect-square lg:aspect-auto lg:h-[500px] relative">
-              <img src={homelabImg} alt="Homelab Circuit Board" className="w-full h-full object-cover opacity-90" />
-            </div>
           </div>
         </div>
       </section>
@@ -380,12 +391,7 @@ export default function Home() {
             <Cpu className="w-8 h-8 text-primary" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-xl overflow-hidden border border-primary/30 box-glow aspect-[4/5] relative order-2 md:order-1">
-              <img src={pcbuildImg} alt="Custom PC Build" className="w-full h-full object-cover opacity-90" />
-            </div>
-            
-            <div className="order-1 md:order-2 space-y-8">
+          <div className="max-w-2xl mx-auto space-y-8">
               <div>
                 <h3 className="font-serif text-3xl text-primary mb-2">"The Grove Station"</h3>
                 <p className="text-muted-foreground">Current build in progress. Designed for gaming, running virtual machines, cybersecurity labs, and research — a machine that grows with the work.</p>
@@ -423,7 +429,6 @@ export default function Home() {
                   <Badge variant="outline" className="font-mono text-xs text-bark border-bark/40">Research</Badge>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </section>
