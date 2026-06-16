@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Download, Server, Shield, Cpu, Terminal, Sun, Moon } from "lucide-react";
+import { Github, Linkedin, Mail, Download, Server, Shield, Cpu, Terminal, Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 
 // Placeholder for images while generating
@@ -12,7 +12,10 @@ import pcbuildImg from "@/assets/images/pcbuild.png";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  const navItems = ["about", "cyber", "homelab", "pcbuild", "resume"];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +36,7 @@ export default function Home() {
   }, []);
 
   const scrollTo = (id: string) => {
+    setMobileMenuOpen(false);
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
@@ -47,11 +51,17 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-serif text-xl font-bold text-primary tracking-wider text-glow cursor-pointer" onClick={() => scrollTo('hero')}>
+          <span
+            className="font-serif text-xl font-bold text-primary tracking-wider text-glow cursor-pointer"
+            onClick={() => scrollTo('hero')}
+            data-testid="nav-logo"
+          >
             A.E.
           </span>
+
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {["about", "cyber", "homelab", "pcbuild", "resume"].map((item) => (
+            {navItems.map((item) => (
               <button
                 key={item}
                 onClick={() => scrollTo(item)}
@@ -71,6 +81,51 @@ export default function Home() {
             >
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex md:hidden items-center space-x-3">
+            <button
+              onClick={toggleTheme}
+              data-testid="button-theme-toggle-mobile"
+              aria-label="Toggle theme"
+              className="w-9 h-9 rounded-full border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-all"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => setMobileMenuOpen(prev => !prev)}
+              data-testid="button-mobile-menu"
+              aria-label="Toggle navigation menu"
+              className="w-9 h-9 rounded-full border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-all"
+            >
+              {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile dropdown */}
+        <div
+          data-testid="mobile-menu"
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out border-b border-border/50 ${
+            mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="container mx-auto px-6 py-4 flex flex-col space-y-1">
+            {navItems.map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollTo(item)}
+                data-testid={`nav-mobile-link-${item}`}
+                className={`text-left py-3 px-4 font-mono text-sm tracking-widest uppercase transition-colors rounded-md hover:bg-primary/10 hover:text-primary ${
+                  activeSection === item
+                    ? "text-primary bg-primary/5"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
           </div>
         </div>
       </nav>
