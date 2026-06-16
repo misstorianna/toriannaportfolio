@@ -23,58 +23,14 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 const certs = [
   {
-    abbr: "OSCP",
-    name: "Offensive Security Certified Professional",
-    issuer: "Offensive Security",
-    year: "2022",
-    borderClass: "border-l-ember",
-    textClass: "text-ember",
-    bgClass: "bg-ember/10",
-  },
-  {
-    abbr: "CISSP",
-    name: "Certified Information Systems Security Professional",
-    issuer: "(ISC)²",
-    year: "2023",
-    borderClass: "border-l-grove",
-    textClass: "text-grove",
-    bgClass: "bg-grove/10",
-  },
-  {
-    abbr: "CEH",
-    name: "Certified Ethical Hacker",
-    issuer: "EC-Council",
-    year: "2021",
+    abbr: "Sec+",
+    name: "CompTIA Security+ (SY0-701)",
+    issuer: "CompTIA",
+    year: "2025",
     borderClass: "border-l-primary",
     textClass: "text-primary",
     bgClass: "bg-primary/10",
-  },
-  {
-    abbr: "Sec+",
-    name: "CompTIA Security+",
-    issuer: "CompTIA",
-    year: "2020",
-    borderClass: "border-l-bark",
-    textClass: "text-bark",
-    bgClass: "bg-bark/10",
-  },
-  {
-    abbr: "CySA+",
-    name: "CompTIA Cybersecurity Analyst+",
-    issuer: "CompTIA",
-    year: "2021",
-    borderClass: "border-l-secondary",
-    textClass: "text-secondary",
-    bgClass: "bg-secondary/10",
-  },
-  {
-    abbr: "AWS-S",
-    name: "AWS Certified Security – Specialty",
-    issuer: "Amazon Web Services",
-    year: "2023",
-    borderClass: "border-l-ember",
-    textClass: "text-ember",
-    bgClass: "bg-ember/10",
+    earned: true,
   },
 ];
 
@@ -153,7 +109,7 @@ export default function Home() {
             onClick={() => scrollTo('hero')}
             data-testid="nav-logo"
           >
-            A.E.
+            T.
           </span>
 
           {/* Desktop nav */}
@@ -253,15 +209,15 @@ export default function Home() {
 
         <div className="relative z-10 text-center px-6">
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-4 text-glow">
-            Alex <span className="text-secondary">Eldridge</span>
+            <span className="text-secondary">Torianna</span>
           </h1>
           <p className="font-mono text-xl md:text-2xl text-primary tracking-widest uppercase mb-8">
-            Cybersecurity Professional
+            Cybersecurity Graduate
           </p>
           <div className="flex flex-col items-center justify-center space-y-4">
             <p className="max-w-xl text-muted-foreground font-sans text-lg">
-              Hunting digital threats the way a ranger tracks monsters.
-              Deep technical expertise rooted in Chicago.
+              Curious about how systems connect, alerts get investigated,
+              and technical decisions keep environments safe. Based in Chicago.
             </p>
             <Button onClick={() => scrollTo('about')} variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-mono mt-8">
               Initiate Handshake <Terminal className="ml-2 w-4 h-4" />
@@ -275,18 +231,18 @@ export default function Home() {
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="border-mythic p-8 bg-card/50 backdrop-blur-sm">
-              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">The Architect</h2>
+              <h2 className="font-serif text-3xl md:text-4xl text-primary mb-6">About Me</h2>
               <p className="mb-4 text-muted-foreground leading-relaxed">
-                I operate at the crossroads of raw hardware capability and intricate software defense. Based in Chicago, I build resilient systems and tear down malicious ones. My work is not just a profession; it's a craft steeped in the pursuit of arcane technical knowledge.
+                I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the parts of security that sit at intersections — how systems connect, how alerts tell a story, how people actually interact with security controls, and how the right technical decisions quietly protect an environment.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Whether configuring an enterprise firewall or tuning a personal homelab, I approach infrastructure like a living ecosystem.
+                Outside of work I experiment with a Raspberry Pi homelab, tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
               </p>
             </div>
             <div>
-              <h3 className="font-mono text-xl text-secondary mb-4 uppercase tracking-widest border-b border-border pb-2">Arsenal</h3>
+              <h3 className="font-mono text-xl text-secondary mb-4 uppercase tracking-widest border-b border-border pb-2">Skills & Tools</h3>
               <div className="flex flex-wrap gap-2">
-                {["Kali Linux", "Wireshark", "Metasploit", "Splunk", "Suricata", "Proxmox", "Docker", "pfSense", "Python", "Rust", "C++", "AWS Security", "Zero Trust"].map((skill, i) => (
+                {["Rapid7 InsightIDR", "KnowBe4", "Microsoft Entra ID", "Active Directory", "SAML / SSO", "LEQL", "MITRE ATT&CK", "Nmap", "OSINT", "DNS / DHCP", "TCP/IP", "Linux", "SSH", "Nginx", "Python", "Phishing Analysis"].map((skill, i) => (
                   <Badge key={skill} variant="outline" className={`${skillColors[i % skillColors.length]} border font-mono py-1 hover:opacity-80 transition-opacity`}>
                     {skill}
                   </Badge>
@@ -310,37 +266,54 @@ export default function Home() {
              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-background border-border/50 hover:border-primary/50 transition-colors group">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="bg-background border-border/50 hover:border-ember/50 transition-colors group">
               <CardHeader>
-                <CardTitle className="font-serif text-2xl group-hover:text-primary transition-colors">Operation: Silent Grove</CardTitle>
-                <CardDescription className="font-mono">Threat Hunting & Mitigation</CardDescription>
+                <CardTitle className="font-serif text-xl group-hover:text-ember transition-colors">Phishing Awareness Campaigns</CardTitle>
+                <CardDescription className="font-mono text-xs">Security Awareness · Great Wolf Lodge</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Led a complete teardown and analysis of a novel polymorphic ransomware variant. Developed YARA signatures and deployed custom IDS rules across the enterprise network.
+                  Orchestrated phishing simulations via KnowBe4 for 3,000+ employees. Designed realistic HTML/CSS email templates, analyzed results to identify risky users, and delivered targeted retraining to six flagged employees.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="font-mono text-xs text-secondary">YARA</Badge>
-                  <Badge variant="outline" className="font-mono text-xs text-secondary">Suricata</Badge>
-                  <Badge variant="outline" className="font-mono text-xs text-secondary">Reverse Engineering</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-ember border-ember/40">KnowBe4</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-ember border-ember/40">HTML/CSS</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-ember border-ember/40">Reporting</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-background border-border/50 hover:border-primary/50 transition-colors group">
+            <Card className="bg-background border-border/50 hover:border-grove/50 transition-colors group">
               <CardHeader>
-                <CardTitle className="font-serif text-2xl group-hover:text-primary transition-colors">Project: Aegis Wall</CardTitle>
-                <CardDescription className="font-mono">Zero Trust Architecture</CardDescription>
+                <CardTitle className="font-serif text-xl group-hover:text-grove transition-colors">Detection & Alerting Logic</CardTitle>
+                <CardDescription className="font-mono text-xs">SIEM Engineering · Great Wolf Lodge</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground mb-4 text-sm">
-                  Designed and implemented a zero-trust network model for a mid-sized financial firm. Eliminated implicit trust and reduced the attack surface by 85%.
+                  Built custom LEQL detection rules in Rapid7 InsightIDR to flag unauthorized password storage, excessive MFA failures, and repeated VPN login attempts. Created dashboards to surface suspicious authentication patterns.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="font-mono text-xs text-secondary">ZTA</Badge>
-                  <Badge variant="outline" className="font-mono text-xs text-secondary">Okta</Badge>
-                  <Badge variant="outline" className="font-mono text-xs text-secondary">Micro-segmentation</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-grove border-grove/40">Rapid7 InsightIDR</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-grove border-grove/40">LEQL</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-grove border-grove/40">MFA Monitoring</Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background border-border/50 hover:border-primary/50 transition-colors group md:col-span-2 lg:col-span-1">
+              <CardHeader>
+                <CardTitle className="font-serif text-xl group-hover:text-primary transition-colors">SSO & Identity Work</CardTitle>
+                <CardDescription className="font-mono text-xs">Identity & Access · Great Wolf Lodge</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  Configured and deployed SSO for core business apps via Microsoft Entra ID using SAML and IdP-initiated flows. Collaborated with app owners to resolve access issues, test cloud application authentication, and document rollout steps.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline" className="font-mono text-xs text-primary border-primary/40">Entra ID</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-primary border-primary/40">SAML</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-primary border-primary/40">SSO</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -359,25 +332,36 @@ export default function Home() {
           <div className="grid lg:grid-cols-5 gap-8 items-center">
             <div className="lg:col-span-2 space-y-6">
               <div className="border-mythic p-6 bg-card/40">
-                <h3 className="font-serif text-xl text-primary mb-2">The Nexus Cluster</h3>
+                <h3 className="font-serif text-xl text-primary mb-2">Raspberry Pi Setup</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  A high-availability Proxmox VE cluster handling personal services, isolated malware detonation labs, and automated backup routines. 
+                  Getting hands-on with Linux fundamentals — setting up Raspberry Pi OS, practicing terminal commands, managing files and directories, and establishing SSH access from the local network.
                 </p>
-                <ul className="space-y-2 font-mono text-xs text-secondary-foreground">
-                  <li><span className="text-primary">&gt;</span> 3x Mini PCs (i5-1240P, 64GB RAM)</li>
-                  <li><span className="text-primary">&gt;</span> TrueNAS Core Storage Backend</li>
-                  <li><span className="text-primary">&gt;</span> 10GbE SFP+ Backbone</li>
+                <ul className="space-y-2 font-mono text-xs text-muted-foreground">
+                  <li><span className="text-grove">&gt;</span> Raspberry Pi OS configuration</li>
+                  <li><span className="text-grove">&gt;</span> SSH remote access</li>
+                  <li><span className="text-grove">&gt;</span> File &amp; folder management via CLI</li>
                 </ul>
               </div>
               <div className="border-mythic p-6 bg-card/40">
-                <h3 className="font-serif text-xl text-primary mb-2">Perimeter Defense</h3>
+                <h3 className="font-serif text-xl text-primary mb-2">Home Networking</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Custom pfSense routing with strict VLAN isolation for IoT, Guest, and Lab environments. WireGuard VPN for secure remote access.
+                  Building foundational networking knowledge — understanding router and switch concepts, configuring LAN connectivity, assigning IP addresses, and troubleshooting local network issues.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-4">
-                  <Badge variant="outline" className="border-secondary text-secondary">VLANs</Badge>
-                  <Badge variant="outline" className="border-secondary text-secondary">WireGuard</Badge>
-                  <Badge variant="outline" className="border-secondary text-secondary">pfBlockerNG</Badge>
+                  <Badge variant="outline" className="border-bark text-bark">DNS / DHCP</Badge>
+                  <Badge variant="outline" className="border-bark text-bark">TCP/IP</Badge>
+                  <Badge variant="outline" className="border-bark text-bark">VLAN Concepts</Badge>
+                </div>
+              </div>
+              <div className="border-mythic p-6 bg-card/40">
+                <h3 className="font-serif text-xl text-primary mb-2">Self-Hosted Portfolio</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Hosting this portfolio site through Nginx, with DNS and Cloudflare Tunnel for safer public access — no unnecessary services exposed.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  <Badge variant="outline" className="border-ember text-ember">Nginx</Badge>
+                  <Badge variant="outline" className="border-ember text-ember">Cloudflare Tunnel</Badge>
+                  <Badge variant="outline" className="border-ember text-ember">DNS</Badge>
                 </div>
               </div>
             </div>
@@ -403,30 +387,40 @@ export default function Home() {
             
             <div className="order-1 md:order-2 space-y-8">
               <div>
-                <h3 className="font-serif text-3xl text-primary mb-2">"Emerald Monolith"</h3>
-                <p className="text-muted-foreground">The primary workstation. Built for compiling kernels, running local LLMs, and rendering 3D scenes without breaking a sweat.</p>
+                <h3 className="font-serif text-3xl text-primary mb-2">"The Grove Station"</h3>
+                <p className="text-muted-foreground">Current build in progress. Designed for gaming, running virtual machines, cybersecurity labs, and research — a machine that grows with the work.</p>
               </div>
 
               <div className="space-y-4 font-mono text-sm">
                 <div className="flex justify-between border-b border-border pb-2">
-                  <span className="text-secondary">CPU</span>
-                  <span className="text-foreground text-right">AMD Ryzen 9 7950X</span>
+                  <span className="text-grove">CPU</span>
+                  <span className="text-foreground text-right">AMD Ryzen 7 9800X3D</span>
                 </div>
                 <div className="flex justify-between border-b border-border pb-2">
-                  <span className="text-secondary">GPU</span>
-                  <span className="text-foreground text-right">NVIDIA RTX 4090 Founders Edition</span>
+                  <span className="text-grove">Motherboard</span>
+                  <span className="text-foreground text-right">Gigabyte B850 AORUS ELITE WIFI7</span>
                 </div>
                 <div className="flex justify-between border-b border-border pb-2">
-                  <span className="text-secondary">RAM</span>
-                  <span className="text-foreground text-right">64GB DDR5-6000 CL30</span>
+                  <span className="text-grove">RAM</span>
+                  <span className="text-foreground text-right">32GB DDR5</span>
                 </div>
                 <div className="flex justify-between border-b border-border pb-2">
-                  <span className="text-secondary">Storage</span>
-                  <span className="text-foreground text-right">4TB NVMe Gen5 RAID 0</span>
+                  <span className="text-muted-foreground">GPU</span>
+                  <span className="text-muted-foreground text-right italic">TBD</span>
                 </div>
                 <div className="flex justify-between border-b border-border pb-2">
-                  <span className="text-secondary">Cooling</span>
-                  <span className="text-foreground text-right">Custom EKWB Loop (Green Coolant)</span>
+                  <span className="text-muted-foreground">Storage</span>
+                  <span className="text-muted-foreground text-right italic">TBD</span>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest mb-2">Use Cases</p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline" className="font-mono text-xs text-ember border-ember/40">Gaming</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-grove border-grove/40">Virtual Machines</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-primary border-primary/40">Cyber Labs</Badge>
+                  <Badge variant="outline" className="font-mono text-xs text-bark border-bark/40">Research</Badge>
                 </div>
               </div>
             </div>
@@ -446,46 +440,56 @@ export default function Home() {
 
           <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/50 before:to-transparent">
             
-            {/* Experience Item */}
+            {/* Internship */}
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-primary bg-background text-primary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_10px_rgba(201,168,76,0.5)] z-10">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-primary bg-background text-primary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-[0_0_10px_rgba(201,168,76,0.3)] z-10">
                 <Shield className="w-4 h-4" />
               </div>
               <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] border-mythic p-6 bg-card/50">
-                <div className="flex flex-col mb-2">
-                  <span className="font-serif text-xl text-primary">Senior Security Engineer</span>
-                  <span className="font-mono text-sm text-secondary">Vanguard Tech | Chicago, IL</span>
-                  <span className="font-mono text-xs text-muted-foreground mt-1">2021 - Present</span>
+                <div className="flex flex-col mb-3">
+                  <span className="font-serif text-xl text-primary">IT Corporate Support / Cybersecurity Intern</span>
+                  <span className="font-mono text-sm text-ember">Great Wolf Lodge — Remote / Corporate Team</span>
+                  <span className="font-mono text-xs text-muted-foreground mt-1">June 2025 – August 2025</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Leading the incident response team. Architected SIEM solutions and mentored junior analysts in threat hunting methodologies.</p>
+                <ul className="text-sm text-muted-foreground space-y-1 list-none">
+                  <li><span className="text-primary mr-1">&rsaquo;</span>Phishing simulations via KnowBe4 for 3,000+ employees; designed HTML/CSS templates and produced retraining reports</li>
+                  <li><span className="text-primary mr-1">&rsaquo;</span>Built LEQL detection rules in Rapid7 InsightIDR for MFA failures, VPN abuse, and unauthorized password storage</li>
+                  <li><span className="text-primary mr-1">&rsaquo;</span>Configured SSO for core business apps via Microsoft Entra ID (SAML, IdP-initiated); documented rollout steps</li>
+                  <li><span className="text-primary mr-1">&rsaquo;</span>Shadowed Active Directory and multi-lodge network architecture sessions</li>
+                </ul>
               </div>
             </div>
 
-            {/* Experience Item */}
+            {/* Bradley Red Team */}
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-primary bg-background text-primary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-grove bg-background text-grove shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                 <Terminal className="w-4 h-4" />
               </div>
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] border-mythic p-6 bg-card/50">
-                <div className="flex flex-col mb-2">
-                  <span className="font-serif text-xl text-primary">Systems Administrator</span>
-                  <span className="font-mono text-sm text-secondary">AeroDynamics | Chicago, IL</span>
-                  <span className="font-mono text-xs text-muted-foreground mt-1">2018 - 2021</span>
+              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] border border-grove/30 p-6 bg-card/50">
+                <div className="flex flex-col mb-3">
+                  <span className="font-serif text-xl text-grove">Bradley Red Team</span>
+                  <span className="font-mono text-sm text-secondary">MIS 483: Advanced Ethical Hacking · Bradley University</span>
+                  <span className="font-mono text-xs text-muted-foreground mt-1">Fall 2025</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Managed Active Directory, automated server deployments using Ansible, and hardened internal networks against lateral movement.</p>
+                <ul className="text-sm text-muted-foreground space-y-1 list-none">
+                  <li><span className="text-grove mr-1">&rsaquo;</span>Conducted OSINT and reconnaissance for authorized physical and cybersecurity assessments</li>
+                  <li><span className="text-grove mr-1">&rsaquo;</span>Used WHOIS, DNS lookup, Google dorking, Wayback Machine, Shodan concepts, and Nmap</li>
+                  <li><span className="text-grove mr-1">&rsaquo;</span>Applied MITRE ATT&amp;CK to connect findings to real-world adversary tactics</li>
+                  <li><span className="text-grove mr-1">&rsaquo;</span>Participated in social engineering and physical security testing; documented improvement recommendations</li>
+                </ul>
               </div>
             </div>
 
-            {/* Education Item */}
+            {/* Education */}
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-border bg-background text-muted-foreground shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
-                <span className="font-serif font-bold">U</span>
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-bark bg-background text-bark shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                <span className="font-serif font-bold text-sm">B</span>
               </div>
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] border border-border p-6 bg-card/20">
+              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] border border-bark/30 p-6 bg-card/20">
                 <div className="flex flex-col mb-2">
-                  <span className="font-serif text-xl text-foreground">B.S. Computer Science</span>
-                  <span className="font-mono text-sm text-muted-foreground">University of Illinois Chicago</span>
-                  <span className="font-mono text-xs text-muted-foreground mt-1">2014 - 2018</span>
+                  <span className="font-serif text-xl text-bark">B.S. in Cybersecurity</span>
+                  <span className="font-mono text-sm text-muted-foreground">Bradley University · Peoria, IL</span>
+                  <span className="font-mono text-xs text-muted-foreground mt-1">Graduated May 2026</span>
                 </div>
               </div>
             </div>
@@ -499,25 +503,41 @@ export default function Home() {
         <div className="container mx-auto px-6 max-w-5xl">
           <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-2">Earned in the Field</h3>
           <h2 className="font-serif text-4xl text-foreground mb-12">Certifications</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {certs.map((cert) => (
+          <div className="grid md:grid-cols-2 gap-6 items-start">
+            {/* Featured earned cert */}
+            {certs.filter(c => c.earned).map((cert) => (
               <div
                 key={cert.abbr}
                 data-testid={`card-cert-${cert.abbr}`}
-                className={`border border-border/50 border-l-4 ${cert.borderClass} bg-card/50 hover:bg-card/80 transition-all group p-5 rounded-sm`}
+                className={`border border-border/50 border-l-4 ${cert.borderClass} bg-card/60 p-8 rounded-sm`}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <span className={`inline-flex items-center justify-center px-3 py-1 rounded-sm font-mono font-bold text-sm ${cert.bgClass} ${cert.textClass} border border-current/20`}>
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`inline-flex items-center justify-center px-4 py-1.5 rounded-sm font-mono font-bold text-base ${cert.bgClass} ${cert.textClass} border border-current/20`}>
                     {cert.abbr}
                   </span>
-                  <span className="font-mono text-xs text-muted-foreground">{cert.year}</span>
+                  <span className={`font-mono text-xs px-2 py-1 rounded-full ${cert.bgClass} ${cert.textClass} border border-current/20`}>
+                    Earned {cert.year}
+                  </span>
                 </div>
-                <p className="font-serif text-base text-foreground leading-snug mb-1 group-hover:text-primary transition-colors">
-                  {cert.name}
-                </p>
-                <p className={`font-mono text-xs ${cert.textClass} opacity-80`}>{cert.issuer}</p>
+                <p className="font-serif text-2xl text-foreground leading-snug mb-2">{cert.name}</p>
+                <p className={`font-mono text-sm ${cert.textClass} opacity-80`}>{cert.issuer}</p>
               </div>
             ))}
+            {/* Looking ahead */}
+            <div className="border border-border/30 border-dashed p-8 rounded-sm bg-card/20">
+              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">Currently Exploring</p>
+              <div className="space-y-3">
+                {[
+                  { abbr: "CySA+", name: "CompTIA Cybersecurity Analyst+", color: "text-grove" },
+                  { abbr: "CEH", name: "Certified Ethical Hacker", color: "text-ember" },
+                ].map(item => (
+                  <div key={item.abbr} className="flex items-center space-x-3 opacity-60">
+                    <span className={`font-mono text-xs font-bold ${item.color} border border-current/20 px-2 py-0.5 rounded-sm`}>{item.abbr}</span>
+                    <span className="font-serif text-sm text-muted-foreground">{item.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -544,7 +564,7 @@ export default function Home() {
                     <Mail className="w-4 h-4" />
                   </div>
                   <span className="font-mono text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                    alex@example.com
+                    torianna@example.com
                   </span>
                 </a>
                 <a
@@ -558,7 +578,7 @@ export default function Home() {
                     <Github className="w-4 h-4" />
                   </div>
                   <span className="font-mono text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                    github.com/alexeldridge
+                    github.com/torianna
                   </span>
                 </a>
                 <a
@@ -572,7 +592,7 @@ export default function Home() {
                     <Linkedin className="w-4 h-4" />
                   </div>
                   <span className="font-mono text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                    linkedin.com/in/alexeldridge
+                    linkedin.com/in/torianna
                   </span>
                 </a>
               </div>
@@ -720,7 +740,7 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center z-10 relative">
           <div className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
             <p className="mb-1 text-primary">Based in Chicago, IL</p>
-            <p>&copy; {new Date().getFullYear()} Alex Eldridge. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Torianna. All rights reserved.</p>
           </div>
         </div>
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-5 pointer-events-none pb-4">

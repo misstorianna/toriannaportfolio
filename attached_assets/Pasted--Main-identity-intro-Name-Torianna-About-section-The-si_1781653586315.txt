@@ -1,0 +1,156 @@
+
+Main identity / intro
+Name: Torianna
+About section
+The site says you are interested in:
+How systems connect
+How alerts are investigated
+How people interact with security controls
+How technical decisions help protect environments
+Cybersecurity experience
+Raspberry Pi homelab work
+PC build projects
+Ongoing technical growth
+It also mentions that the site’s style is inspired by:
+Nature
+Mossy greens
+Old stone
+Soft light
+Chicago
+
+Security Projects section
+1. Phishing Awareness Campaigns
+Includes:
+KnowBe4 campaign support
+HTML/CSS email templates
+Reporting and metrics
+Follow-up training
+Tracking risky users
+Turning security data into action
+2. Detection & Alerting Logic
+Includes:
+Rapid7 InsightIDR
+LEQL rules
+Dashboards
+VPN failure monitoring
+MFA failure monitoring
+Risky file-content monitoring
+Suspicious authentication activity
+3. SSO & Identity Work
+Includes:
+Microsoft Entra ID
+SSO configuration concepts
+App claims
+Group mappings
+Cloud application access testing
+Snowflake exposure
+Meraki exposure
+
+Raspberry Pi Setup
+Includes:
+Raspberry Pi OS setup
+Terminal command practice
+File and folder management
+SSH access
+Home Networking
+Includes:
+Router concepts
+Switch concepts
+LAN connectivity
+Device connectivity
+IP address assignment
+Local network troubleshooting
+Self-Hosted Website
+Includes:
+Building this portfolio website
+Nginx
+DNS
+Cloudflare Tunnel
+Safer publishing without exposing unnecessary services
+
+PC Build section
+Current/planned PC build info:
+CPU: AMD Ryzen 7 9800X3D
+Motherboard: Gigabyte B850 AORUS ELITE WIFI7
+Memory: 32GB DDR5
+Use cases: gaming, virtual machines, cybersecurity labs, documentation, and research
+
+Experience section
+Security Operations
+Mentions:
+Rapid7 InsightIDR
+Alerting logic
+Dashboards
+Phishing analysis
+MFA failure monitoring
+VPN login review
+Security awareness
+Identity & Access
+Mentions:
+Microsoft Entra ID
+Active Directory concepts
+SSO
+MFA
+User groups
+Access mappings
+Cloud application authentication
+Networking
+Mentions:
+DNS
+DHCP
+TCP/IP
+Routers
+Switches
+LAN troubleshooting
+VLAN concepts
+Basic network documentation
+Systems & Homelab
+Mentions:
+Linux
+Raspberry Pi OS
+SSH
+Nginx
+Windows
+File management
+Command-line practice
+Self-hosting
+
+Experience
+
+IT Corporate Support/Cybersecurity Intern 
+ Great Wolf Lodge (Remote/Corporate Team) |  June 2025 – August 2025
+
+Orchestrated phishing simulation campaigns using KnowBe4, designing realistic HTML/CSS emails
+for 3,000+ employees across U.S. lodges.
+Analyzed campaign results to identify risky clickers, producing detailed reports and targeted
+retraining plans
+Developed custom detection alerts in Rapid7 to flag unauthorized password storage, excessive MFA
+failures, and repeated VPN login attempts.
+Configured and deployed SSO for core business apps via Microsoft Entra ID (SAML, IdP-initiated) to
+improve authentication and security posture.
+Collaborated with application owners to troubleshoot access issues, and document rollout steps 
+ Delivered phishing-awareness guidance to six users identified through campaign results, reinforcing safe email and reporting practices .
+Participated in Lunch & Learn sessions and technical shadowing to expand knowledge of Active
+Directory and multi-lodge network architecture.
+
+Bradley Red Team
+MIS 483: Advanced Ethical Hacking | Bradley University | Fall 2025
+
+Tools/Methods: OSINT, WHOIS/DNS lookup, Google dorking, Wayback Machine, Shodan concepts, Nmap, reconnaissance documentation, social engineering awareness, physical security assessment
+
+Conducted OSINT and reconnaissance to support authorized cybersecurity and physical security assessments.
+Researched publicly available information, domain records, archived web pages, and exposed digital footprints to identify possible security gaps.
+Practiced ethical reconnaissance methods to organize findings and support testing within a defined scope.
+Participated in controlled social engineering and physical security testing to evaluate awareness, access control, and security procedures.
+Documented observations and translated findings into security improvement recommendations.
+Used the MITRE ATT&CK framework to better understand adversary tactics, techniques, and procedures and connect findings to real-world attack methods. 
+
+Education
+Bachelor of Science in Cybersecurity                                                                                                                                                   
+Bradley University | Graduated May 2026         
+
+Certifications
+CompTIA Security+ (SY0-701) — Earned 2025 
+
+
+
