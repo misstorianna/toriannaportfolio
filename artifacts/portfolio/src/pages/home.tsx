@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Download, Server, Shield, Cpu, Terminal } from "lucide-react";
+import { Github, Linkedin, Mail, Download, Server, Shield, Cpu, Terminal, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/hooks/use-theme";
 
 // Placeholder for images while generating
 import cyberImg from "@/assets/images/cyber.png";
@@ -11,6 +12,7 @@ import pcbuildImg from "@/assets/images/pcbuild.png";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +50,7 @@ export default function Home() {
           <span className="font-serif text-xl font-bold text-primary tracking-wider text-glow cursor-pointer" onClick={() => scrollTo('hero')}>
             A.E.
           </span>
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {["about", "cyber", "homelab", "pcbuild", "resume"].map((item) => (
               <button
                 key={item}
@@ -56,10 +58,19 @@ export default function Home() {
                 className={`text-sm font-mono tracking-widest uppercase transition-colors hover:text-primary ${
                   activeSection === item ? "text-primary" : "text-muted-foreground"
                 }`}
+                data-testid={`nav-link-${item}`}
               >
                 {item}
               </button>
             ))}
+            <button
+              onClick={toggleTheme}
+              data-testid="button-theme-toggle"
+              aria-label="Toggle theme"
+              className="w-9 h-9 rounded-full border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-all"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
           </div>
         </div>
       </nav>

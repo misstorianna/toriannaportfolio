@@ -104,6 +104,31 @@
   --ring: 44 53% 54%;
 }
 
+/* Parchment daylight theme */
+.light {
+  --background: 42 58% 92%;       /* warm parchment #F5EDD9 */
+  --foreground: 120 41% 9%;       /* dark forest #0D1F0D */
+  --border: 42 30% 72%;           /* muted tan border */
+  --card: 42 50% 96%;             /* cream card surface */
+  --card-foreground: 120 41% 9%;
+  --card-border: 42 30% 72%;
+  --popover: 42 50% 96%;
+  --popover-foreground: 120 41% 9%;
+  --popover-border: 42 30% 72%;
+  --primary: 44 53% 40%;          /* deeper gold for contrast on light */
+  --primary-foreground: 42 58% 96%;
+  --secondary: 113 39% 28%;       /* forest green */
+  --secondary-foreground: 42 60% 95%;
+  --muted: 42 35% 85%;            /* warm sand */
+  --muted-foreground: 120 20% 30%; /* muted dark green */
+  --accent: 44 53% 40%;
+  --accent-foreground: 42 58% 96%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 42 60% 90%;
+  --input: 42 30% 72%;
+  --ring: 44 53% 40%;
+}
+
 @layer base {
   * {
     @apply border-border;
