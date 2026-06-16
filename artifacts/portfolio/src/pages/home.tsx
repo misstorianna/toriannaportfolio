@@ -21,6 +21,71 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
+const certs = [
+  {
+    abbr: "OSCP",
+    name: "Offensive Security Certified Professional",
+    issuer: "Offensive Security",
+    year: "2022",
+    borderClass: "border-l-ember",
+    textClass: "text-ember",
+    bgClass: "bg-ember/10",
+  },
+  {
+    abbr: "CISSP",
+    name: "Certified Information Systems Security Professional",
+    issuer: "(ISC)²",
+    year: "2023",
+    borderClass: "border-l-grove",
+    textClass: "text-grove",
+    bgClass: "bg-grove/10",
+  },
+  {
+    abbr: "CEH",
+    name: "Certified Ethical Hacker",
+    issuer: "EC-Council",
+    year: "2021",
+    borderClass: "border-l-primary",
+    textClass: "text-primary",
+    bgClass: "bg-primary/10",
+  },
+  {
+    abbr: "Sec+",
+    name: "CompTIA Security+",
+    issuer: "CompTIA",
+    year: "2020",
+    borderClass: "border-l-bark",
+    textClass: "text-bark",
+    bgClass: "bg-bark/10",
+  },
+  {
+    abbr: "CySA+",
+    name: "CompTIA Cybersecurity Analyst+",
+    issuer: "CompTIA",
+    year: "2021",
+    borderClass: "border-l-secondary",
+    textClass: "text-secondary",
+    bgClass: "bg-secondary/10",
+  },
+  {
+    abbr: "AWS-S",
+    name: "AWS Certified Security – Specialty",
+    issuer: "Amazon Web Services",
+    year: "2023",
+    borderClass: "border-l-ember",
+    textClass: "text-ember",
+    bgClass: "bg-ember/10",
+  },
+];
+
+const skillColors = [
+  "bg-primary/10 text-primary border-primary/30",
+  "bg-ember/10 text-ember border-ember/30",
+  "bg-grove/10 text-grove border-grove/30",
+  "bg-bark/10 text-bark border-bark/30",
+  "bg-secondary/20 text-secondary border-secondary/30",
+];
+
 // Placeholder for images while generating
 import cyberImg from "@/assets/images/cyber.png";
 import homelabImg from "@/assets/images/homelab.png";
@@ -221,8 +286,8 @@ export default function Home() {
             <div>
               <h3 className="font-mono text-xl text-secondary mb-4 uppercase tracking-widest border-b border-border pb-2">Arsenal</h3>
               <div className="flex flex-wrap gap-2">
-                {["Kali Linux", "Wireshark", "Metasploit", "Splunk", "Suricata", "Proxmox", "Docker", "pfSense", "Python", "Rust", "C++", "AWS Security", "Zero Trust"].map(skill => (
-                  <Badge key={skill} variant="secondary" className="bg-secondary/20 text-primary hover:bg-secondary/40 border border-primary/20 font-mono py-1">
+                {["Kali Linux", "Wireshark", "Metasploit", "Splunk", "Suricata", "Proxmox", "Docker", "pfSense", "Python", "Rust", "C++", "AWS Security", "Zero Trust"].map((skill, i) => (
+                  <Badge key={skill} variant="outline" className={`${skillColors[i % skillColors.length]} border font-mono py-1 hover:opacity-80 transition-opacity`}>
                     {skill}
                   </Badge>
                 ))}
@@ -425,6 +490,34 @@ export default function Home() {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-24 bg-card/30 relative">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-2">Earned in the Field</h3>
+          <h2 className="font-serif text-4xl text-foreground mb-12">Certifications</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {certs.map((cert) => (
+              <div
+                key={cert.abbr}
+                data-testid={`card-cert-${cert.abbr}`}
+                className={`border border-border/50 border-l-4 ${cert.borderClass} bg-card/50 hover:bg-card/80 transition-all group p-5 rounded-sm`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <span className={`inline-flex items-center justify-center px-3 py-1 rounded-sm font-mono font-bold text-sm ${cert.bgClass} ${cert.textClass} border border-current/20`}>
+                    {cert.abbr}
+                  </span>
+                  <span className="font-mono text-xs text-muted-foreground">{cert.year}</span>
+                </div>
+                <p className="font-serif text-base text-foreground leading-snug mb-1 group-hover:text-primary transition-colors">
+                  {cert.name}
+                </p>
+                <p className={`font-mono text-xs ${cert.textClass} opacity-80`}>{cert.issuer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
