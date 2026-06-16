@@ -1,9 +1,25 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod/v4";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Mail, Download, Server, Shield, Cpu, Terminal, Sun, Moon, Menu, X } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Github, Linkedin, Mail, Download, Server, Shield, Cpu, Terminal, Sun, Moon, Menu, X, Send, CheckCircle } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { useToast } from "@/hooks/use-toast";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.email("Please enter a valid email address"),
+  subject: z.string().min(3, "Subject must be at least 3 characters"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
 
 // Placeholder for images while generating
 import cyberImg from "@/assets/images/cyber.png";
@@ -13,13 +29,29 @@ import pcbuildImg from "@/assets/images/pcbuild.png";
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { toast } = useToast();
 
-  const navItems = ["about", "cyber", "homelab", "pcbuild", "resume"];
+  const navItems = ["about", "cyber", "homelab", "pcbuild", "resume", "contact"];
+
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { name: "", email: "", subject: "", message: "" },
+  });
+
+  const onSubmit = (values: ContactFormValues) => {
+    console.log("Contact form submission:", values);
+    setSubmitted(true);
+    toast({
+      title: "Message transmitted.",
+      description: "Thanks for reaching out — I'll respond within 24 hours.",
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "about", "cyber", "homelab", "pcbuild", "resume"];
+      const sections = ["hero", "about", "cyber", "homelab", "pcbuild", "resume", "contact"];
       const current = sections.find(section => {
         const el = document.getElementById(section);
         if (el) {
@@ -397,34 +429,211 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer / Contact */}
-      <footer className="border-t border-border/50 bg-background pt-16 pb-8 relative overflow-hidden">
-        <div className="container mx-auto px-6 text-center z-10 relative">
-          <h2 className="font-serif text-3xl text-primary mb-8 text-glow">Establish Connection</h2>
-          
-          <div className="flex justify-center space-x-6 mb-12">
-            <a href="#" className="w-12 h-12 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all box-glow">
-              <Mail className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-12 h-12 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all box-glow">
-              <Github className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-12 h-12 rounded-full border border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all box-glow">
-              <Linkedin className="w-5 h-5" />
-            </a>
-          </div>
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-card/30 relative">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            {/* Left: heading + social links */}
+            <div>
+              <h2 className="font-serif text-4xl text-foreground mb-4">Establish Connection</h2>
+              <p className="text-muted-foreground mb-10 leading-relaxed">
+                Whether you have a project in mind, a threat to investigate, or just want to talk
+                shop about homelabs and hardware — my inbox is open.
+              </p>
 
-          <div className="font-mono text-sm text-muted-foreground uppercase tracking-widest border-t border-border/50 pt-8 inline-block px-12">
-            <p className="mb-2 text-primary">Based in Chicago, IL</p>
+              <div className="space-y-4 mb-10">
+                <a
+                  href="mailto:alex@example.com"
+                  data-testid="link-email"
+                  className="flex items-center space-x-4 group"
+                >
+                  <div className="w-10 h-10 rounded-full border border-primary/40 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <span className="font-mono text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                    alex@example.com
+                  </span>
+                </a>
+                <a
+                  href="https://github.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="link-github"
+                  className="flex items-center space-x-4 group"
+                >
+                  <div className="w-10 h-10 rounded-full border border-primary/40 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <Github className="w-4 h-4" />
+                  </div>
+                  <span className="font-mono text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                    github.com/alexeldridge
+                  </span>
+                </a>
+                <a
+                  href="https://linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="link-linkedin"
+                  className="flex items-center space-x-4 group"
+                >
+                  <div className="w-10 h-10 rounded-full border border-primary/40 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                    <Linkedin className="w-4 h-4" />
+                  </div>
+                  <span className="font-mono text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                    linkedin.com/in/alexeldridge
+                  </span>
+                </a>
+              </div>
+
+              <div className="border-mythic p-4 bg-card/40 inline-block">
+                <p className="font-mono text-xs text-secondary uppercase tracking-widest">
+                  Based in Chicago, IL
+                </p>
+              </div>
+            </div>
+
+            {/* Right: contact form */}
+            <div className="border-mythic p-8 bg-card/50 backdrop-blur-sm">
+              {submitted ? (
+                <div
+                  data-testid="contact-success"
+                  className="flex flex-col items-center justify-center text-center py-12 space-y-4"
+                >
+                  <CheckCircle className="w-16 h-16 text-primary" />
+                  <h3 className="font-serif text-2xl text-primary">Message Transmitted</h3>
+                  <p className="text-muted-foreground text-sm max-w-xs">
+                    Your signal reached me. I'll respond within 24 hours.
+                  </p>
+                  <Button
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-mono mt-4"
+                    onClick={() => { setSubmitted(false); form.reset(); }}
+                    data-testid="button-send-another"
+                  >
+                    Send Another
+                  </Button>
+                </div>
+              ) : (
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-5"
+                    data-testid="form-contact"
+                  >
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-mono text-xs uppercase tracking-widest text-secondary">
+                              Name
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Your name"
+                                data-testid="input-name"
+                                className="bg-background/60 border-border focus:border-primary font-mono text-sm"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-mono text-xs uppercase tracking-widest text-secondary">
+                              Email
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                type="email"
+                                placeholder="you@example.com"
+                                data-testid="input-email"
+                                className="bg-background/60 border-border focus:border-primary font-mono text-sm"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="subject"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-mono text-xs uppercase tracking-widest text-secondary">
+                            Subject
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="What's this about?"
+                              data-testid="input-subject"
+                              className="bg-background/60 border-border focus:border-primary font-mono text-sm"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="font-mono text-xs uppercase tracking-widest text-secondary">
+                            Message
+                          </FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Tell me what's on your mind..."
+                              data-testid="textarea-message"
+                              className="bg-background/60 border-border focus:border-primary font-mono text-sm min-h-[120px] resize-none"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <Button
+                      type="submit"
+                      data-testid="button-submit-contact"
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/80 font-mono tracking-widest"
+                      disabled={form.formState.isSubmitting}
+                    >
+                      <Send className="mr-2 w-4 h-4" />
+                      Transmit Message
+                    </Button>
+                  </form>
+                </Form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border/50 bg-background py-8 relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center z-10 relative">
+          <div className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
+            <p className="mb-1 text-primary">Based in Chicago, IL</p>
             <p>&copy; {new Date().getFullYear()} Alex Eldridge. All rights reserved.</p>
           </div>
         </div>
-        
-        {/* Subtle background element */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-5 pointer-events-none pb-4">
-           <svg viewBox="0 0 100 20" className="w-full fill-primary">
-             <path d="M0,20 L10,10 L20,15 L30,5 L40,15 L50,0 L60,15 L70,5 L80,15 L90,10 L100,20 Z" />
-           </svg>
+          <svg viewBox="0 0 100 20" className="w-full fill-primary">
+            <path d="M0,20 L10,10 L20,15 L30,5 L40,15 L50,0 L60,15 L70,5 L80,15 L90,10 L100,20 Z" />
+          </svg>
         </div>
       </footer>
     </div>
