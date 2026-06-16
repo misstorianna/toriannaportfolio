@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "TJ5vc1YLgKNuM2qJU4hCA"
+uri = "file://artifacts/portfolio/src/assets/images/cyber.png"
+type = "image"
+title = "Cybersecurity glowing server rack"
+
+[[generated]]
+id = "9FgDzXYARc1VVIHkTG7oP"
+uri = "file://artifacts/portfolio/src/assets/images/homelab.png"
+type = "image"
+title = "Dragon themed circuit board"
+
+[[generated]]
+id = "PFkBdJ4QUai5ZVNxV508e"
+uri = "file://artifacts/portfolio/src/assets/images/pcbuild.png"
+type = "image"
+title = "Dramatic PC build"
