@@ -41,7 +41,7 @@
   --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-destructive-border: var(--destructive-border);
 
-  /* Steampunk accent palette */
+  /* Green cyberpunk accent palette */
   --color-ember: hsl(var(--ember));
   --color-grove: hsl(var(--grove));
   --color-bark: hsl(var(--bark));
@@ -56,34 +56,34 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ── Steampunk Dark (default) ─────────────────────────────── */
+/* ── Green Cyberpunk Dark (default) ──────────────────────── */
 :root {
-  --background: 25 22% 8%;      /* #1C1209 — coal furnace */
-  --foreground: 42 60% 90%;     /* #F5ECD7 — aged parchment text */
-  --border: 32 38% 22%;         /* #432E12 — burnished brass edge */
-  --card: 26 20% 12%;           /* #231508 — dark mahogany */
-  --card-foreground: 42 60% 90%;
-  --card-border: 32 38% 22%;
-  --popover: 26 20% 12%;
-  --popover-foreground: 42 60% 90%;
-  --popover-border: 32 38% 22%;
-  --primary: 38 75% 52%;        /* #D49B1E — polished brass */
-  --primary-foreground: 25 22% 8%;
-  --secondary: 22 60% 42%;      /* #AB5520 — aged copper */
-  --secondary-foreground: 42 60% 90%;
-  --muted: 26 18% 16%;          /* #2A1D0F — dark muted */
-  --muted-foreground: 34 22% 60%; /* #A08060 — warm amber-grey */
-  --accent: 38 75% 52%;
-  --accent-foreground: 25 22% 8%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 42 60% 90%;
-  --input: 32 38% 22%;
-  --ring: 38 75% 52%;
-  --radius: 0.25rem;             /* sharper, mechanical corners */
-  /* Steampunk extended palette */
-  --ember: 12 72% 48%;          /* #CB3A15 — rust & firebox */
-  --grove: 168 28% 28%;         /* #2F6B5D — verdigris patina */
-  --bark: 18 52% 26%;           /* #63311A — dark walnut */
+  --background: 120 38% 5%;      /* #081208 — deep system black-green */
+  --foreground: 120 20% 88%;     /* #D0E8D0 — terminal green-white */
+  --border: 120 55% 16%;         /* #0D4D0D — dark neon grid line */
+  --card: 120 34% 8%;            /* #0D1A0D — dark panel */
+  --card-foreground: 120 20% 88%;
+  --card-border: 120 55% 16%;
+  --popover: 120 34% 8%;
+  --popover-foreground: 120 20% 88%;
+  --popover-border: 120 55% 16%;
+  --primary: 120 68% 48%;        /* #28C228 — electric green */
+  --primary-foreground: 120 38% 5%;
+  --secondary: 180 62% 40%;      /* #1A9999 — neon cyan */
+  --secondary-foreground: 120 20% 88%;
+  --muted: 120 28% 11%;          /* dark muted panel */
+  --muted-foreground: 120 18% 56%; /* #6B9B6B — dim terminal green */
+  --accent: 120 68% 48%;
+  --accent-foreground: 120 38% 5%;
+  --destructive: 0 70% 40%;
+  --destructive-foreground: 120 20% 88%;
+  --input: 120 55% 16%;
+  --ring: 120 68% 48%;
+  --radius: 0.25rem;
+  /* Cyberpunk accent palette */
+  --ember: 280 72% 55%;          /* #9933CC — neon violet/purple */
+  --grove: 150 65% 40%;          /* #22B566 — bright matrix green */
+  --bark: 120 48% 26%;           /* #226622 — deep grid green */
 
   --app-font-sans: 'Inter', sans-serif;
   --app-font-serif: 'Cinzel', 'Fraunces', serif;
@@ -91,58 +91,58 @@
 }
 
 .dark {
-  --background: 25 22% 8%;
-  --foreground: 42 60% 90%;
-  --border: 32 38% 22%;
-  --card: 26 20% 12%;
-  --card-foreground: 42 60% 90%;
-  --card-border: 32 38% 22%;
-  --popover: 26 20% 12%;
-  --popover-foreground: 42 60% 90%;
-  --popover-border: 32 38% 22%;
-  --primary: 38 75% 52%;
-  --primary-foreground: 25 22% 8%;
-  --secondary: 22 60% 42%;
-  --secondary-foreground: 42 60% 90%;
-  --muted: 26 18% 16%;
-  --muted-foreground: 34 22% 60%;
-  --accent: 38 75% 52%;
-  --accent-foreground: 25 22% 8%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 42 60% 90%;
-  --input: 32 38% 22%;
-  --ring: 38 75% 52%;
-  --ember: 12 72% 48%;
-  --grove: 168 28% 28%;
-  --bark: 18 52% 26%;
+  --background: 120 38% 5%;
+  --foreground: 120 20% 88%;
+  --border: 120 55% 16%;
+  --card: 120 34% 8%;
+  --card-foreground: 120 20% 88%;
+  --card-border: 120 55% 16%;
+  --popover: 120 34% 8%;
+  --popover-foreground: 120 20% 88%;
+  --popover-border: 120 55% 16%;
+  --primary: 120 68% 48%;
+  --primary-foreground: 120 38% 5%;
+  --secondary: 180 62% 40%;
+  --secondary-foreground: 120 20% 88%;
+  --muted: 120 28% 11%;
+  --muted-foreground: 120 18% 56%;
+  --accent: 120 68% 48%;
+  --accent-foreground: 120 38% 5%;
+  --destructive: 0 70% 40%;
+  --destructive-foreground: 120 20% 88%;
+  --input: 120 55% 16%;
+  --ring: 120 68% 48%;
+  --ember: 280 72% 55%;
+  --grove: 150 65% 40%;
+  --bark: 120 48% 26%;
 }
 
-/* ── Steampunk Light — aged document ─────────────────────── */
+/* ── Light mode — phosphor terminal paper ─────────────────── */
 .light {
-  --background: 38 50% 87%;     /* #EDD9A0 — old parchment */
-  --foreground: 25 30% 14%;     /* #2D1C09 — charcoal ink */
-  --border: 35 32% 62%;         /* #BCA070 — tanned leather */
-  --card: 38 48% 93%;           /* #F5E8C4 — cream page */
-  --card-foreground: 25 30% 14%;
-  --card-border: 35 32% 62%;
-  --popover: 38 48% 93%;
-  --popover-foreground: 25 30% 14%;
-  --popover-border: 35 32% 62%;
-  --primary: 38 70% 36%;        /* deeper brass for contrast */
-  --primary-foreground: 38 50% 95%;
-  --secondary: 22 58% 32%;      /* deeper copper */
-  --secondary-foreground: 38 50% 95%;
-  --muted: 38 36% 80%;          /* warm sand */
-  --muted-foreground: 25 20% 34%; /* dark warm grey */
-  --accent: 38 70% 36%;
-  --accent-foreground: 38 50% 95%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 42 60% 90%;
-  --input: 35 32% 62%;
-  --ring: 38 70% 36%;
-  --ember: 12 68% 40%;
-  --grove: 168 28% 22%;
-  --bark: 18 50% 20%;
+  --background: 120 30% 94%;     /* #E4F2E4 — pale green paper */
+  --foreground: 120 38% 8%;      /* #0D1F0D — dark terminal ink */
+  --border: 120 35% 70%;         /* soft green rule */
+  --card: 120 28% 98%;           /* near-white card */
+  --card-foreground: 120 38% 8%;
+  --card-border: 120 35% 70%;
+  --popover: 120 28% 98%;
+  --popover-foreground: 120 38% 8%;
+  --popover-border: 120 35% 70%;
+  --primary: 120 62% 32%;        /* deeper green for contrast */
+  --primary-foreground: 120 28% 98%;
+  --secondary: 180 55% 30%;      /* deeper cyan */
+  --secondary-foreground: 120 28% 98%;
+  --muted: 120 22% 88%;
+  --muted-foreground: 120 22% 32%;
+  --accent: 120 62% 32%;
+  --accent-foreground: 120 28% 98%;
+  --destructive: 0 70% 40%;
+  --destructive-foreground: 120 20% 88%;
+  --input: 120 35% 70%;
+  --ring: 120 62% 32%;
+  --ember: 280 65% 42%;
+  --grove: 150 58% 28%;
+  --bark: 120 42% 20%;
 }
 
 @layer base {
@@ -160,27 +160,29 @@
   }
 }
 
+/* Neon green glow on text */
 .text-glow {
   text-shadow:
-    0 0 10px hsl(var(--primary) / 0.7),
-    0 0 30px hsl(var(--primary) / 0.3),
-    0 0 60px hsl(var(--primary) / 0.1);
+    0 0 8px hsl(var(--primary) / 0.8),
+    0 0 24px hsl(var(--primary) / 0.4),
+    0 0 60px hsl(var(--primary) / 0.15);
 }
 
+/* Neon box glow */
 .box-glow {
   box-shadow:
-    0 0 20px hsl(var(--primary) / 0.25),
-    0 0 60px hsl(var(--primary) / 0.08),
+    0 0 18px hsl(var(--primary) / 0.3),
+    0 0 50px hsl(var(--primary) / 0.1),
     inset 0 1px 0 hsl(var(--primary) / 0.12);
 }
 
-/* Riveted panel border */
+/* Riveted panel border — cyber chassis */
 .border-mythic {
   border: 1px solid hsl(var(--primary) / 0.45);
   position: relative;
 }
 
-/* Inner inset line — gives depth like a machined edge */
+/* Inner inset — machined depth */
 .border-mythic::before {
   content: '';
   position: absolute;
@@ -197,10 +199,10 @@
   top: -4px; left: -4px;
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, hsl(var(--primary) / 0.9), hsl(var(--primary) / 0.4));
+  background: radial-gradient(circle at 35% 35%, hsl(var(--primary) / 0.95), hsl(var(--primary) / 0.4));
   box-shadow:
-    calc(100% + 1px) 0 0 hsl(var(--primary) / 0.55),
-    0 calc(100% + 1px) 0 hsl(var(--primary) / 0.55),
-    calc(100% + 1px) calc(100% + 1px) 0 hsl(var(--primary) / 0.55);
+    calc(100% + 1px) 0 0 hsl(var(--primary) / 0.6),
+    0 calc(100% + 1px) 0 hsl(var(--primary) / 0.6),
+    calc(100% + 1px) calc(100% + 1px) 0 hsl(var(--primary) / 0.6);
   pointer-events: none;
 }

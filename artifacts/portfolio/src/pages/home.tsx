@@ -42,7 +42,72 @@ const skillColors = [
   "bg-secondary/20 text-secondary border-secondary/30",
 ];
 
-// Placeholder for images while generating
+function SpinningGear({
+  size = 64,
+  speed = 10,
+  reverse = false,
+  teeth = 12,
+  opacity = 0.3,
+  color = "currentColor",
+}: {
+  size?: number;
+  speed?: number;
+  reverse?: boolean;
+  teeth?: number;
+  opacity?: number;
+  color?: string;
+}) {
+  const cx = 50, cy = 50;
+  const outerR = 45, innerR = 33, hubR = 12, boreR = 5;
+  const pts: string[] = [];
+  for (let i = 0; i < teeth; i++) {
+    const step = (2 * Math.PI) / teeth;
+    const base = step * i;
+    const w = step * 0.2;
+    pts.push(`${(cx + outerR * Math.cos(base - w)).toFixed(2)},${(cy + outerR * Math.sin(base - w)).toFixed(2)}`);
+    pts.push(`${(cx + outerR * Math.cos(base + w)).toFixed(2)},${(cy + outerR * Math.sin(base + w)).toFixed(2)}`);
+    const v = base + step * 0.5;
+    pts.push(`${(cx + innerR * Math.cos(v - w)).toFixed(2)},${(cy + innerR * Math.sin(v - w)).toFixed(2)}`);
+    pts.push(`${(cx + innerR * Math.cos(v + w)).toFixed(2)},${(cy + innerR * Math.sin(v + w)).toFixed(2)}`);
+  }
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      className="animate-spin"
+      style={{
+        opacity,
+        animationDuration: `${speed}s`,
+        animationDirection: reverse ? "reverse" : "normal",
+        animationTimingFunction: "linear",
+        color,
+      }}
+      aria-hidden
+    >
+      <polygon points={pts.join(" ")} fill="currentColor" />
+      <circle cx={cx} cy={cy} r={hubR} fill="currentColor" />
+      <circle cx={cx} cy={cy} r={boreR} fill="hsl(var(--background))" />
+    </svg>
+  );
+}
+
+function GearDivider() {
+  return (
+    <div className="relative py-3 flex items-center justify-center overflow-hidden" aria-hidden>
+      <div className="absolute inset-0 flex items-center px-8">
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
+      </div>
+      <div className="relative flex items-center gap-1 bg-background px-5">
+        <SpinningGear size={22} speed={14} teeth={10} opacity={0.45} />
+        <SpinningGear size={15} speed={8}  reverse teeth={8}  opacity={0.35} />
+        <SpinningGear size={30} speed={20} teeth={14} opacity={0.55} />
+        <SpinningGear size={15} speed={8}  reverse teeth={8}  opacity={0.35} />
+        <SpinningGear size={22} speed={14} teeth={10} opacity={0.45} />
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
@@ -274,6 +339,8 @@ export default function Home() {
         </div>
       </section>
 
+      <GearDivider />
+
       {/* Cybersecurity Projects */}
       <section id="cyber" className="py-24 bg-card/30 relative">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -337,6 +404,8 @@ export default function Home() {
         </div>
       </section>
 
+      <GearDivider />
+
       {/* Homelab Projects */}
       <section id="homelab" className="py-24 relative">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -382,6 +451,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <GearDivider />
 
       {/* PC Build */}
       <section id="pcbuild" className="py-24 bg-card/30 relative">
@@ -432,6 +503,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <GearDivider />
 
       {/* Resume Section */}
       <section id="resume" className="py-24 relative">
@@ -503,6 +576,8 @@ export default function Home() {
         </div>
       </section>
 
+      <GearDivider />
+
       {/* Certifications Section */}
       <section id="certifications" className="py-24 bg-card/30 relative">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -546,6 +621,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <GearDivider />
 
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-card/30 relative">
