@@ -279,7 +279,7 @@ export default function Home() {
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="flex items-center mb-12">
             <Shield className="w-8 h-8 text-primary mr-4" />
-            <h2 className="font-serif text-4xl text-foreground">Threat Intelligence</h2>
+            <h2 className="font-serif text-4xl text-foreground">The Workshop</h2>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -342,7 +342,7 @@ export default function Home() {
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="flex items-center mb-12">
             <Server className="w-8 h-8 text-primary mr-4" />
-            <h2 className="font-serif text-4xl text-foreground">Infrastructure & Homelab</h2>
+            <h2 className="font-serif text-4xl text-foreground">The Engine Room</h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -437,7 +437,7 @@ export default function Home() {
       <section id="resume" className="py-24 relative">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="font-serif text-4xl text-foreground">Chronicles</h2>
+            <h2 className="font-serif text-4xl text-foreground">The Logbook</h2>
             <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-mono">
               <Download className="mr-2 w-4 h-4" /> Download PDF
             </Button>
@@ -506,8 +506,8 @@ export default function Home() {
       {/* Certifications Section */}
       <section id="certifications" className="py-24 bg-card/30 relative">
         <div className="container mx-auto px-6 max-w-5xl">
-          <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-2">Earned in the Field</h3>
-          <h2 className="font-serif text-4xl text-foreground mb-12">Certifications</h2>
+          <h3 className="font-mono text-sm uppercase tracking-widest text-muted-foreground mb-2">Commendations</h3>
+          <h2 className="font-serif text-4xl text-foreground mb-12">Decorations & Honours</h2>
           <div className="grid md:grid-cols-2 gap-6 items-start">
             {/* Featured earned cert */}
             {certs.filter(c => c.earned).map((cert) => (
@@ -553,7 +553,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             {/* Left: heading + social links */}
             <div>
-              <h2 className="font-serif text-4xl text-foreground mb-4">Establish Connection</h2>
+              <h2 className="font-serif text-4xl text-foreground mb-4">Send a Dispatch</h2>
               <p className="text-muted-foreground mb-10 leading-relaxed">
                 Whether you have a project in mind, a threat to investigate, or just want to talk
                 shop about homelabs and hardware — my inbox is open.
