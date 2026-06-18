@@ -7,8 +7,9 @@ import { useTheme } from "@/hooks/use-theme";
 
 const skills = [
   "Rapid7 InsightIDR", "KnowBe4", "Microsoft Entra ID", "Active Directory",
-  "SAML / SSO", "LEQL", "MITRE ATT&CK", "Nmap", "OSINT",
-  "DNS / DHCP", "TCP/IP", "Linux", "SSH", "Nginx", "Python", "Phishing Analysis",
+  "SAML / SSO", "LEQL", "MITRE ATT&CK", "Nmap", "Wireshark", "Shodan",
+  "OSINT", "Google Dorking", "Wayback Machine", "WHOIS / DNS",
+  "HTML / CSS", "Linux", "TCP/IP", "Networking", "Security Reporting",
 ];
 
 const navItems = [
@@ -89,7 +90,7 @@ export default function Home() {
             ))}
             <div className="w-px h-5 bg-border mx-3" />
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/torianna"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -415,9 +416,11 @@ export default function Home() {
               <SectionLabel>Experience & Education</SectionLabel>
               <h2 className="text-3xl font-bold text-foreground">Resume</h2>
             </div>
-            <Button variant="outline" className="border-border text-foreground hover:bg-muted font-medium shrink-0">
-              <Download className="mr-2 w-4 h-4" /> Download PDF
-            </Button>
+            <a href="/resume.pdf" download="Torianna_Dixon_Resume.pdf">
+              <Button variant="outline" className="border-border text-foreground hover:bg-muted font-medium shrink-0">
+                <Download className="mr-2 w-4 h-4" /> Download PDF
+              </Button>
+            </a>
           </div>
 
           <div className="space-y-5">
@@ -432,10 +435,13 @@ export default function Home() {
                   <p className="text-xs text-muted-foreground font-mono shrink-0 mt-1">June 2025 – Aug 2025</p>
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Phishing simulations via KnowBe4 for 3,000+ employees; designed HTML/CSS templates and produced retraining reports</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Built LEQL detection rules in Rapid7 InsightIDR for MFA failures, VPN abuse, and unauthorized password storage</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Configured SSO for core business apps via Microsoft Entra ID (SAML, IdP-initiated); documented rollout steps</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Shadowed Active Directory and multi-lodge network architecture sessions</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Supported phishing simulation campaigns in KnowBe4 by designing realistic HTML/CSS email templates for 3,000+ employees across U.S. lodge and corporate environments</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Analyzed campaign results to identify high-risk users, report trends, and support targeted retraining plans</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Developed custom Rapid7 InsightIDR detection alerts for unauthorized password storage, excessive MFA failures, and repeated VPN login attempts</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Configured and deployed IdP-initiated SSO for business applications using Microsoft Entra ID, SAML, and application role mapping</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Collaborated with application owners to troubleshoot access issues, validate SSO functionality, and document rollout steps</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Delivered phishing-awareness guidance to six users identified through campaign results, reinforcing safe email handling and reporting practices</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Participated in technical shadowing and Lunch &amp; Learn sessions focused on Active Directory, corporate IT support, and multi-lodge network architecture</li>
                 </ul>
               </CardContent>
             </Card>
@@ -451,10 +457,12 @@ export default function Home() {
                   <p className="text-xs text-muted-foreground font-mono shrink-0 mt-1">Fall 2025</p>
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Conducted OSINT and reconnaissance for authorized physical and cybersecurity assessments</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Used WHOIS, DNS lookup, Google dorking, Wayback Machine, Shodan concepts, and Nmap</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Applied MITRE ATT&amp;CK to connect findings to real-world adversary tactics</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Participated in social engineering and physical security testing; documented improvement recommendations</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Conducted OSINT and reconnaissance to support authorized cybersecurity and physical security assessments</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Researched public domain records, archived web pages, exposed digital footprints, and other publicly available information to identify potential security gaps</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Practiced ethical reconnaissance methods within a defined scope and organized findings for review</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Participated in controlled social engineering and physical security testing to evaluate awareness, access control, and security procedures</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Used the MITRE ATT&amp;CK framework to connect findings to real-world adversary tactics, techniques, and procedures</li>
+                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Documented observations and translated findings into security improvement recommendations</li>
                 </ul>
               </CardContent>
             </Card>
@@ -531,7 +539,7 @@ export default function Home() {
           <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Torianna · Chicago, IL</p>
           <div className="flex items-center gap-3">
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/torianna"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
