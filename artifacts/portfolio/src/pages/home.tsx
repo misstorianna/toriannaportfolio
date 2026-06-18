@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,110 @@ const navItems = [
   { id: "resume",        label: "Resume"   },
   { id: "certifications",label: "Certs"   },
 ];
+
+function FairyLights() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    type Light = {
+      x: number; y: number;
+      baseSize: number;
+      baseOpacity: number;
+      speed: number;
+      phase: number;
+      driftX: number;
+      driftY: number;
+      originX: number;
+      originY: number;
+      hue: number;
+    };
+
+    const COUNT = 75;
+    const lights: Light[] = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      originX: 0,
+      originY: 0,
+      baseSize:    0.8 + Math.random() * 1.8,
+      baseOpacity: 0.25 + Math.random() * 0.65,
+      speed:       0.4  + Math.random() * 1.2,
+      phase:       Math.random() * Math.PI * 2,
+      driftX:      (Math.random() - 0.5) * 0.18,
+      driftY:      -0.06 - Math.random() * 0.12,
+      hue:         36 + (Math.random() - 0.5) * 16,
+    }));
+    lights.forEach(l => { l.originX = l.x; l.originY = l.y; });
+
+    let raf: number;
+    let t = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      t += 0.016;
+
+      for (const l of lights) {
+        // Slow drift, wrap at edges
+        l.x += l.driftX;
+        l.y += l.driftY;
+        if (l.y < -10) { l.y = canvas.height + 10; l.x = Math.random() * canvas.width; }
+        if (l.x < -10) l.x = canvas.width + 10;
+        if (l.x > canvas.width + 10) l.x = -10;
+
+        const pulse = 0.55 + 0.45 * Math.sin(t * l.speed + l.phase);
+        const opacity = l.baseOpacity * pulse;
+        const size    = l.baseSize * (0.85 + 0.3 * pulse);
+        const glow    = 6 + 10 * pulse;
+
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        ctx.shadowBlur   = glow;
+        ctx.shadowColor  = `hsl(${l.hue} 85% 65%)`;
+        ctx.fillStyle    = `hsl(${l.hue} 90% 72%)`;
+        ctx.beginPath();
+        ctx.arc(l.x, l.y, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Second tiny core highlight
+        ctx.globalAlpha = opacity * 0.7;
+        ctx.shadowBlur  = 2;
+        ctx.fillStyle   = "hsl(48 100% 92%)";
+        ctx.beginPath();
+        ctx.arc(l.x, l.y, size * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      raf = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      aria-hidden
+    />
+  );
+}
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -157,6 +261,7 @@ export default function Home() {
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <FairyLights />
         {/* Chicago skyline — very subtle */}
         <div className="absolute bottom-0 w-full h-[50vh] pointer-events-none select-none opacity-[0.05]">
           <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className="w-full h-full fill-foreground">
