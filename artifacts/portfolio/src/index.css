@@ -51,29 +51,30 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ── Sage Professional — Light (default) ──────────────────── */
+/* ── Warm Amber + Olive — Dark (default) ──────────────────── */
+/* Pulled from photo: golden fairy lights, olive walls, mocha */
 :root {
-  --background: 60 9% 97%;       /* #F7F7F4 — warm off-white */
-  --foreground: 150 10% 13%;     /* #1C2420 — deep slate */
-  --border: 125 10% 86%;         /* #D4DDD5 — light sage border */
-  --card: 0 0% 100%;             /* white cards */
-  --card-foreground: 150 10% 13%;
-  --card-border: 125 10% 88%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 150 10% 13%;
-  --popover-border: 125 10% 86%;
-  --primary: 125 22% 44%;        /* #5A8A60 — sage green */
-  --primary-foreground: 0 0% 100%;
-  --secondary: 125 12% 90%;      /* soft sage tint */
-  --secondary-foreground: 125 22% 30%;
-  --muted: 60 5% 93%;            /* #EDEDE9 — warm light gray */
-  --muted-foreground: 150 6% 44%; /* #657069 — medium sage-gray */
-  --accent: 125 22% 44%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 68% 44%;
-  --destructive-foreground: 0 0% 100%;
-  --input: 125 10% 86%;
-  --ring: 125 22% 44%;
+  --background: 28 22% 7%;       /* #191008 — deep warm mocha-black */
+  --foreground: 42 18% 88%;      /* #E8DCC8 — warm parchment cream */
+  --border: 36 28% 18%;          /* #3A2710 — dark amber border */
+  --card: 30 18% 10%;            /* #1F1508 — dark warm card */
+  --card-foreground: 42 18% 88%;
+  --card-border: 36 28% 18%;
+  --popover: 30 18% 10%;
+  --popover-foreground: 42 18% 88%;
+  --popover-border: 36 28% 18%;
+  --primary: 40 72% 52%;         /* #D49A28 — warm amber gold (fairy lights) */
+  --primary-foreground: 28 22% 7%;
+  --secondary: 82 22% 38%;       /* #607A35 — olive green (wall) */
+  --secondary-foreground: 42 18% 88%;
+  --muted: 30 14% 14%;           /* #261A0D */
+  --muted-foreground: 40 14% 54%; /* #9C8A6A — warm tan */
+  --accent: 40 72% 52%;
+  --accent-foreground: 28 22% 7%;
+  --destructive: 0 65% 44%;
+  --destructive-foreground: 42 18% 88%;
+  --input: 36 28% 18%;
+  --ring: 40 72% 52%;
   --radius: 0.5rem;
 
   --app-font-sans: 'Inter', sans-serif;
@@ -81,51 +82,52 @@
 }
 
 .dark {
-  --background: 150 8% 9%;       /* #141A15 — dark slate-green */
-  --foreground: 60 8% 88%;       /* #E2E2DA — warm light text */
-  --border: 150 8% 20%;          /* #2B352C — dark sage border */
-  --card: 150 7% 12%;            /* #1A231B — dark card */
-  --card-foreground: 60 8% 88%;
-  --card-border: 150 8% 20%;
-  --popover: 150 7% 12%;
-  --popover-foreground: 60 8% 88%;
-  --popover-border: 150 8% 20%;
-  --primary: 125 22% 56%;        /* #72A878 — lighter sage for dark */
-  --primary-foreground: 150 8% 9%;
-  --secondary: 150 8% 20%;
-  --secondary-foreground: 60 8% 75%;
-  --muted: 150 6% 15%;           /* #1F2A20 */
-  --muted-foreground: 125 6% 54%; /* #808A81 — muted sage */
-  --accent: 125 22% 56%;
-  --accent-foreground: 150 8% 9%;
-  --destructive: 0 68% 44%;
-  --destructive-foreground: 60 8% 88%;
-  --input: 150 8% 20%;
-  --ring: 125 22% 56%;
+  --background: 28 22% 7%;
+  --foreground: 42 18% 88%;
+  --border: 36 28% 18%;
+  --card: 30 18% 10%;
+  --card-foreground: 42 18% 88%;
+  --card-border: 36 28% 18%;
+  --popover: 30 18% 10%;
+  --popover-foreground: 42 18% 88%;
+  --popover-border: 36 28% 18%;
+  --primary: 40 72% 52%;
+  --primary-foreground: 28 22% 7%;
+  --secondary: 82 22% 38%;
+  --secondary-foreground: 42 18% 88%;
+  --muted: 30 14% 14%;
+  --muted-foreground: 40 14% 54%;
+  --accent: 40 72% 52%;
+  --accent-foreground: 28 22% 7%;
+  --destructive: 0 65% 44%;
+  --destructive-foreground: 42 18% 88%;
+  --input: 36 28% 18%;
+  --ring: 40 72% 52%;
 }
 
+/* ── Light mode — warm cream parchment ───────────────────── */
 .light {
-  --background: 60 9% 97%;
-  --foreground: 150 10% 13%;
-  --border: 125 10% 86%;
-  --card: 0 0% 100%;
-  --card-foreground: 150 10% 13%;
-  --card-border: 125 10% 88%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 150 10% 13%;
-  --popover-border: 125 10% 86%;
-  --primary: 125 22% 44%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 125 12% 90%;
-  --secondary-foreground: 125 22% 30%;
-  --muted: 60 5% 93%;
-  --muted-foreground: 150 6% 44%;
-  --accent: 125 22% 44%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 68% 44%;
+  --background: 44 32% 96%;      /* #F7F2E8 — warm cream */
+  --foreground: 28 32% 12%;      /* #261508 — dark mocha */
+  --border: 40 30% 80%;          /* #D4C09A — warm gold border */
+  --card: 44 25% 99%;            /* near-white warm card */
+  --card-foreground: 28 32% 12%;
+  --card-border: 40 30% 82%;
+  --popover: 44 25% 99%;
+  --popover-foreground: 28 32% 12%;
+  --popover-border: 40 30% 80%;
+  --primary: 38 65% 38%;         /* #9E7018 — deeper amber for contrast */
+  --primary-foreground: 44 25% 99%;
+  --secondary: 82 25% 46%;       /* #6E8A3A — olive for contrast */
+  --secondary-foreground: 44 25% 99%;
+  --muted: 44 18% 92%;
+  --muted-foreground: 36 14% 42%;
+  --accent: 38 65% 38%;
+  --accent-foreground: 44 25% 99%;
+  --destructive: 0 65% 44%;
   --destructive-foreground: 0 0% 100%;
-  --input: 125 10% 86%;
-  --ring: 125 22% 44%;
+  --input: 40 30% 80%;
+  --ring: 38 65% 38%;
 }
 
 @layer base {
