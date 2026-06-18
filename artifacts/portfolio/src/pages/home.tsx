@@ -817,20 +817,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border/50 bg-background py-8 relative overflow-hidden">
-        <div className="container mx-auto px-6 text-center z-10 relative">
-          <div className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
-            <p className="mb-1 text-primary">Based in Chicago, IL</p>
-            <p>&copy; {new Date().getFullYear()} Torianna. All rights reserved.</p>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-5 pointer-events-none pb-4">
-          <svg viewBox="0 0 100 20" className="w-full fill-primary">
-            <path d="M0,20 L10,10 L20,15 L30,5 L40,15 L50,0 L60,15 L70,5 L80,15 L90,10 L100,20 Z" />
-          </svg>
-        </div>
-      </footer>
     </div>
   );
 }

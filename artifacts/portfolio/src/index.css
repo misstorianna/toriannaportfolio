@@ -56,34 +56,35 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ── Green Cyberpunk Dark (default) ──────────────────────── */
+/* ── Cyberpunk + Steampunk Dark (default) ────────────────── */
+/* Neon green on warm olive-black — brass rivets, gold trim   */
 :root {
-  --background: 120 38% 5%;      /* #081208 — deep system black-green */
-  --foreground: 120 20% 88%;     /* #D0E8D0 — terminal green-white */
-  --border: 120 55% 16%;         /* #0D4D0D — dark neon grid line */
-  --card: 120 34% 8%;            /* #0D1A0D — dark panel */
-  --card-foreground: 120 20% 88%;
-  --card-border: 120 55% 16%;
-  --popover: 120 34% 8%;
-  --popover-foreground: 120 20% 88%;
-  --popover-border: 120 55% 16%;
-  --primary: 120 68% 48%;        /* #28C228 — electric green */
-  --primary-foreground: 120 38% 5%;
-  --secondary: 180 62% 40%;      /* #1A9999 — neon cyan */
-  --secondary-foreground: 120 20% 88%;
-  --muted: 120 28% 11%;          /* dark muted panel */
-  --muted-foreground: 120 18% 56%; /* #6B9B6B — dim terminal green */
-  --accent: 120 68% 48%;
-  --accent-foreground: 120 38% 5%;
-  --destructive: 0 70% 40%;
-  --destructive-foreground: 120 20% 88%;
-  --input: 120 55% 16%;
-  --ring: 120 68% 48%;
+  --background: 36 20% 6%;       /* #100e07 — dark oiled-wood black */
+  --foreground: 44 22% 86%;      /* #E4DCCA — warm parchment cream */
+  --border: 40 40% 18%;          /* #3D2E10 — aged brass border */
+  --card: 36 16% 9%;             /* #181207 — dark walnut panel */
+  --card-foreground: 44 22% 86%;
+  --card-border: 40 40% 18%;
+  --popover: 36 16% 9%;
+  --popover-foreground: 44 22% 86%;
+  --popover-border: 40 40% 18%;
+  --primary: 120 65% 48%;        /* #28C228 — electric neon green */
+  --primary-foreground: 36 20% 6%;
+  --secondary: 42 78% 52%;       /* #D4961A — warm brass / gold */
+  --secondary-foreground: 36 20% 6%;
+  --muted: 38 14% 13%;           /* dark warm muted panel */
+  --muted-foreground: 44 18% 54%; /* #9C8E72 — warm tan / aged oak */
+  --accent: 120 65% 48%;
+  --accent-foreground: 36 20% 6%;
+  --destructive: 0 68% 40%;
+  --destructive-foreground: 44 22% 86%;
+  --input: 40 40% 18%;
+  --ring: 120 65% 48%;
   --radius: 0.25rem;
-  /* Cyberpunk accent palette */
-  --ember: 280 72% 55%;          /* #9933CC — neon violet/purple */
-  --grove: 150 65% 40%;          /* #22B566 — bright matrix green */
-  --bark: 120 48% 26%;           /* #226622 — deep grid green */
+  /* Warm accent palette */
+  --ember: 28 72% 50%;           /* #CC6622 — deep copper / amber */
+  --grove: 85 42% 36%;           /* #5C7A2B — warm olive green */
+  --bark: 30 48% 22%;            /* #52320F — dark walnut */
 
   --app-font-sans: 'Inter', sans-serif;
   --app-font-serif: 'Cinzel', 'Fraunces', serif;
@@ -91,58 +92,58 @@
 }
 
 .dark {
-  --background: 120 38% 5%;
-  --foreground: 120 20% 88%;
-  --border: 120 55% 16%;
-  --card: 120 34% 8%;
-  --card-foreground: 120 20% 88%;
-  --card-border: 120 55% 16%;
-  --popover: 120 34% 8%;
-  --popover-foreground: 120 20% 88%;
-  --popover-border: 120 55% 16%;
-  --primary: 120 68% 48%;
-  --primary-foreground: 120 38% 5%;
-  --secondary: 180 62% 40%;
-  --secondary-foreground: 120 20% 88%;
-  --muted: 120 28% 11%;
-  --muted-foreground: 120 18% 56%;
-  --accent: 120 68% 48%;
-  --accent-foreground: 120 38% 5%;
-  --destructive: 0 70% 40%;
-  --destructive-foreground: 120 20% 88%;
-  --input: 120 55% 16%;
-  --ring: 120 68% 48%;
-  --ember: 280 72% 55%;
-  --grove: 150 65% 40%;
-  --bark: 120 48% 26%;
+  --background: 36 20% 6%;
+  --foreground: 44 22% 86%;
+  --border: 40 40% 18%;
+  --card: 36 16% 9%;
+  --card-foreground: 44 22% 86%;
+  --card-border: 40 40% 18%;
+  --popover: 36 16% 9%;
+  --popover-foreground: 44 22% 86%;
+  --popover-border: 40 40% 18%;
+  --primary: 120 65% 48%;
+  --primary-foreground: 36 20% 6%;
+  --secondary: 42 78% 52%;
+  --secondary-foreground: 36 20% 6%;
+  --muted: 38 14% 13%;
+  --muted-foreground: 44 18% 54%;
+  --accent: 120 65% 48%;
+  --accent-foreground: 36 20% 6%;
+  --destructive: 0 68% 40%;
+  --destructive-foreground: 44 22% 86%;
+  --input: 40 40% 18%;
+  --ring: 120 65% 48%;
+  --ember: 28 72% 50%;
+  --grove: 85 42% 36%;
+  --bark: 30 48% 22%;
 }
 
-/* ── Light mode — phosphor terminal paper ─────────────────── */
+/* ── Light mode — aged parchment ────────────────────────── */
 .light {
-  --background: 120 30% 94%;     /* #E4F2E4 — pale green paper */
-  --foreground: 120 38% 8%;      /* #0D1F0D — dark terminal ink */
-  --border: 120 35% 70%;         /* soft green rule */
-  --card: 120 28% 98%;           /* near-white card */
-  --card-foreground: 120 38% 8%;
-  --card-border: 120 35% 70%;
-  --popover: 120 28% 98%;
-  --popover-foreground: 120 38% 8%;
-  --popover-border: 120 35% 70%;
-  --primary: 120 62% 32%;        /* deeper green for contrast */
-  --primary-foreground: 120 28% 98%;
-  --secondary: 180 55% 30%;      /* deeper cyan */
-  --secondary-foreground: 120 28% 98%;
-  --muted: 120 22% 88%;
-  --muted-foreground: 120 22% 32%;
-  --accent: 120 62% 32%;
-  --accent-foreground: 120 28% 98%;
-  --destructive: 0 70% 40%;
-  --destructive-foreground: 120 20% 88%;
-  --input: 120 35% 70%;
-  --ring: 120 62% 32%;
-  --ember: 280 65% 42%;
-  --grove: 150 58% 28%;
-  --bark: 120 42% 20%;
+  --background: 44 38% 93%;      /* #F2EBD8 — warm parchment */
+  --foreground: 30 38% 12%;      /* #2E1A08 — dark wood ink */
+  --border: 42 42% 68%;          /* #C9A85C — soft gold rule */
+  --card: 44 30% 97%;            /* #FAF5EC — cream card */
+  --card-foreground: 30 38% 12%;
+  --card-border: 42 42% 68%;
+  --popover: 44 30% 97%;
+  --popover-foreground: 30 38% 12%;
+  --popover-border: 42 42% 68%;
+  --primary: 120 58% 30%;        /* deeper green for contrast */
+  --primary-foreground: 44 30% 97%;
+  --secondary: 42 72% 40%;       /* deeper brass for contrast */
+  --secondary-foreground: 44 30% 97%;
+  --muted: 44 24% 88%;
+  --muted-foreground: 36 22% 38%;
+  --accent: 120 58% 30%;
+  --accent-foreground: 44 30% 97%;
+  --destructive: 0 68% 40%;
+  --destructive-foreground: 44 22% 86%;
+  --input: 42 42% 68%;
+  --ring: 120 58% 30%;
+  --ember: 28 68% 42%;           /* copper */
+  --grove: 85 40% 28%;           /* olive */
+  --bark: 30 45% 18%;            /* walnut */
 }
 
 @layer base {
