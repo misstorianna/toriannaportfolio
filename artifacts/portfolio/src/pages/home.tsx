@@ -261,7 +261,7 @@ export default function Home() {
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
         <FairyLights />
-        {/* Chicago skyline — very subtle */}
+        {/* Chicago skyline, very subtle */}
         <div className="absolute bottom-0 w-full h-[50vh] pointer-events-none select-none opacity-[0.05]">
           <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className="w-full h-full fill-foreground">
             <path d="M0,300 L0,200 L50,200 L50,150 L80,150 L80,220 L120,220 L120,100 L150,100 L150,180 L200,180 L200,50 L250,50 L250,250 L300,250 L300,120 L350,120 L350,200 L400,200 L400,80 L450,80 L450,230 L500,230 L500,20 L550,20 L550,210 L600,210 L600,140 L650,140 L650,260 L700,260 L700,90 L750,90 L750,190 L800,190 L800,60 L850,60 L850,240 L900,240 L900,110 L950,110 L950,200 L1000,200 L1000,300 Z" />
@@ -302,7 +302,7 @@ export default function Home() {
             <div className="space-y-8">
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the parts of security that sit at intersections — how systems connect, how alerts tell a story, how people actually interact with security controls, and how the right technical decisions quietly protect an environment.
+                  I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the places where systems meet: how systems connect, how alerts tell a story, how people interact with security controls, and how the right technical decisions quietly protect an environment.
                 </p>
                 <p>
                   Outside of work I experiment with a Raspberry Pi homelab, tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
@@ -407,7 +407,7 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed mt-6 max-w-3xl">
-                  Standing up a dedicated Ubuntu host for network security monitoring — CrowdSec for threat intel and automated blocking, Suricata for intrusion detection, and Loki/Grafana for centralized logging and visualization.
+                  I am building a dedicated Ubuntu host for network security monitoring. It uses CrowdSec for threat intelligence and automated blocking, Suricata for intrusion detection, and Loki and Grafana for centralized logging and visualization.
                 </p>
                 <div className="flex flex-wrap gap-1.5 mt-5">
                   {["CrowdSec", "Suricata", "Loki/Grafana", "Ubuntu"].map(t => (
@@ -425,17 +425,17 @@ export default function Home() {
                 {[
                   {
                     title: "Raspberry Pi Setup",
-                    body: "Getting hands-on with Linux fundamentals — Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
+                    body: "This project builds hands-on Linux fundamentals through Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
                     tags: ["Raspberry Pi OS", "SSH", "CLI"],
                   },
                   {
                     title: "Home Networking",
-                    body: "Building foundational networking knowledge — router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
+                    body: "This project builds foundational networking knowledge through router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
                     tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
                   },
                   {
                     title: "Self-Hosted Portfolio",
-                    body: "Hosting this portfolio through Nginx on a dedicated Ubuntu server, with DNS and Cloudflare Tunnel for safer public access — no unnecessary services exposed.",
+                    body: "This portfolio is hosted through Nginx on a dedicated Ubuntu server, with DNS and Cloudflare Tunnel providing safer public access and no unnecessary services exposed.",
                     tags: ["Nginx", "Ubuntu", "Cloudflare Tunnel", "DNS"],
                   },
                 ].map((lab) => (
@@ -476,7 +476,7 @@ export default function Home() {
           <div className="max-w-2xl mt-10 space-y-6">
             <div>
               <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
-                Current build in progress — designed for gaming, virtual machines, cybersecurity labs, and research.
+                This build is in progress and is designed for gaming, virtual machines, cybersecurity labs, and research.
               </p>
             </div>
 
