@@ -306,31 +306,9 @@ export default function Home() {
           <SectionLabel>Background</SectionLabel>
           <h2 className="text-3xl font-bold text-foreground mb-12">About Me</h2>
 
-          <div className="grid md:grid-cols-3 gap-10 items-start">
-            {/* Photo */}
-            <div className="flex flex-col items-center md:items-start">
-              <div className="relative w-full max-w-[240px] mx-auto md:mx-0 aspect-[3/4] rounded-xl overflow-hidden border border-border bg-muted">
-                <img
-                  src="/profile.jpg"
-                  alt="Torianna"
-                  className="w-full h-full object-cover"
-                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 pointer-events-none">
-                  <div className="w-14 h-14 rounded-full border-2 border-dashed border-border flex items-center justify-center mb-3">
-                    <svg className="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                  </div>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
-                    Add <code>profile.jpg</code><br />to <code>public/</code>
-                  </p>
-                </div>
-              </div>
-            </div>
-
+          <div className="space-y-8">
             {/* Bio */}
-            <div className="md:col-span-2 space-y-8">
+            <div className="space-y-8">
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
                   I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the parts of security that sit at intersections — how systems connect, how alerts tell a story, how people actually interact with security controls, and how the right technical decisions quietly protect an environment.
