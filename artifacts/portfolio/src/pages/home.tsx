@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Download, Server, Shield, Cpu, Sun, Moon, Menu, X } from "lucide-react";
+import { Github, Linkedin, Server, Shield, Cpu, Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 
 const skills = [
@@ -17,7 +17,6 @@ const navItems = [
   { id: "cyber",         label: "Projects" },
   { id: "homelab",       label: "Homelab"  },
   { id: "pcbuild",       label: "Build"    },
-  { id: "resume",        label: "Resume"   },
   { id: "certifications",label: "Certs"   },
 ];
 
@@ -288,14 +287,6 @@ export default function Home() {
             >
               View Work
             </Button>
-            <Button
-              onClick={() => scrollTo("resume")}
-              variant="outline"
-              className="border-border text-foreground hover:bg-muted px-6 font-medium"
-            >
-              <Download className="mr-2 w-4 h-4" />
-              Resume
-            </Button>
           </div>
         </div>
       </section>
@@ -448,7 +439,6 @@ export default function Home() {
 
           <div className="max-w-2xl mt-10 space-y-6">
             <div>
-              <p className="font-semibold text-foreground text-lg">"The Grove Station"</p>
               <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                 Current build in progress — designed for gaming, virtual machines, cybersecurity labs, and research.
               </p>
@@ -485,83 +475,6 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <Divider />
-
-      {/* ── Resume ─────────────────────────────────────────────── */}
-      <section id="resume" className="py-24">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="flex items-start justify-between mb-12 flex-wrap gap-4">
-            <div>
-              <SectionLabel>Experience & Education</SectionLabel>
-              <h2 className="text-3xl font-bold text-foreground">Resume</h2>
-            </div>
-            <a href="/resume.pdf" download="Torianna_Dixon_Resume.pdf">
-              <Button variant="outline" className="border-border text-foreground hover:bg-muted font-medium shrink-0">
-                <Download className="mr-2 w-4 h-4" /> Download PDF
-              </Button>
-            </a>
-          </div>
-
-          <div className="space-y-5">
-            {/* Internship */}
-            <Card className="border-border shadow-sm border-l-2 border-l-primary">
-              <CardContent className="p-6">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-4">
-                  <div>
-                    <p className="font-semibold text-foreground">IT Corporate Support / Cybersecurity Intern</p>
-                    <p className="text-sm text-primary mt-0.5">Great Wolf Lodge — Remote / Corporate Team</p>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono shrink-0 mt-1">June 2025 – Aug 2025</p>
-                </div>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Supported phishing simulation campaigns in KnowBe4 by designing realistic HTML/CSS email templates for 3,000+ employees across U.S. lodge and corporate environments</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Analyzed campaign results to identify high-risk users, report trends, and support targeted retraining plans</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Developed custom Rapid7 InsightIDR detection alerts for unauthorized password storage, excessive MFA failures, and repeated VPN login attempts</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Configured and deployed IdP-initiated SSO for business applications using Microsoft Entra ID, SAML, and application role mapping</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Collaborated with application owners to troubleshoot access issues, validate SSO functionality, and document rollout steps</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Delivered phishing-awareness guidance to six users identified through campaign results, reinforcing safe email handling and reporting practices</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Participated in technical shadowing and Lunch &amp; Learn sessions focused on Active Directory, corporate IT support, and multi-lodge network architecture</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Red Team */}
-            <Card className="border-border shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-4">
-                  <div>
-                    <p className="font-semibold text-foreground">Bradley Red Team</p>
-                    <p className="text-sm text-muted-foreground mt-0.5">MIS 483: Advanced Ethical Hacking · Bradley University</p>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono shrink-0 mt-1">Fall 2025</p>
-                </div>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Conducted OSINT and reconnaissance to support authorized cybersecurity and physical security assessments</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Researched public domain records, archived web pages, exposed digital footprints, and other publicly available information to identify potential security gaps</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Practiced ethical reconnaissance methods within a defined scope and organized findings for review</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Participated in controlled social engineering and physical security testing to evaluate awareness, access control, and security procedures</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Used the MITRE ATT&amp;CK framework to connect findings to real-world adversary tactics, techniques, and procedures</li>
-                  <li className="flex gap-2"><span className="text-primary shrink-0 mt-0.5">›</span>Documented observations and translated findings into security improvement recommendations</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Education */}
-            <Card className="border-border shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-                  <div>
-                    <p className="font-semibold text-foreground">B.S. in Cybersecurity</p>
-                    <p className="text-sm text-muted-foreground mt-0.5">Bradley University · Peoria, IL</p>
-                  </div>
-                  <p className="text-xs text-muted-foreground font-mono shrink-0 mt-1">Graduated May 2026</p>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
