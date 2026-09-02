@@ -387,41 +387,77 @@ export default function Home() {
           <SectionLabel>Personal Projects</SectionLabel>
           <h2 className="text-3xl font-bold text-foreground mb-12">Homelab</h2>
 
-          <div className="grid md:grid-cols-3 gap-5">
-            {[
-              {
-                title: "Raspberry Pi Setup",
-                body: "Getting hands-on with Linux fundamentals — Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
-                tags: ["Raspberry Pi OS", "SSH", "CLI"],
-              },
-              {
-                title: "Home Networking",
-                body: "Building foundational networking knowledge — router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
-                tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
-              },
-              {
-                title: "Self-Hosted Portfolio",
-                body: "Hosting this portfolio through Nginx, with DNS and Cloudflare Tunnel for safer public access — no unnecessary services exposed.",
-                tags: ["Nginx", "Cloudflare Tunnel", "DNS"],
-              },
-            ].map((lab) => (
-              <Card key={lab.title} className="border-border shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                    <Server className="w-4 h-4 text-primary" />
+          <div className="space-y-10">
+            <Card className="border-primary/35 bg-primary/[0.04] shadow-sm">
+              <CardContent className="p-6 md:p-8">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <Shield className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap mb-2">
+                        <SectionLabel>Current Focus</SectionLabel>
+                        <Badge className="bg-primary/10 text-primary border border-primary/25 font-mono text-[11px]">
+                          In progress
+                        </Badge>
+                      </div>
+                      <CardTitle className="text-xl font-semibold">Detection Lab</CardTitle>
+                    </div>
                   </div>
-                  <CardTitle className="text-base font-semibold">{lab.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{lab.body}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {lab.tags.map(t => (
-                      <Badge key={t} variant="outline" className="font-mono text-xs border-border text-muted-foreground">{t}</Badge>
-                    ))}
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-6 max-w-3xl">
+                  Standing up a dedicated Ubuntu host for network security monitoring — CrowdSec for threat intel and automated blocking, Suricata for intrusion detection, and Loki/Grafana for centralized logging and visualization.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-5">
+                  {["CrowdSec", "Suricata", "Loki/Grafana", "Ubuntu"].map(t => (
+                    <Badge key={t} variant="outline" className="font-mono text-xs border-primary/25 text-primary/80">
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div>
+              <SectionLabel>Foundations</SectionLabel>
+              <div className="rounded-xl border border-border overflow-hidden divide-y divide-border">
+                {[
+                  {
+                    title: "Raspberry Pi Setup",
+                    body: "Getting hands-on with Linux fundamentals — Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
+                    tags: ["Raspberry Pi OS", "SSH", "CLI"],
+                  },
+                  {
+                    title: "Home Networking",
+                    body: "Building foundational networking knowledge — router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
+                    tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
+                  },
+                  {
+                    title: "Self-Hosted Portfolio",
+                    body: "Hosting this portfolio through Nginx on a dedicated Ubuntu server, with DNS and Cloudflare Tunnel for safer public access — no unnecessary services exposed.",
+                    tags: ["Nginx", "Ubuntu", "Cloudflare Tunnel", "DNS"],
+                  },
+                ].map((lab) => (
+                  <div key={lab.title} className="flex items-start gap-4 p-5 bg-card/50 hover:bg-muted/40 transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Server className="w-4 h-4 text-primary" />
+                    </div>
+                    <div className="min-w-0">
+                      <CardTitle className="text-base font-semibold">{lab.title}</CardTitle>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-2 max-w-3xl">{lab.body}</p>
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {lab.tags.map(t => (
+                          <Badge key={t} variant="outline" className="font-mono text-xs border-border text-muted-foreground">
+                            {t}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
