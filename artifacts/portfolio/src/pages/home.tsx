@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Github, Linkedin, Server, Shield, Cpu, Sun, Moon, Menu, X, Activity, ArrowDown, ArrowRight, BookOpen, CheckCircle2, CircleDot, Eye, ListChecks, Network } from "lucide-react";
+import { Github, Linkedin, Server, Shield, Cpu, Sun, Moon, Menu, X, Activity, ArrowDown, ArrowRight, BookOpen, CheckCircle2, CircleDot, ChevronLeft, ChevronRight, Eye, ListChecks, Network } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 
 const skills = [
@@ -254,6 +253,8 @@ function Divider() {
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedBuildStep, setSelectedBuildStep] = useState(0);
+  const buildStepRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -274,6 +275,14 @@ export default function Home() {
   const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const selectBuildStep = (index: number, moveFocus = false) => {
+    const nextIndex = Math.max(0, Math.min(index, buildLog.length - 1));
+    setSelectedBuildStep(nextIndex);
+    if (moveFocus) {
+      buildStepRefs.current[nextIndex]?.focus();
+    }
   };
 
   return (
@@ -672,32 +681,147 @@ export default function Home() {
             <p className="mb-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               Each phase keeps the technical detail available without making the full story a wall of text. Open a step to see what it contributed and where it stands.
             </p>
-            <Accordion type="multiple" defaultValue={["build-step-01"]} className="rounded-xl border border-border bg-card px-5 md:px-7">
-              {buildLog.map(step => (
-                <AccordionItem key={step.number} value={`build-step-${step.number}`} className="border-border last:border-0">
-                  <AccordionTrigger className="gap-4 py-5 text-left hover:no-underline">
-                    <div className="flex min-w-0 flex-1 items-start gap-3 md:gap-4">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary/10 font-mono text-[11px] font-semibold text-primary">{step.number}</span>
-                      <span className="min-w-0">
-                        <span className="block font-semibold text-foreground">{step.title}</span>
-                        <span className="mt-1 block text-sm font-normal leading-relaxed text-muted-foreground">{step.summary}</span>
-                      </span>
-                    </div>
-                    <Badge variant="outline" className="hidden shrink-0 border-primary/25 font-mono text-[10px] text-primary/80 sm:inline-flex">{step.status}</Badge>
-                  </AccordionTrigger>
-                  <AccordionContent className="pl-10 pr-0 md:pl-11">
-                    <div className="pb-5">
-                      <p className="text-sm leading-relaxed text-muted-foreground">{step.detail}</p>
-                      <div className="mt-3 flex flex-wrap gap-1.5">
-                        {step.tags.map(tag => (
-                          <Badge key={tag} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{tag}</Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <div className="rounded-xl border border-border bg-card p-4 md:p-6">
+              <div className="-mx-1 overflow-x-auto px-1 pb-3" aria-label="Homelab build milestones">
+                <div
+                  className="relative flex min-w-[40rem] items-start justify-between gap-2 px-2 sm:min-w-0 sm:gap-3"
+                  role="tablist"
+                  aria-label="Homelab build milestones"
+                  aria-orientation="horizontal"
+                >
+                  <div className="pointer-events-none absolute left-7 right-7 top-4 h-0.5 bg-border sm:left-[6.25%] sm:right-[6.25%]" aria-hidden="true" />
+                  {buildLog.map((step, index) => {
+                    const isSelected = selectedBuildStep === index;
+                    const isCompleted = index < selectedBuildStep;
+                    const isInProgress = step.status === "In progress";
+                    return (
+                      <button
+                        key={step.number}
+                        ref={element => { buildStepRefs.current[index] = element; }}
+                        type="button"
+                        id={`homelab-build-step-${step.number}`}
+                        role="tab"
+                        aria-selected={isSelected}
+                        aria-controls="homelab-build-step-panel"
+                        tabIndex={isSelected ? 0 : -1}
+                        aria-label={`Step ${step.number}: ${step.title}. Status: ${step.status}.`}
+                        className="group relative z-10 flex min-w-[4.5rem] flex-1 flex-col items-center gap-2 rounded-lg px-1 py-1 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                        onClick={() => selectBuildStep(index)}
+                        onKeyDown={event => {
+                          if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                            event.preventDefault();
+                            selectBuildStep((index + 1) % buildLog.length, true);
+                          }
+                          if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                            event.preventDefault();
+                            selectBuildStep((index - 1 + buildLog.length) % buildLog.length, true);
+                          }
+                          if (event.key === "Home") {
+                            event.preventDefault();
+                            selectBuildStep(0, true);
+                          }
+                          if (event.key === "End") {
+                            event.preventDefault();
+                            selectBuildStep(buildLog.length - 1, true);
+                          }
+                        }}
+                      >
+                        <span
+                          className={`flex h-8 w-8 items-center justify-center rounded-full border-2 bg-card font-mono text-[11px] font-semibold transition-[background-color,border-color,color,box-shadow] ${
+                            isSelected
+                              ? "border-primary bg-primary text-primary-foreground shadow-[0_0_0_4px_hsl(var(--primary)/0.18)]"
+                              : isCompleted
+                                ? "border-primary/70 bg-primary/15 text-primary"
+                                : isInProgress
+                                  ? "border-secondary bg-secondary/15 text-secondary-foreground"
+                                  : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary"
+                          }`}
+                        >
+                          {isCompleted ? <CheckCircle2 className="h-4 w-4" aria-hidden="true" /> : step.number}
+                        </span>
+                        <span className={`max-w-[7.5rem] text-[11px] font-medium leading-tight transition-colors ${
+                          isSelected ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                        }`}>
+                          {step.title}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-2 flex items-center justify-between gap-3 border-t border-border pt-4">
+                <p className="text-xs text-muted-foreground" aria-live="polite">
+                  Showing step <span className="font-mono font-semibold text-foreground">{String(selectedBuildStep + 1).padStart(2, "0")}</span> of <span className="font-mono font-semibold text-foreground">08</span>
+                </p>
+                <div className="flex items-center gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => selectBuildStep(selectedBuildStep - 1)}
+                    disabled={selectedBuildStep === 0}
+                    aria-label="Show previous homelab milestone"
+                    className="border-border text-muted-foreground"
+                  >
+                    <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                    <span className="hidden sm:inline">Previous</span>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => selectBuildStep(selectedBuildStep + 1)}
+                    disabled={selectedBuildStep === buildLog.length - 1}
+                    aria-label="Show next homelab milestone"
+                    className="border-border text-muted-foreground"
+                  >
+                    <span className="hidden sm:inline">Next</span>
+                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </div>
+              </div>
+
+              <div
+                id="homelab-build-step-panel"
+                role="tabpanel"
+                tabIndex={0}
+                aria-labelledby={`homelab-build-step-${buildLog[selectedBuildStep].number}`}
+                className="mt-5 rounded-lg border border-primary/25 bg-primary/[0.04] p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:p-6"
+              >
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div className="min-w-0">
+                    <p className="font-mono text-[11px] font-medium uppercase tracking-widest text-primary/80">
+                      Milestone {buildLog[selectedBuildStep].number}
+                    </p>
+                    <h4 className="mt-2 text-xl font-bold leading-tight text-foreground">
+                      {buildLog[selectedBuildStep].title}
+                    </h4>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className={`w-fit shrink-0 font-mono text-[10px] ${
+                      buildLog[selectedBuildStep].status === "In progress"
+                        ? "border-secondary/60 text-secondary-foreground"
+                        : "border-primary/25 text-primary/80"
+                    }`}
+                  >
+                    {buildLog[selectedBuildStep].status}
+                  </Badge>
+                </div>
+                <p className="mt-4 text-sm font-medium leading-relaxed text-foreground/85">
+                  {buildLog[selectedBuildStep].summary}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {buildLog[selectedBuildStep].detail}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-1.5" aria-label={`Technologies for ${buildLog[selectedBuildStep].title}`}>
+                  {buildLog[selectedBuildStep].tags.map(tag => (
+                    <Badge key={tag} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{tag}</Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div id="homelab-results" className="mt-12 scroll-mt-24">
