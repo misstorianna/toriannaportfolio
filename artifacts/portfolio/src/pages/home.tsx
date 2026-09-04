@@ -105,6 +105,14 @@ const buildLog = [
     detail: "The self-hosted portfolio is part of the same learning arc: practice safe access patterns while keeping the detection work on the dedicated Ubuntu machine.",
     tags: ["Nginx", "DNS", "Cloudflare Tunnel"],
   },
+  {
+    number: "08",
+    title: "Automate deployment with GitHub and cron",
+    status: "Working",
+    summary: "Built a deploy script and scheduled it to run automatically, so pushing code is the only manual step required to update the live site.",
+    detail: "Getting here required solving a few real problems: a cp command's trailing slash was silently creating a nested folder instead of overwriting the live site, which took real diagnostic work to catch. Passwordless sudo rules had to match the deploy script's exact commands for cron to run unattended. The result is a genuinely hands-off pipeline: edit in Replit, push, and the site updates itself.",
+    tags: ["GitHub", "Cron", "Bash", "Sudoers"],
+  },
 ];
 
 const foundations = [
@@ -405,7 +413,7 @@ export default function Home() {
                 <p>
                   I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the places where systems meet: how systems connect, how alerts tell a story, how people interact with security controls, and how the right technical decisions quietly protect an environment.
                 </p>
-                <p>Outside of work I like to experiment using my home lab, which you can learn more about on this page! I'm currently running a detection stack: Crowd Sec and Suricata feeding into a Loki/Grafana dashboard on a dedicated Ubuntu machine that also hosts this site. I believe the best way to learn security is to build things, break them, and understand why.</p>
+                <p>Outside of work I like to experiment using my home lab, which you can learn more about on this page! I'm currently running a detection stack: CrowdSec and Suricata feeding into a Loki/Grafana dashboard on a dedicated Ubuntu machine that also hosts this site, with a fully automated deploy pipeline keeping it all in sync. I believe the best way to learn security is to build things, break them, and understand why.</p>
               </div>
 
               <aside className="rounded-xl border border-primary/30 bg-primary/[0.06] p-5 md:p-6" aria-labelledby="about-next-steps">
@@ -526,6 +534,38 @@ export default function Home() {
               <div className="mt-5 flex flex-wrap gap-1.5">
                 {["CrowdSec", "Suricata", "Loki / Grafana", "Ubuntu"].map(t => (
                   <Badge key={t} variant="outline" className="border-primary/25 font-mono text-xs text-primary/80">{t}</Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="mb-7 border-border shadow-sm transition-[border-color,box-shadow] hover:border-primary/40 hover:shadow-md" id="homelab-deploy">
+            <CardHeader className="gap-3 pb-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <Badge className="border border-primary/25 bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
+                  Complete
+                </Badge>
+              </div>
+              <div>
+                <CardTitle className="text-xl">Auto-Deploy Pipeline</CardTitle>
+                <CardDescription className="mt-2 max-w-3xl text-sm leading-relaxed">
+                  Closed the loop on the whole project by building a fully automated deployment pipeline: push a change from Replit, and it goes live on torianna.tech within 5 minutes with zero manual steps.
+                </CardDescription>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="rounded-lg border border-border bg-muted/35 p-4">
+                <p className="font-mono text-[11px] uppercase tracking-wide text-primary/80">How it works</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  A cron job on the Ubuntu host checks GitHub every 5 minutes. When it finds a new commit, it automatically pulls the change, rebuilds the site, clears out old build files, and redeploys: all without me touching the server.
+                </p>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {["GitHub", "Cron", "Bash", "CI/CD"].map(tag => (
+                  <Badge key={tag} variant="outline" className="border-primary/25 font-mono text-xs text-primary/80">{tag}</Badge>
                 ))}
               </div>
             </CardContent>
@@ -693,18 +733,36 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-12 grid gap-5 lg:grid-cols-2">
-            <Card id="homelab-lessons" className="scroll-mt-24 border-border shadow-sm">
-              <CardHeader className="gap-2 pb-3">
-                <SectionLabel>05 · Lessons learned</SectionLabel>
-                <CardTitle className="text-xl">Build the story in layers</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
-                <p>Linux fundamentals and home networking made the later monitoring work easier to understand and troubleshoot.</p>
-                <p>Separating detection, threat intelligence, and visualization clarifies what each tool contributes instead of treating the stack as one black box.</p>
-                <p>Self-hosting also makes access decisions part of the project: Nginx, DNS, and Cloudflare Tunnel keep the public surface deliberate.</p>
-              </CardContent>
-            </Card>
+          <Card id="homelab-lessons" className="mt-12 scroll-mt-24 border-border shadow-sm">
+            <CardHeader className="gap-2 pb-3">
+              <SectionLabel>05 · Lessons learned</SectionLabel>
+              <CardTitle className="text-xl">What Actually Went Wrong (and How I Fixed It)</CardTitle>
+              <CardDescription className="max-w-3xl leading-relaxed">
+                Every step of this project had at least one thing that didn't work the first time. Documenting the real problems, not just the finished result, felt more honest and more useful.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ul className="grid gap-4 text-sm leading-relaxed text-muted-foreground md:grid-cols-2">
+                <li className="rounded-lg border border-border bg-muted/25 p-4">
+                  <span className="font-semibold text-foreground">Suricata wouldn't start.</span> The default config pointed at network interface <code className="rounded bg-muted px-1 py-0.5 text-xs">eth0</code>, which didn't exist on this machine. Found the real interface name with <code className="rounded bg-muted px-1 py-0.5 text-xs">ip a</code>, updated the config, confirmed with <code className="rounded bg-muted px-1 py-0.5 text-xs">systemctl status</code>.
+                </li>
+                <li className="rounded-lg border border-border bg-muted/25 p-4">
+                  <span className="font-semibold text-foreground">CrowdSec logs weren't reaching Grafana.</span> Promtail was silently failing with a permissions error: the log file was owned by root with no group access. Fixed by adjusting file permissions and group ownership, then verified in Promtail's own logs.
+                </li>
+                <li className="rounded-lg border border-border bg-muted/25 p-4">
+                  <span className="font-semibold text-foreground">A trailing slash broke deployment for hours.</span> <code className="rounded bg-muted px-1 py-0.5 text-xs">cp -r source/ dest/</code> doesn't overwrite <code className="rounded bg-muted px-1 py-0.5 text-xs">dest</code>'s contents the way you'd expect: it nests <code className="rounded bg-muted px-1 py-0.5 text-xs">source</code> inside it. The live site kept showing stale files even though builds were succeeding, because the real content was landing one folder too deep. Root-caused it by comparing what was actually in the deployed files against the fresh build output.
+                </li>
+                <li className="rounded-lg border border-border bg-muted/25 p-4">
+                  <span className="font-semibold text-foreground">Sudoers rejected a wildcard.</span> Passwordless sudo doesn't allow <code className="rounded bg-muted px-1 py-0.5 text-xs">*</code> in command paths for security reasons. Rewrote the deploy command to copy a directory's contents explicitly instead of relying on a wildcard match.
+                </li>
+                <li className="rounded-lg border border-border bg-muted/25 p-4 md:col-span-2">
+                  <span className="font-semibold text-foreground">Deduplication saved my sanity.</span> Suricata's stats events log constantly and look identical. Grafana's “Signature” deduplication mode collapsed repeated entries into a count instead of showing every duplicate, making the dashboard actually readable.
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+
+          <div className="mt-12">
             <Card id="homelab-next-steps" className="scroll-mt-24 border-primary/30 bg-primary/[0.04] shadow-sm">
               <CardHeader className="gap-2 pb-3">
                 <SectionLabel>06 · Next steps</SectionLabel>

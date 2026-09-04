@@ -1,0 +1,55 @@
+Here's everything combined into one clean, ready-to-paste block you can hand to Replit:
+
+---
+
+## Homelab Section Update — Full Copy
+
+### 1. About Me (updated paragraph)
+
+> Outside of work I like to experiment using my home lab, which you can learn more about on this page! I'm currently running a detection stack — CrowdSec and Suricata feeding into a Loki/Grafana dashboard — on a dedicated Ubuntu machine that also hosts this site, with a fully automated deploy pipeline keeping it all in sync. I believe the best way to learn security is to build things, break them, and understand why.
+
+**Next Steps callout:**
+> I'm working on closing the loop from detection to response — adding a CrowdSec bouncer so flagged IPs actually get blocked instead of just logged — along with building out more meaningful dashboard views and alerting for real security events.
+
+---
+
+### 2. New Card: Auto-Deploy Pipeline
+
+**Status:** Complete
+
+> Closed the loop on the whole project by building a fully automated deployment pipeline: push a change from Replit, and it goes live on torianna.tech within 5 minutes with zero manual steps.
+
+**How it works:**
+> A cron job on the Ubuntu host checks GitHub every 5 minutes. When it finds a new commit, it automatically pulls the change, rebuilds the site, clears out old build files, and redeploys — all without me touching the server.
+
+**Tags:** `GitHub` `Cron` `Bash` `CI/CD`
+
+---
+
+### 3. Build Log Entry (matches your existing accordion format)
+
+**Title:** Automate deployment with GitHub and cron
+**Status:** Working
+**Summary:** Built a deploy script and scheduled it to run automatically, so pushing code is the only manual step required to update the live site.
+**Detail:** Getting here required solving a few real problems: a `cp` command's trailing slash was silently creating a nested folder instead of overwriting the live site, which took real diagnostic work to catch. Passwordless sudo rules had to match the deploy script's exact commands for cron to run unattended. The result is a genuinely hands-off pipeline — edit in Replit, push, and the site updates itself.
+**Tags:** `GitHub` `Cron` `Bash` `Sudoers`
+
+---
+
+### 4. New Section: What Actually Went Wrong (and How I Fixed It)
+
+> Every step of this project had at least one thing that didn't work the first time. Documenting the real problems, not just the finished result, felt more honest — and more useful.
+
+- **Suricata wouldn't start.** The default config pointed at network interface `eth0`, which didn't exist on this machine. Found the real interface name with `ip a`, updated the config, confirmed with `systemctl status`.
+
+- **CrowdSec logs weren't reaching Grafana.** Promtail was silently failing with a permissions error — the log file was owned by root with no group access. Fixed by adjusting file permissions and group ownership, then verified in Promtail's own logs.
+
+- **A trailing slash broke deployment for hours.** `cp -r source/ dest/` doesn't overwrite `dest`'s contents the way you'd expect — it nests `source` inside it. The live site kept showing stale files even though builds were succeeding, because the real content was landing one folder too deep. Root-caused it by comparing what was actually in the deployed files against the fresh build output.
+
+- **Sudoers rejected a wildcard.** Passwordless sudo doesn't allow `*` in command paths for security reasons. Rewrote the deploy command to copy a directory's contents explicitly instead of relying on a wildcard match.
+
+- **Deduplication saved my sanity.** Suricata's stats events log constantly and look identical — Grafana's "Signature" deduplication mode collapsed repeated entries into a count instead of showing every duplicate, making the dashboard actually readable.
+
+---
+
+That's the full package — paste it into Replit's chat/assistant as instructions for where each piece should go in your existing page structure, or hand it to me if you want me to write the actual JSX to match your component format instead.
