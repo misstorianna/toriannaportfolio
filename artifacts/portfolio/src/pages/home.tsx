@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, Linkedin, Server, Shield, Cpu, Sun, Moon, Menu, X } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Github, Linkedin, Server, Shield, Cpu, Sun, Moon, Menu, X, Activity, ArrowDown, ArrowRight, BookOpen, CheckCircle2, CircleDot, Eye, ListChecks, Network } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
 
 const skills = [
@@ -18,6 +19,110 @@ const navItems = [
   { id: "homelab",       label: "Homelab"  },
   { id: "pcbuild",       label: "Build"    },
   { id: "certifications",label: "Certs"   },
+];
+
+const detectionStack = [
+  {
+    name: "Ubuntu",
+    role: "Dedicated host",
+    detail: "A dedicated Ubuntu machine runs the monitoring stack and hosts this portfolio.",
+    icon: Server,
+  },
+  {
+    name: "Suricata",
+    role: "Network detection",
+    detail: "An intrusion detection layer that watches network traffic and produces security events.",
+    icon: Network,
+  },
+  {
+    name: "CrowdSec",
+    role: "Threat intelligence",
+    detail: "Adds community-powered threat intelligence and a path toward automated blocking.",
+    icon: Shield,
+  },
+  {
+    name: "Loki / Grafana",
+    role: "Logs and views",
+    detail: "Centralizes logs and turns detection activity into views that are easier to inspect.",
+    icon: Activity,
+  },
+];
+
+const buildLog = [
+  {
+    number: "01",
+    title: "Build the Linux foundation",
+    status: "Foundation",
+    summary: "Started with Raspberry Pi OS, terminal work, file management, and SSH access from the local network.",
+    detail: "Those early experiments made the command line and remote administration familiar before moving the monitoring stack onto a more capable dedicated Ubuntu host.",
+    tags: ["Raspberry Pi OS", "Linux", "SSH"],
+  },
+  {
+    number: "02",
+    title: "Understand the home network",
+    status: "Foundation",
+    summary: "Worked through router and switch concepts, LAN connectivity, IP addressing, and local troubleshooting.",
+    detail: "This networking context is the foundation for understanding what a network sensor can see, where events originate, and how the host fits into the larger environment.",
+    tags: ["DNS / DHCP", "TCP/IP", "Networking"],
+  },
+  {
+    number: "03",
+    title: "Move the stack to Ubuntu",
+    status: "Configured",
+    summary: "Set up a dedicated Ubuntu machine as the home for the portfolio and security monitoring work.",
+    detail: "Keeping the services on one dedicated host makes the system easier to reason about while the lab is still being built and documented.",
+    tags: ["Ubuntu", "Nginx", "Dedicated host"],
+  },
+  {
+    number: "04",
+    title: "Add network detection with Suricata",
+    status: "Working",
+    summary: "Added Suricata as the intrusion detection layer for observing network activity and generating events.",
+    detail: "Suricata answers the visibility question: what is happening on the network? Its detections become useful input for the rest of the observability stack.",
+    tags: ["Suricata", "Intrusion detection", "Events"],
+  },
+  {
+    number: "05",
+    title: "Add threat intelligence with CrowdSec",
+    status: "Working",
+    summary: "Added CrowdSec to provide threat intelligence and identify behavior that should eventually drive a response.",
+    detail: "Detection is working, but the response loop is not complete yet. The next milestone is a CrowdSec bouncer so flagged IPs are actually blocked instead of only logged.",
+    tags: ["CrowdSec", "Threat intelligence", "Bouncer next"],
+  },
+  {
+    number: "06",
+    title: "Centralize logs and build views",
+    status: "In progress",
+    summary: "Connected the monitoring story to Loki, Promtail, and Grafana for centralized logs and visualization.",
+    detail: "The current dashboard makes the activity inspectable. The next pass is to turn that foundation into more meaningful views and alerting for real security events.",
+    tags: ["Loki", "Promtail", "Grafana"],
+  },
+  {
+    number: "07",
+    title: "Keep the public surface narrow",
+    status: "Configured",
+    summary: "Host the portfolio through Nginx with DNS and Cloudflare Tunnel rather than exposing unnecessary services.",
+    detail: "The self-hosted portfolio is part of the same learning arc: practice safe access patterns while keeping the detection work on the dedicated Ubuntu machine.",
+    tags: ["Nginx", "DNS", "Cloudflare Tunnel"],
+  },
+];
+
+const foundations = [
+  {
+    title: "Raspberry Pi Setup",
+    body: "This project builds hands-on Linux fundamentals through Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
+    tags: ["Raspberry Pi OS", "SSH", "CLI"],
+  },
+  {
+    title: "Home Networking",
+    body: "This project builds foundational networking knowledge through router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
+    tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
+  },
+  {
+    title: "Self-Hosted Portfolio",
+    body: "This portfolio is hosted through Nginx on a dedicated Ubuntu server, with DNS and Cloudflare Tunnel providing safer public access and no unnecessary services exposed.",
+    tags: ["Nginx", "Ubuntu", "Cloudflare Tunnel", "DNS"],
+  },
 ];
 
 function FairyLights() {
@@ -168,12 +273,13 @@ export default function Home() {
       {/* ── Navigation ─────────────────────────────────────────── */}
       <nav className="fixed top-0 w-full z-40 bg-background/90 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-5xl">
-          <span
-            className="font-semibold text-base text-foreground tracking-tight cursor-pointer select-none"
+          <button
+            type="button"
+            className="rounded-md font-semibold text-base text-foreground tracking-tight transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             onClick={() => scrollTo("hero")}
           >
             Torianna
-          </span>
+          </button>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-0.5">
@@ -181,7 +287,7 @@ export default function Home() {
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`px-3.5 py-2 text-sm rounded-md transition-colors ${
+                className={`rounded-md px-3.5 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   activeSection === item.id
                     ? "text-primary bg-primary/10 font-medium"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -196,7 +302,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
+              className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <Linkedin className="w-4 h-4" />
             </a>
@@ -205,14 +311,14 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
+              className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <Github className="w-4 h-4" />
             </a>
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="p-2 ml-1 text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors"
+              className="ml-1 rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
@@ -223,14 +329,14 @@ export default function Home() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="p-2 text-muted-foreground rounded-md hover:bg-muted"
+              className="rounded-md p-2 text-muted-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(v => !v)}
               aria-label="Toggle menu"
-              className="p-2 text-muted-foreground rounded-md hover:bg-muted"
+              className="rounded-md p-2 text-muted-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -244,7 +350,7 @@ export default function Home() {
               <button
                 key={item.id}
                 onClick={() => scrollTo(item.id)}
-                className={`text-left px-4 py-2.5 text-sm rounded-md transition-colors ${
+                className={`rounded-md px-4 py-2.5 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                   activeSection === item.id
                     ? "text-primary bg-primary/10 font-medium"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -304,6 +410,20 @@ export default function Home() {
                 <p>Outside of work I like to experiment using my home lab, which you can learn more about on this page! I'm currently running a detection stack: Crowd Sec and Suricata feeding into a Loki/Grafana dashboard on a dedicated Ubuntu machine that also hosts this site. I believe the best way to learn security is to build things, break them, and understand why.</p>
               </div>
 
+              <aside className="rounded-xl border border-primary/30 bg-primary/[0.06] p-5 md:p-6" aria-labelledby="about-next-steps">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <p id="about-next-steps" className="text-xs font-semibold uppercase tracking-widest text-primary">Next Steps</p>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/85">
+                      I'm working on closing the loop from detection to response, adding a CrowdSec bouncer so flagged IPs actually get blocked instead of just logged, along with building out more meaningful dashboard views and alerting for real security events.
+                    </p>
+                  </div>
+                </div>
+              </aside>
+
               <div>
                 <SectionLabel>Skills & Tools</SectionLabel>
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -329,7 +449,7 @@ export default function Home() {
           <SectionLabel>Internship · Great Wolf Lodge</SectionLabel>
           <h2 className="text-3xl font-bold text-foreground mb-12">Security Projects</h2>
 
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid gap-5 md:grid-cols-3">
             {[
               {
                 title: "Phishing Awareness Campaigns",
@@ -350,19 +470,19 @@ export default function Home() {
                 tags: ["Entra ID", "SAML", "SSO"],
               },
             ].map((proj) => (
-              <Card key={proj.title} className="border-border shadow-sm hover:shadow-md transition-shadow">
-                <CardHeader className="pb-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+              <Card key={proj.title} className="group flex h-full flex-col border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+                <CardHeader className="gap-2 pb-4">
+                  <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
                     <Shield className="w-4 h-4 text-primary" />
                   </div>
                   <CardTitle className="text-base font-semibold leading-snug">{proj.title}</CardTitle>
-                  <CardDescription className="font-mono text-xs">{proj.sub}</CardDescription>
+                  <CardDescription className="font-mono text-[11px] uppercase tracking-wide">{proj.sub}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{proj.body}</p>
+                <CardContent className="flex flex-1 flex-col justify-between gap-5">
+                  <p className="text-sm leading-relaxed text-muted-foreground">{proj.body}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {proj.tags.map(t => (
-                      <Badge key={t} variant="outline" className="font-mono text-xs border-border text-muted-foreground">{t}</Badge>
+                      <Badge key={t} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{t}</Badge>
                     ))}
                   </div>
                 </CardContent>
@@ -373,88 +493,263 @@ export default function Home() {
       </section>
       <Divider />
       {/* ── Homelab ────────────────────────────────────────────── */}
-      <section id="homelab" className="py-24">
+      <section id="homelab" className="scroll-mt-20 py-24 md:py-28">
         <div className="container mx-auto px-6 max-w-5xl">
-          <SectionLabel>Personal Projects</SectionLabel>
-          <h2 className="text-3xl font-bold text-foreground mb-12">Homelab</h2>
+          <SectionLabel>Personal Project · Detection Engineering</SectionLabel>
+          <div className="mb-10 flex flex-col gap-4 md:mb-12 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">Detection Lab: Building a Security Monitoring Stack on Ubuntu</h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
+                A hands-on case study in moving from Linux and networking foundations to a working home detection and observability stack.
+              </p>
+            </div>
+            <Badge className="w-fit border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-xs text-primary">
+              In progress
+            </Badge>
+          </div>
 
-          <div className="space-y-10">
-            <Card className="border-primary/35 bg-primary/[0.04] shadow-sm">
-              <CardContent className="p-6 md:p-8">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <Shield className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap mb-2">
-                        <SectionLabel>Current Focus</SectionLabel>
-                        <Badge className="bg-primary/10 text-primary border border-primary/25 font-mono text-[11px]">
-                          In progress
-                        </Badge>
-                      </div>
-                      <CardTitle className="text-xl font-semibold">Detection Lab</CardTitle>
-                    </div>
-                  </div>
+          <Card className="mb-7 border-primary/35 bg-primary/[0.04] shadow-sm transition-[border-color,box-shadow] hover:border-primary/50 hover:shadow-md" id="homelab-tldr">
+            <CardContent className="p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+                  <ListChecks className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-6 max-w-3xl">
-                  I am building a dedicated Ubuntu host for network security monitoring. It uses CrowdSec for threat intelligence and automated blocking, Suricata for intrusion detection, and Loki and Grafana for centralized logging and visualization.
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-primary">TL;DR</p>
+                  <p className="mt-2 max-w-3xl text-lg font-medium leading-relaxed text-foreground">
+                    Detection is working on a dedicated Ubuntu host. The next step is closing the loop with automated blocking, better dashboard views, and alerting for real security events.
+                  </p>
+                </div>
+              </div>
+              <div className="mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-background/35 p-4">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  <span className="font-semibold text-foreground">Current state:</span> Suricata and CrowdSec are producing useful detection activity; automated blocking with a CrowdSec bouncer is the next milestone.
                 </p>
-                <div className="flex flex-wrap gap-1.5 mt-5">
-                  {["CrowdSec", "Suricata", "Loki/Grafana", "Ubuntu"].map(t => (
-                    <Badge key={t} variant="outline" className="font-mono text-xs border-primary/25 text-primary/80">
-                      {t}
-                    </Badge>
-                  ))}
+              </div>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {["CrowdSec", "Suricata", "Loki / Grafana", "Ubuntu"].map(t => (
+                  <Badge key={t} variant="outline" className="border-primary/25 font-mono text-xs text-primary/80">{t}</Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <nav aria-label="Homelab case study sections" className="mb-10 overflow-x-auto rounded-xl border border-border bg-card/60 p-2">
+            <div className="flex min-w-max gap-1">
+              {[
+                ["homelab-stack", "Stack"],
+                ["homelab-architecture", "Data flow"],
+                ["homelab-build-log", "Build log"],
+                ["homelab-results", "Results"],
+                ["homelab-lessons", "Lessons"],
+                ["homelab-next-steps", "Next steps"],
+              ].map(([id, label]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className="rounded-md px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+          </nav>
+
+          <div id="homelab-stack" className="scroll-mt-24">
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <SectionLabel>01 · The system</SectionLabel>
+                <h3 className="text-2xl font-bold text-foreground">Stack at a glance</h3>
+              </div>
+              <span className="hidden text-xs font-mono text-muted-foreground sm:block">DETECTION → RESPONSE → VISIBILITY</span>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {detectionStack.map(item => {
+                const Icon = item.icon;
+                return (
+                  <Card key={item.name} className="group h-full border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
+                    <CardContent className="flex h-full gap-4 p-5 md:p-6">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-foreground">{item.name}</p>
+                        <p className="mt-1 font-mono text-[11px] uppercase tracking-wide text-primary/80">{item.role}</p>
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <Card className="border-border shadow-sm" id="homelab-complementary">
+              <CardHeader className="gap-2 pb-3">
+                <SectionLabel>Why these tools</SectionLabel>
+                <CardTitle className="text-xl">CrowdSec and Suricata are complementary</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground">
+                <p><span className="font-semibold text-foreground">Suricata sees the activity.</span> It provides the network intrusion detection layer and turns traffic into security events.</p>
+                <p><span className="font-semibold text-foreground">CrowdSec adds context and response.</span> It brings threat intelligence and a decision layer that can eventually hand flagged IPs to a bouncer.</p>
+                <div className="rounded-lg border border-border bg-muted/35 p-4">
+                  <p className="font-mono text-xs leading-relaxed text-foreground/80">Visibility from Suricata + decisions from CrowdSec = a path from detection to response.</p>
                 </div>
               </CardContent>
             </Card>
 
-            <div>
-              <SectionLabel>Foundations</SectionLabel>
-              <div className="rounded-xl border border-border overflow-hidden divide-y divide-border">
-                {[
-                  {
-                    title: "Raspberry Pi Setup",
-                    body: "This project builds hands-on Linux fundamentals through Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
-                    tags: ["Raspberry Pi OS", "SSH", "CLI"],
-                  },
-                  {
-                    title: "Home Networking",
-                    body: "This project builds foundational networking knowledge through router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
-                    tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
-                  },
-                  {
-                    title: "Self-Hosted Portfolio",
-                    body: "This portfolio is hosted through Nginx on a dedicated Ubuntu server, with DNS and Cloudflare Tunnel providing safer public access and no unnecessary services exposed.",
-                    tags: ["Nginx", "Ubuntu", "Cloudflare Tunnel", "DNS"],
-                  },
-                ].map((lab) => (
-                  <div key={lab.title} className="flex items-start gap-4 p-5 bg-card/50 hover:bg-muted/40 transition-colors">
-                    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Server className="w-4 h-4 text-primary" />
+            <Card className="border-border shadow-sm" id="homelab-architecture">
+              <CardHeader className="gap-2 pb-3">
+                <SectionLabel>02 · Architecture</SectionLabel>
+                <CardTitle className="text-xl">How the data moves</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-foreground" aria-label="Network traffic flows to Suricata and then into Loki and Grafana">
+                  {["Network traffic", "Suricata", "Loki", "Grafana"].map((item, index, items) => (
+                    <span key={item} className="flex items-center gap-2">
+                      <span className="rounded-lg border border-primary/25 bg-primary/5 px-3 py-2">{item}</span>
+                      {index < items.length - 1 && <ArrowRight className="h-4 w-4 text-primary" aria-hidden="true" />}
+                    </span>
+                  ))}
+                </div>
+                <div className="my-5 flex justify-center text-primary sm:hidden" aria-hidden="true"><ArrowDown className="h-4 w-4" /></div>
+                <div className="mt-5 rounded-lg border border-border bg-muted/35 p-4">
+                  <p className="font-mono text-[11px] uppercase tracking-wide text-primary/80">Response layer</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    CrowdSec evaluates threat intelligence alongside the detection story. The bouncer is the missing connection that will turn a flagged IP into an actual block.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div id="homelab-build-log" className="mt-12 scroll-mt-24">
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <SectionLabel>03 · Build log</SectionLabel>
+                <h3 className="text-2xl font-bold text-foreground">From foundations to a working stack</h3>
+              </div>
+              <BookOpen className="hidden h-5 w-5 text-primary/70 sm:block" aria-hidden="true" />
+            </div>
+            <p className="mb-5 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              Each phase keeps the technical detail available without making the full story a wall of text. Open a step to see what it contributed and where it stands.
+            </p>
+            <Accordion type="multiple" defaultValue={["build-step-01"]} className="rounded-xl border border-border bg-card px-5 md:px-7">
+              {buildLog.map(step => (
+                <AccordionItem key={step.number} value={`build-step-${step.number}`} className="border-border last:border-0">
+                  <AccordionTrigger className="gap-4 py-5 text-left hover:no-underline">
+                    <div className="flex min-w-0 flex-1 items-start gap-3 md:gap-4">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary/10 font-mono text-[11px] font-semibold text-primary">{step.number}</span>
+                      <span className="min-w-0">
+                        <span className="block font-semibold text-foreground">{step.title}</span>
+                        <span className="mt-1 block text-sm font-normal leading-relaxed text-muted-foreground">{step.summary}</span>
+                      </span>
                     </div>
-                    <div className="min-w-0">
-                      <CardTitle className="text-base font-semibold">{lab.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-2 max-w-3xl">{lab.body}</p>
-                      <div className="flex flex-wrap gap-1.5 mt-3">
-                        {lab.tags.map(t => (
-                          <Badge key={t} variant="outline" className="font-mono text-xs border-border text-muted-foreground">
-                            {t}
-                          </Badge>
+                    <Badge variant="outline" className="hidden shrink-0 border-primary/25 font-mono text-[10px] text-primary/80 sm:inline-flex">{step.status}</Badge>
+                  </AccordionTrigger>
+                  <AccordionContent className="pl-10 pr-0 md:pl-11">
+                    <div className="pb-5">
+                      <p className="text-sm leading-relaxed text-muted-foreground">{step.detail}</p>
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {step.tags.map(tag => (
+                          <Badge key={tag} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{tag}</Badge>
                         ))}
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
+          <div id="homelab-results" className="mt-12 scroll-mt-24">
+            <SectionLabel>04 · Current results</SectionLabel>
+            <div className="grid gap-5 lg:grid-cols-3">
+              <Card className="border-border shadow-sm">
+                <CardHeader className="gap-2 pb-3">
+                  <Eye className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <CardTitle className="text-lg">Dashboard and visibility</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                  Loki and Grafana provide a centralized place to inspect the activity coming from the monitoring stack. The foundation is in place; the next pass is making the views more meaningful.
+                </CardContent>
+              </Card>
+              <Card className="border-border shadow-sm">
+                <CardHeader className="gap-2 pb-3">
+                  <CircleDot className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <CardTitle className="text-lg">What works now</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                  Detection is working: Suricata provides network visibility and CrowdSec contributes threat-intelligence decisions that can be reviewed in the logging and visualization layer.
+                </CardContent>
+              </Card>
+              <Card className="border-border shadow-sm">
+                <CardHeader className="gap-2 pb-3">
+                  <Activity className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <CardTitle className="text-lg">Current limitation</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                  The response loop is not finished yet. Flagged IPs are currently logged rather than blocked; a CrowdSec bouncer is the next step.
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <Card id="homelab-lessons" className="scroll-mt-24 border-border shadow-sm">
+              <CardHeader className="gap-2 pb-3">
+                <SectionLabel>05 · Lessons learned</SectionLabel>
+                <CardTitle className="text-xl">Build the story in layers</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                <p>Linux fundamentals and home networking made the later monitoring work easier to understand and troubleshoot.</p>
+                <p>Separating detection, threat intelligence, and visualization clarifies what each tool contributes instead of treating the stack as one black box.</p>
+                <p>Self-hosting also makes access decisions part of the project: Nginx, DNS, and Cloudflare Tunnel keep the public surface deliberate.</p>
+              </CardContent>
+            </Card>
+            <Card id="homelab-next-steps" className="scroll-mt-24 border-primary/30 bg-primary/[0.04] shadow-sm">
+              <CardHeader className="gap-2 pb-3">
+                <SectionLabel>06 · Next steps</SectionLabel>
+                <CardTitle className="text-xl">Close the loop from detection to response</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm leading-relaxed text-muted-foreground">
+                I'm working on closing the loop from detection to response, adding a CrowdSec bouncer so flagged IPs actually get blocked instead of just logged, along with building out more meaningful dashboard views and alerting for real security events.
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-14" id="homelab-foundations">
+            <SectionLabel>Foundations</SectionLabel>
+            <h3 className="mb-5 text-2xl font-bold text-foreground">The progression behind the lab</h3>
+            <div className="grid gap-4 lg:grid-cols-3">
+              {foundations.map((lab, index) => (
+                <Card key={lab.title} className="group h-full border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
+                  <CardContent className="flex h-full flex-col p-5 md:p-6">
+                    <div className="mb-4 flex items-center justify-between gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        <Server className="h-4 w-4" aria-hidden="true" />
+                      </div>
+                      <span className="font-mono text-[11px] text-muted-foreground">0{index + 1}</span>
+                    </div>
+                    <CardTitle className="text-base">{lab.title}</CardTitle>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{lab.body}</p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {lab.tags.map(tag => (
+                        <Badge key={tag} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{tag}</Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </div>
       </section>
       <Divider />
       {/* ── PC Build ───────────────────────────────────────────── */}
-      <section id="pcbuild" className="py-24">
+      <section id="pcbuild" className="scroll-mt-20 py-24 md:py-28">
         <div className="container mx-auto px-6 max-w-5xl">
           <SectionLabel>Current Build</SectionLabel>
           <h2 className="text-3xl font-bold text-foreground mb-3 flex items-center gap-3">
@@ -462,16 +757,16 @@ export default function Home() {
             <Cpu className="w-5 h-5 text-primary opacity-70" />
           </h2>
 
-          <div className="max-w-2xl mt-10 space-y-6">
+          <div className="mt-10 max-w-2xl space-y-6">
             <div>
               <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
                 This build is in progress and is designed for gaming, virtual machines, cybersecurity labs, and research.
               </p>
             </div>
 
-            <Card className="border-border shadow-sm overflow-hidden">
-              <CardContent className="p-0">
-                <table className="w-full text-sm font-mono">
+            <Card className="overflow-hidden border-border shadow-sm transition-[border-color,box-shadow] hover:border-primary/40 hover:shadow-md">
+              <CardContent className="overflow-x-auto p-0">
+                <table className="w-full min-w-[30rem] text-sm font-mono">
                   <tbody className="divide-y divide-border">
                     {[
                       { label: "CPU",         value: "AMD Ryzen 7 9800X3D",              ready: true  },
@@ -505,17 +800,17 @@ export default function Home() {
       </section>
       <Divider />
       {/* ── Certifications ─────────────────────────────────────── */}
-      <section id="certifications" className="py-24">
+      <section id="certifications" className="scroll-mt-20 py-24 md:py-28">
         <div className="container mx-auto px-6 max-w-5xl">
           <SectionLabel>Credentials</SectionLabel>
           <h2 className="text-3xl font-bold text-foreground mb-12">Certifications</h2>
 
-          <div className="grid md:grid-cols-2 gap-5 max-w-2xl">
+          <div className="grid max-w-2xl gap-5 md:grid-cols-2">
             {/* Earned */}
-            <Card className="border-border shadow-sm border-l-2 border-l-primary">
-              <CardContent className="p-8">
-                <div className="flex items-center justify-between mb-5">
-                  <Badge className="bg-primary/10 text-primary border border-primary/25 font-mono font-semibold px-3 py-1 text-sm">
+            <Card className="border-l-2 border-border border-l-primary shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:shadow-md">
+              <CardContent className="p-6 md:p-7">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <Badge className="border border-primary/25 bg-primary/10 px-3 py-1 font-mono text-sm font-semibold text-primary">
                     Sec+
                   </Badge>
                   <span className="text-xs text-muted-foreground font-mono">Earned 2025</span>
@@ -528,9 +823,9 @@ export default function Home() {
             </Card>
 
             {/* Upcoming */}
-            <Card className="border-dashed border-border shadow-sm">
-              <CardContent className="p-8">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-5">
+            <Card className="border-dashed border-border shadow-sm transition-[border-color,box-shadow] hover:border-primary/40 hover:shadow-md">
+              <CardContent className="p-6 md:p-7">
+                <p className="mb-5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
                   Exploring Next
                 </p>
                 <div className="space-y-3">
