@@ -378,7 +378,7 @@ export default function Home() {
           <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-8">
             Cybersecurity Graduate · Chicago, IL
           </p>
-          <h1 className="text-7xl md:text-9xl font-bold text-foreground tracking-tight mb-6 leading-none">Tori</h1>
+          <h1 className="text-7xl md:text-9xl font-bold text-foreground tracking-tight mb-6 leading-none">TESTING</h1>
           <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-lg mx-auto">
             Curious about how systems connect, alerts tell a story, and the right technical decisions quietly keep environments safe.
           </p>
