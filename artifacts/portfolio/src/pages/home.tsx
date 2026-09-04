@@ -165,7 +165,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-
       {/* ── Navigation ─────────────────────────────────────────── */}
       <nav className="fixed top-0 w-full z-40 bg-background/90 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-5xl">
@@ -257,9 +256,8 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden text-right">
         <FairyLights />
         {/* Chicago skyline, very subtle */}
         <div className="absolute bottom-0 w-full h-[50vh] pointer-events-none select-none opacity-[0.05]">
@@ -290,7 +288,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ── About ──────────────────────────────────────────────── */}
       <section id="about" className="py-24">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -305,7 +302,7 @@ export default function Home() {
                   I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the places where systems meet: how systems connect, how alerts tell a story, how people interact with security controls, and how the right technical decisions quietly protect an environment.
                 </p>
                 <p>
-                  Outside of work I experiment with a Raspberry Pi homelab, tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
+                  Outside of work I like to experiment using my home lab which you can learn more about on this page! I tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
                 </p>
               </div>
 
@@ -327,9 +324,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Divider />
-
       {/* ── Projects ───────────────────────────────────────────── */}
       <section id="cyber" className="py-24">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -378,9 +373,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Divider />
-
       {/* ── Homelab ────────────────────────────────────────────── */}
       <section id="homelab" className="py-24">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -461,9 +454,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Divider />
-
       {/* ── PC Build ───────────────────────────────────────────── */}
       <section id="pcbuild" className="py-24">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -514,9 +505,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Divider />
-
       {/* ── Certifications ─────────────────────────────────────── */}
       <section id="certifications" className="py-24">
         <div className="container mx-auto px-6 max-w-5xl">
@@ -564,7 +553,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ── Footer ─────────────────────────────────────────────── */}
       <div className="border-t border-border py-8">
         <div className="container mx-auto px-6 max-w-5xl flex items-center justify-between flex-wrap gap-4">
@@ -591,7 +579,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
