@@ -301,9 +301,7 @@ export default function Home() {
                 <p>
                   I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the places where systems meet: how systems connect, how alerts tell a story, how people interact with security controls, and how the right technical decisions quietly protect an environment.
                 </p>
-                <p>
-                  Outside of work I like to experiment using my home lab which you can learn more about on this page! I tinker with networking setups, and am building out a new PC. I believe the best way to learn security is to build things, break them, and understand why.
-                </p>
+                <p>Outside of work I like to experiment using my home lab, which you can learn more about on this page! I'm currently running a detection stack: Crowd Sec and Suricata feeding into a Loki/Grafana dashboard on a dedicated Ubuntu machine that also hosts this site. I believe the best way to learn security is to build things, break them, and understand why.</p>
               </div>
 
               <div>
