@@ -64,3 +64,70 @@ test("keeps all Homelab milestones selectable and keyboard accessible", async ({
   await expect(previousButton).toBeDisabled();
   await expect(nextButton).toBeEnabled();
 });
+
+test.describe("on narrow mobile screens", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("keeps the milestone strip scrollable without clipping the detail panel", async ({ page }) => {
+    await page.goto("/");
+
+    const tabList = page.getByRole("tablist", { name: "Homelab build milestones" });
+    const tabs = tabList.getByRole("tab");
+    const milestoneScroller = tabList.locator("..");
+    const panel = page.getByRole("tabpanel");
+    const previousButton = page.getByRole("button", { name: "Show previous homelab milestone" });
+    const nextButton = page.getByRole("button", { name: "Show next homelab milestone" });
+
+    await expect(tabs).toHaveCount(milestones.length);
+    await expect(milestoneScroller).toHaveCSS("overflow-x", "auto");
+    await expect.poll(() => milestoneScroller.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(true);
+
+    for (const [index, title] of milestones.entries()) {
+      const tab = tabs.nth(index);
+      await tab.scrollIntoViewIfNeeded();
+      await expect(tab).toBeInViewport();
+      await tab.click();
+
+      await expect(tab).toHaveAttribute("aria-selected", "true");
+      await expect(panel).toContainText(title);
+      if (index === 0) {
+        await expect(previousButton).toBeDisabled();
+      } else {
+        await expect(previousButton).toBeEnabled();
+      }
+      if (index === milestones.length - 1) {
+        await expect(nextButton).toBeDisabled();
+      } else {
+        await expect(nextButton).toBeEnabled();
+      }
+
+      const panelMetrics = await panel.evaluate(element => {
+        const rect = element.getBoundingClientRect();
+        return {
+          left: rect.left,
+          right: rect.right,
+          viewportWidth: window.innerWidth,
+          clientWidth: element.clientWidth,
+          scrollWidth: element.scrollWidth,
+        };
+      });
+      expect(panelMetrics.left).toBeGreaterThanOrEqual(0);
+      expect(panelMetrics.right).toBeLessThanOrEqual(panelMetrics.viewportWidth);
+      expect(panelMetrics.scrollWidth).toBeLessThanOrEqual(panelMetrics.clientWidth);
+    }
+
+    await tabs.nth(0).focus();
+    await tabs.nth(0).press("End");
+    await expect(tabs.nth(milestones.length - 1)).toBeFocused();
+    await expect(panel).toContainText(milestones[milestones.length - 1]);
+    await expect(previousButton).toBeEnabled();
+    await expect(nextButton).toBeDisabled();
+    await expect.poll(() => milestoneScroller.evaluate(element => element.scrollLeft > 0)).toBe(true);
+
+    await tabs.nth(milestones.length - 1).press("Home");
+    await expect(tabs.nth(0)).toBeFocused();
+    await expect(panel).toContainText(milestones[0]);
+    await expect(previousButton).toBeDisabled();
+    await expect(nextButton).toBeEnabled();
+  });
+});
