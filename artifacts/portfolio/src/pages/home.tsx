@@ -372,7 +372,7 @@ export default function Home() {
           <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-8">
             Cybersecurity Graduate · Chicago, IL
           </p>
-          <h1 className="text-7xl md:text-9xl font-bold text-foreground tracking-tight mb-6 leading-none">Torianna</h1>
+          <h1 className="font-script text-7xl font-bold leading-none tracking-tight text-foreground md:text-9xl">Torianna</h1>
           <img
             src={heroStreet}
             alt="Warmly lit city street at night"
