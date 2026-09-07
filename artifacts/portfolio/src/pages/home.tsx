@@ -14,8 +14,8 @@ const skills = [
 
 const navItems = [
   { id: "about",         label: "About"    },
-  { id: "cyber",         label: "Projects" },
   { id: "homelab",       label: "Homelab"  },
+  { id: "cyber",         label: "Projects" },
   { id: "pcbuild",       label: "Build"    },
   { id: "certifications",label: "Certs"   },
 ];
@@ -438,55 +438,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <Divider />
-      {/* ── Projects ───────────────────────────────────────────── */}
-      <section id="cyber" className="py-24">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <SectionLabel>Internship · Great Wolf Lodge</SectionLabel>
-          <h2 className="text-3xl font-bold text-foreground mb-12">Security Projects</h2>
-
-          <div className="grid gap-5 md:grid-cols-3">
-            {[
-              {
-                title: "Phishing Awareness Campaigns",
-                sub: "Security Awareness",
-                body: "Orchestrated phishing simulations via KnowBe4 for 3,000+ employees. Designed realistic email templates, analyzed click rates, and delivered targeted retraining to flagged employees.",
-                tags: ["KnowBe4", "HTML/CSS", "Reporting"],
-              },
-              {
-                title: "Detection & Alerting Logic",
-                sub: "SIEM Engineering",
-                body: "Built custom LEQL detection rules in Rapid7 InsightIDR to flag unauthorized password storage, excessive MFA failures, and repeated VPN login attempts.",
-                tags: ["Rapid7 InsightIDR", "LEQL", "MFA Monitoring"],
-              },
-              {
-                title: "SSO & Identity Work",
-                sub: "Identity & Access",
-                body: "Configured and deployed SSO for core business apps via Microsoft Entra ID using SAML and IdP-initiated flows. Documented rollout steps and resolved access issues.",
-                tags: ["Entra ID", "SAML", "SSO"],
-              },
-            ].map((proj) => (
-              <Card key={proj.title} className="group flex h-full flex-col border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
-                <CardHeader className="gap-2 pb-4">
-                  <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
-                    <Shield className="w-4 h-4 text-primary" />
-                  </div>
-                  <CardTitle className="text-base font-semibold leading-snug">{proj.title}</CardTitle>
-                  <CardDescription className="font-mono text-[11px] uppercase tracking-wide">{proj.sub}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-1 flex-col justify-between gap-5">
-                  <p className="text-sm leading-relaxed text-muted-foreground">{proj.body}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {proj.tags.map(t => (
-                      <Badge key={t} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{t}</Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
@@ -989,6 +940,55 @@ export default function Home() {
 
             </div>
           )}
+        </div>
+      </section>
+      <Divider />
+      {/* ── Internship ──────────────────────────────────────────── */}
+      <section id="cyber" className="py-24">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <SectionLabel>Internship · Great Wolf Lodge</SectionLabel>
+          <h2 className="text-3xl font-bold text-foreground mb-12">Security Projects</h2>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                title: "Phishing Awareness Campaigns",
+                sub: "Security Awareness",
+                body: "Orchestrated phishing simulations via KnowBe4 for 3,000+ employees. Designed realistic email templates, analyzed click rates, and delivered targeted retraining to flagged employees.",
+                tags: ["KnowBe4", "HTML/CSS", "Reporting"],
+              },
+              {
+                title: "Detection & Alerting Logic",
+                sub: "SIEM Engineering",
+                body: "Built custom LEQL detection rules in Rapid7 InsightIDR to flag unauthorized password storage, excessive MFA failures, and repeated VPN login attempts.",
+                tags: ["Rapid7 InsightIDR", "LEQL", "MFA Monitoring"],
+              },
+              {
+                title: "SSO & Identity Work",
+                sub: "Identity & Access",
+                body: "Configured and deployed SSO for core business apps via Microsoft Entra ID using SAML and IdP-initiated flows. Documented rollout steps and resolved access issues.",
+                tags: ["Entra ID", "SAML", "SSO"],
+              },
+            ].map((proj) => (
+              <Card key={proj.title} className="group flex h-full flex-col border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+                <CardHeader className="gap-2 pb-4">
+                  <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
+                    <Shield className="w-4 h-4 text-primary" />
+                  </div>
+                  <CardTitle className="text-base font-semibold leading-snug">{proj.title}</CardTitle>
+                  <CardDescription className="font-mono text-[11px] uppercase tracking-wide">{proj.sub}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-1 flex-col justify-between gap-5">
+                  <p className="text-sm leading-relaxed text-muted-foreground">{proj.body}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {proj.tags.map(t => (
+                      <Badge key={t} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{t}</Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
       <Divider />
