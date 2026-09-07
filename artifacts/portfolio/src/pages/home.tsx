@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Server, Shield, Cpu, Sun, Moon, Menu, X, Activity, ArrowDown, ArrowRight, BookOpen, CheckCircle2, CircleDot, ChevronLeft, ChevronRight, Eye, ListChecks, Network } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import heroStreet from "@/assets/hero-street.jpg";
 
 const skills = [
   "Rapid7 InsightIDR", "KnowBe4", "Microsoft Entra ID", "Active Directory",
@@ -366,6 +367,22 @@ export default function Home() {
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden text-right">
         <FairyLights />
+        <div className="pointer-events-none absolute inset-x-0 top-[18%] h-[48vh] min-h-[18rem] overflow-hidden" aria-hidden="true">
+          <img
+            src={heroStreet}
+            alt=""
+            className="h-full w-full scale-105 object-cover object-center opacity-75"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: [
+                "linear-gradient(90deg, rgba(25, 16, 8, 0.9) 0%, rgba(25, 16, 8, 0.3) 38%, rgba(25, 16, 8, 0.3) 62%, rgba(25, 16, 8, 0.9) 100%)",
+                "linear-gradient(180deg, rgba(25, 16, 8, 0.85) 0%, rgba(25, 16, 8, 0.08) 35%, rgba(25, 16, 8, 0.2) 65%, rgba(25, 16, 8, 0.95) 100%)",
+              ].join(", "),
+            }}
+          />
+        </div>
         {/* Chicago skyline, very subtle */}
         <div className="absolute bottom-0 w-full h-[50vh] pointer-events-none select-none opacity-[0.05]">
           <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className="w-full h-full fill-foreground">
