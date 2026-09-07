@@ -15,7 +15,7 @@ const skills = [
 const navItems = [
   { id: "about",         label: "About"    },
   { id: "homelab",       label: "Homelab"  },
-  { id: "cyber",         label: "Projects" },
+  { id: "cyber",         label: "Experience" },
   { id: "pcbuild",       label: "Build"    },
   { id: "certifications",label: "Certs"   },
 ];
@@ -947,7 +947,7 @@ export default function Home() {
       <section id="cyber" className="py-24">
         <div className="container mx-auto px-6 max-w-5xl">
           <SectionLabel>Internship · Great Wolf Lodge</SectionLabel>
-          <h2 className="text-3xl font-bold text-foreground mb-12">Security Projects</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-12">Experience</h2>
 
           <div className="grid gap-5 md:grid-cols-3">
             {[
