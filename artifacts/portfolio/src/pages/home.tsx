@@ -371,25 +371,17 @@ export default function Home() {
           <img
             src={heroStreet}
             alt=""
-            className="h-full w-full scale-105 object-cover object-center opacity-75"
+            className="h-full w-full scale-105 object-cover object-center opacity-90"
           />
           <div
             className="absolute inset-0"
             style={{
               background: [
-                "linear-gradient(90deg, rgba(25, 16, 8, 0.9) 0%, rgba(25, 16, 8, 0.3) 38%, rgba(25, 16, 8, 0.3) 62%, rgba(25, 16, 8, 0.9) 100%)",
-                "linear-gradient(180deg, rgba(25, 16, 8, 0.85) 0%, rgba(25, 16, 8, 0.08) 35%, rgba(25, 16, 8, 0.2) 65%, rgba(25, 16, 8, 0.95) 100%)",
+                "linear-gradient(90deg, rgba(25, 16, 8, 0.76) 0%, rgba(25, 16, 8, 0.16) 38%, rgba(25, 16, 8, 0.16) 62%, rgba(25, 16, 8, 0.76) 100%)",
+                "linear-gradient(180deg, rgba(25, 16, 8, 0.62) 0%, rgba(25, 16, 8, 0.02) 35%, rgba(25, 16, 8, 0.12) 65%, rgba(25, 16, 8, 0.78) 100%)",
               ].join(", "),
             }}
           />
-        </div>
-        {/* Chicago skyline, very subtle */}
-        <div className="absolute bottom-0 w-full h-[50vh] pointer-events-none select-none opacity-[0.05]">
-          <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className="w-full h-full fill-foreground">
-            <path d="M0,300 L0,200 L50,200 L50,150 L80,150 L80,220 L120,220 L120,100 L150,100 L150,180 L200,180 L200,50 L250,50 L250,250 L300,250 L300,120 L350,120 L350,200 L400,200 L400,80 L450,80 L450,230 L500,230 L500,20 L550,20 L550,210 L600,210 L600,140 L650,140 L650,260 L700,260 L700,90 L750,90 L750,190 L800,190 L800,60 L850,60 L850,240 L900,240 L900,110 L950,110 L950,200 L1000,200 L1000,300 Z" />
-            <rect x="220" y="20" width="9" height="30" />
-            <rect x="520" y="0"  width="9" height="20" />
-          </svg>
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
