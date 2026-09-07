@@ -106,19 +106,6 @@ const buildLog = [
   },
 ];
 
-const foundations = [
-  {
-    title: "Raspberry Pi Setup",
-    body: "This project builds hands-on Linux fundamentals through Raspberry Pi OS, terminal commands, file management, and SSH access from the local network.",
-    tags: ["Raspberry Pi OS", "SSH", "CLI"],
-  },
-  {
-    title: "Home Networking",
-    body: "This project builds foundational networking knowledge through router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
-    tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
-  },
-];
-
 function FairyLights() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -1000,31 +987,6 @@ export default function Home() {
             </Card>
           </div>
 
-          <div className="mt-14" id="homelab-foundations">
-            <SectionLabel>Foundations</SectionLabel>
-            <h3 className="mb-5 text-2xl font-bold text-foreground">The progression behind the detection system</h3>
-            <div className="grid gap-4 lg:grid-cols-3">
-              {foundations.map((lab, index) => (
-                <Card key={lab.title} className="group h-full border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
-                  <CardContent className="flex h-full flex-col p-5 md:p-6">
-                    <div className="mb-4 flex items-center justify-between gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <Server className="h-4 w-4" aria-hidden="true" />
-                      </div>
-                      <span className="font-mono text-[11px] text-muted-foreground">0{index + 1}</span>
-                    </div>
-                    <CardTitle className="text-base">{lab.title}</CardTitle>
-                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{lab.body}</p>
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {lab.tags.map(tag => (
-                        <Badge key={tag} variant="outline" className="border-border font-mono text-[11px] text-muted-foreground">{tag}</Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
             </div>
           )}
         </div>
