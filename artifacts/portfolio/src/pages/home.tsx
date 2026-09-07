@@ -20,6 +20,14 @@ const navItems = [
   { id: "certifications",label: "Certs"   },
 ];
 
+const homelabTabs = [
+  { id: "overview", label: "Overview" },
+  { id: "website", label: "This Website" },
+  { id: "detection", label: "Detection System" },
+] as const;
+
+type HomelabTabId = typeof homelabTabs[number]["id"];
+
 const detectionStack = [
   {
     name: "Ubuntu",
@@ -96,22 +104,6 @@ const buildLog = [
     detail: "The current dashboard makes the activity inspectable. The next pass is to turn that foundation into more meaningful views and alerting for real security events.",
     tags: ["Loki", "Promtail", "Grafana"],
   },
-  {
-    number: "07",
-    title: "Keep the public surface narrow",
-    status: "Configured",
-    summary: "Host the portfolio through Nginx with DNS and Cloudflare Tunnel rather than exposing unnecessary services.",
-    detail: "The self-hosted portfolio is part of the same learning arc: practice safe access patterns while keeping the detection work on the dedicated Ubuntu machine.",
-    tags: ["Nginx", "DNS", "Cloudflare Tunnel"],
-  },
-  {
-    number: "08",
-    title: "Automate deployment with GitHub and cron",
-    status: "Working",
-    summary: "Built a deploy script and scheduled it to run automatically, so pushing code is the only manual step required to update the live site.",
-    detail: "Getting here required solving a few real problems: a cp command's trailing slash was silently creating a nested folder instead of overwriting the live site, which took real diagnostic work to catch. Passwordless sudo rules had to match the deploy script's exact commands for cron to run unattended. The result is a genuinely hands-off pipeline: edit in Replit, push, and the site updates itself.",
-    tags: ["GitHub", "Cron", "Bash", "Sudoers"],
-  },
 ];
 
 const foundations = [
@@ -124,11 +116,6 @@ const foundations = [
     title: "Home Networking",
     body: "This project builds foundational networking knowledge through router and switch concepts, LAN connectivity, IP addressing, and troubleshooting local network issues.",
     tags: ["DNS / DHCP", "TCP/IP", "VLAN Concepts"],
-  },
-  {
-    title: "Self-Hosted Portfolio",
-    body: "This portfolio is hosted through Nginx on a dedicated Ubuntu server, with DNS and Cloudflare Tunnel providing safer public access and no unnecessary services exposed.",
-    tags: ["Nginx", "Ubuntu", "Cloudflare Tunnel", "DNS"],
   },
 ];
 
@@ -253,8 +240,10 @@ function Divider() {
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeHomelabTab, setActiveHomelabTab] = useState<HomelabTabId>("overview");
   const [selectedBuildStep, setSelectedBuildStep] = useState(0);
   const buildStepRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const homelabTabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -282,6 +271,14 @@ export default function Home() {
     setSelectedBuildStep(nextIndex);
     if (moveFocus) {
       buildStepRefs.current[nextIndex]?.focus();
+    }
+  };
+
+  const selectHomelabTab = (tabId: HomelabTabId, moveFocus = false) => {
+    setActiveHomelabTab(tabId);
+    if (moveFocus) {
+      const nextIndex = homelabTabs.findIndex(tab => tab.id === tabId);
+      homelabTabRefs.current[nextIndex]?.focus();
     }
   };
 
@@ -422,7 +419,7 @@ export default function Home() {
                 <p>
                   I'm a recent cybersecurity graduate from Bradley University, based in Chicago. I'm drawn to the places where systems meet: how systems connect, how alerts tell a story, how people interact with security controls, and how the right technical decisions quietly protect an environment.
                 </p>
-                <p>Outside of work I like to experiment using my home lab, which you can learn more about on this page! I'm currently running a detection stack: CrowdSec and Suricata feeding into a Loki/Grafana dashboard on a dedicated Ubuntu machine that also hosts this site, with a fully automated deploy pipeline keeping it all in sync. I believe the best way to learn security is to build things, break them, and understand why.</p>
+                <p>Outside of work I like to experiment using my home lab, which you can learn more about on this page! My security detection system uses CrowdSec and Suricata, with Loki and Grafana providing the dashboard. Separately, this website is self-hosted on the same dedicated Ubuntu machine and kept in sync by a fully automated deploy pipeline. I believe the best way to learn security is to build things, break them, and understand why.</p>
               </div>
 
               <aside className="rounded-xl border border-primary/30 bg-primary/[0.06] p-5 md:p-6" aria-labelledby="about-next-steps">
@@ -510,17 +507,179 @@ export default function Home() {
       {/* ── Homelab ────────────────────────────────────────────── */}
       <section id="homelab" className="scroll-mt-20 py-24 md:py-28">
         <div className="container mx-auto px-6 max-w-5xl">
-          <SectionLabel>Personal Project · Detection Engineering</SectionLabel>
+          <SectionLabel>Personal Project · Homelab</SectionLabel>
           <div className="mb-10 flex flex-col gap-4 md:mb-12 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">Detection Lab: Building a Security Monitoring Stack on Ubuntu</h2>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">A hands on case study in moving from Linux and networking foundations to a working home detection and observability stack.</p>
+              <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">One Homelab, Two Projects</h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Explore the infrastructure behind this website separately from the security detection system running on the same Ubuntu host.</p>
             </div>
             <Badge className="w-fit border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-xs text-primary">
               In progress
             </Badge>
           </div>
 
+          <div
+            role="tablist"
+            aria-label="Homelab projects"
+            className="mb-8 grid gap-1 rounded-xl border border-border bg-card/60 p-1 sm:grid-cols-3"
+          >
+            {homelabTabs.map((tab, index) => {
+              const isSelected = activeHomelabTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  ref={element => { homelabTabRefs.current[index] = element; }}
+                  type="button"
+                  role="tab"
+                  id={`homelab-tab-${tab.id}`}
+                  aria-selected={isSelected}
+                  aria-controls={`homelab-panel-${tab.id}`}
+                  tabIndex={isSelected ? 0 : -1}
+                  className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+                    isSelected
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+                  onClick={() => selectHomelabTab(tab.id)}
+                  onKeyDown={event => {
+                    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                      event.preventDefault();
+                      selectHomelabTab(homelabTabs[(index + 1) % homelabTabs.length].id, true);
+                    }
+                    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                      event.preventDefault();
+                      selectHomelabTab(homelabTabs[(index - 1 + homelabTabs.length) % homelabTabs.length].id, true);
+                    }
+                    if (event.key === "Home") {
+                      event.preventDefault();
+                      selectHomelabTab(homelabTabs[0].id, true);
+                    }
+                    if (event.key === "End") {
+                      event.preventDefault();
+                      selectHomelabTab(homelabTabs[homelabTabs.length - 1].id, true);
+                    }
+                  }}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {activeHomelabTab === "overview" && (
+            <div
+              id="homelab-panel-overview"
+              role="tabpanel"
+              aria-labelledby="homelab-tab-overview"
+              className="space-y-5"
+            >
+              <div>
+                <SectionLabel>Start here</SectionLabel>
+                <h3 className="text-2xl font-bold text-foreground">Choose a project</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                  The website and the detection system share a host, but they solve different problems. Pick a track to see its details.
+                </p>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={() => selectHomelabTab("website")}
+                  className="group rounded-xl border border-border bg-card p-6 text-left shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-primary/80">Website infrastructure</p>
+                  <h4 className="mt-3 text-xl font-bold text-foreground">This Website</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    A self-hosted portfolio with Nginx, DNS, Cloudflare Tunnel, and a GitHub-based auto-deploy pipeline.
+                  </p>
+                  <span className="mt-5 block text-sm font-medium text-primary transition-transform group-hover:translate-x-1">View website details →</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => selectHomelabTab("detection")}
+                  className="group rounded-xl border border-border bg-card p-6 text-left shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-primary/80">Security project</p>
+                  <h4 className="mt-3 text-xl font-bold text-foreground">Detection System</h4>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    CrowdSec and Suricata feed a Loki and Grafana observability stack for network detection and response.
+                  </p>
+                  <span className="mt-5 block text-sm font-medium text-primary transition-transform group-hover:translate-x-1">View detection details →</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {activeHomelabTab === "website" && (
+            <div
+              id="homelab-panel-website"
+              role="tabpanel"
+              aria-labelledby="homelab-tab-website"
+              className="space-y-6"
+            >
+              <div>
+                <SectionLabel>Website infrastructure</SectionLabel>
+                <h3 className="text-2xl font-bold text-foreground">This Website</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                  The portfolio is its own project: a public site hosted through Nginx on the Ubuntu machine, with Cloudflare Tunnel and DNS keeping the public surface narrow.
+                </p>
+              </div>
+
+              <Card id="homelab-deploy" className="border-border shadow-sm transition-[border-color,box-shadow] hover:border-primary/40 hover:shadow-md">
+                <CardHeader className="gap-3 pb-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <Badge className="border border-primary/25 bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
+                      Complete
+                    </Badge>
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl">Auto-Deploy Pipeline</CardTitle>
+                    <CardDescription className="mt-2 max-w-3xl text-sm leading-relaxed">
+                      Push a change from Replit, and it goes live on torianna.tech within 5 minutes with zero manual steps.
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="rounded-lg border border-border bg-muted/35 p-4">
+                    <p className="font-mono text-[11px] uppercase tracking-wide text-primary/80">How it works</p>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      A cron job on the Ubuntu host checks GitHub every 5 minutes. When it finds a new commit, it pulls the change, rebuilds the site, clears out old build files, and redeploys without manual server work.
+                    </p>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["GitHub", "Cron", "Bash", "CI/CD"].map(tag => (
+                      <Badge key={tag} variant="outline" className="border-primary/25 font-mono text-xs text-primary/80">{tag}</Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-border shadow-sm">
+                <CardHeader className="gap-2 pb-3">
+                  <SectionLabel>Deployment lessons</SectionLabel>
+                  <CardTitle className="text-xl">What keeps the site reliable</CardTitle>
+                </CardHeader>
+                <CardContent className="grid gap-4 text-sm leading-relaxed text-muted-foreground md:grid-cols-2">
+                  <p className="rounded-lg border border-border bg-muted/25 p-4">
+                    <span className="font-semibold text-foreground">The trailing slash problem.</span> A <code className="rounded bg-muted px-1 py-0.5 text-xs">cp</code> command was nesting fresh files instead of replacing the live site, leaving stale content online until the deployed files were compared with the build output.
+                  </p>
+                  <p className="rounded-lg border border-border bg-muted/25 p-4">
+                    <span className="font-semibold text-foreground">The sudoers constraint.</span> Passwordless sudo rules had to match the deploy script's exact commands, so the copy step was rewritten without relying on a wildcard path.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {activeHomelabTab === "detection" && (
+            <div
+              id="homelab-panel-detection"
+              role="tabpanel"
+              aria-labelledby="homelab-tab-detection"
+              className="space-y-6"
+            >
           <Card className="mb-7 border-primary/35 bg-primary/[0.04] shadow-sm transition-[border-color,box-shadow] hover:border-primary/50 hover:shadow-md" id="homelab-tldr">
             <CardContent className="p-6 md:p-8">
               <div className="flex items-start gap-4">
@@ -547,59 +706,6 @@ export default function Home() {
               </div>
             </CardContent>
           </Card>
-
-          <Card className="mb-7 border-border shadow-sm transition-[border-color,box-shadow] hover:border-primary/40 hover:shadow-md" id="homelab-deploy">
-            <CardHeader className="gap-3 pb-4">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <Badge className="border border-primary/25 bg-primary/10 px-3 py-1 font-mono text-xs text-primary">
-                  Complete
-                </Badge>
-              </div>
-              <div>
-                <CardTitle className="text-xl">Auto-Deploy Pipeline</CardTitle>
-                <CardDescription className="mt-2 max-w-3xl text-sm leading-relaxed">
-                  Closed the loop on the whole project by building a fully automated deployment pipeline: push a change from Replit, and it goes live on torianna.tech within 5 minutes with zero manual steps.
-                </CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="rounded-lg border border-border bg-muted/35 p-4">
-                <p className="font-mono text-[11px] uppercase tracking-wide text-primary/80">How it works</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  A cron job on the Ubuntu host checks GitHub every 5 minutes. When it finds a new commit, it automatically pulls the change, rebuilds the site, clears out old build files, and redeploys: all without me touching the server.
-                </p>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {["GitHub", "Cron", "Bash", "CI/CD"].map(tag => (
-                  <Badge key={tag} variant="outline" className="border-primary/25 font-mono text-xs text-primary/80">{tag}</Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <nav aria-label="Homelab case study sections" className="mb-10 overflow-x-auto rounded-xl border border-border bg-card/60 p-2">
-            <div className="flex min-w-max gap-1">
-              {[
-                ["homelab-stack", "Stack"],
-                ["homelab-architecture", "Data flow"],
-                ["homelab-build-log", "Build log"],
-                ["homelab-results", "Results"],
-                ["homelab-lessons", "Lessons"],
-                ["homelab-next-steps", "Next steps"],
-              ].map(([id, label]) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className="rounded-md px-3 py-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                >
-                  {label}
-                </a>
-              ))}
-            </div>
-          </nav>
 
           <div id="homelab-stack" className="scroll-mt-24">
             <div className="mb-5 flex items-end justify-between gap-4">
@@ -752,7 +858,7 @@ export default function Home() {
 
               <div className="mt-2 flex items-center justify-between gap-3 border-t border-border pt-4">
                 <p className="text-xs text-muted-foreground" aria-live="polite">
-                  Showing step <span className="font-mono font-semibold text-foreground">{String(selectedBuildStep + 1).padStart(2, "0")}</span> of <span className="font-mono font-semibold text-foreground">08</span>
+                  Showing step <span className="font-mono font-semibold text-foreground">{String(selectedBuildStep + 1).padStart(2, "0")}</span> of <span className="font-mono font-semibold text-foreground">{String(buildLog.length).padStart(2, "0")}</span>
                 </p>
                 <div className="flex items-center gap-2">
                   <Button
@@ -874,10 +980,6 @@ export default function Home() {
                   <span className="font-semibold text-foreground">CrowdSec logs weren't reaching Grafana.</span> Promtail was silently failing with a permissions error: the log file was owned by root with no group access. Fixed by adjusting file permissions and group ownership, then verified in Promtail's own logs.
                 </li>
                 <li className="rounded-lg border border-border bg-muted/25 p-4">
-                  <span className="font-semibold text-foreground">A trailing slash broke deployment for hours.</span> <code className="rounded bg-muted px-1 py-0.5 text-xs">cp -r source/ dest/</code> doesn't overwrite <code className="rounded bg-muted px-1 py-0.5 text-xs">dest</code>'s contents the way you'd expect: it nests <code className="rounded bg-muted px-1 py-0.5 text-xs">source</code> inside it. The live site kept showing stale files even though builds were succeeding, because the real content was landing one folder too deep. Root-caused it by comparing what was actually in the deployed files against the fresh build output.
-                </li>
-                <li className="rounded-lg border border-border bg-muted/25 p-4">
-                  <span className="font-semibold text-foreground">Sudoers rejected a wildcard.</span> Passwordless sudo doesn't allow <code className="rounded bg-muted px-1 py-0.5 text-xs">*</code> in command paths for security reasons. Rewrote the deploy command to copy a directory's contents explicitly instead of relying on a wildcard match.
                 </li>
                 <li className="rounded-lg border border-border bg-muted/25 p-4 md:col-span-2">
                   <span className="font-semibold text-foreground">Deduplication saved my sanity.</span> Suricata's stats events log constantly and look identical. Grafana's “Signature” deduplication mode collapsed repeated entries into a count instead of showing every duplicate, making the dashboard actually readable.
@@ -900,7 +1002,7 @@ export default function Home() {
 
           <div className="mt-14" id="homelab-foundations">
             <SectionLabel>Foundations</SectionLabel>
-            <h3 className="mb-5 text-2xl font-bold text-foreground">The progression behind the lab</h3>
+            <h3 className="mb-5 text-2xl font-bold text-foreground">The progression behind the detection system</h3>
             <div className="grid gap-4 lg:grid-cols-3">
               {foundations.map((lab, index) => (
                 <Card key={lab.title} className="group h-full border-border shadow-sm transition-[border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
@@ -923,6 +1025,8 @@ export default function Home() {
               ))}
             </div>
           </div>
+            </div>
+          )}
         </div>
       </section>
       <Divider />

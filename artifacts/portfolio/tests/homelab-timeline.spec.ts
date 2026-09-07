@@ -7,16 +7,46 @@ const milestones = [
   "Add network detection with Suricata",
   "Add threat intelligence with CrowdSec",
   "Centralize logs and build views",
-  "Keep the public surface narrow",
-  "Automate deployment with GitHub and cron",
 ];
+
+test("separates the website and detection system into focused Homelab panels", async ({ page }) => {
+  await page.goto("/");
+
+  const projectTabs = page.getByRole("tablist", { name: "Homelab projects" });
+  const overviewTab = projectTabs.getByRole("tab", { name: "Overview" });
+  const websiteTab = projectTabs.getByRole("tab", { name: "This Website" });
+  const detectionTab = projectTabs.getByRole("tab", { name: "Detection System" });
+
+  await expect(overviewTab).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#homelab-panel-overview")).toBeVisible();
+  await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
+  await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
+
+  await overviewTab.press("ArrowRight");
+  await expect(websiteTab).toBeFocused();
+  await expect(websiteTab).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#homelab-panel-website")).toBeVisible();
+  await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
+  await expect(page.getByText("Auto-Deploy Pipeline")).toBeVisible();
+
+  await detectionTab.click();
+  await expect(detectionTab).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#homelab-panel-detection")).toBeVisible();
+  await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
+  await expect(page.getByText("Auto-Deploy Pipeline")).toHaveCount(0);
+});
 
 test("keeps all Homelab milestones selectable and keyboard accessible", async ({ page }) => {
   await page.goto("/");
 
+  const projectTabs = page.getByRole("tablist", { name: "Homelab projects" });
+  await expect(projectTabs.getByRole("tab")).toHaveCount(3);
+  await expect(projectTabs.getByRole("tab", { name: "Overview" })).toHaveAttribute("aria-selected", "true");
+  await projectTabs.getByRole("tab", { name: "Detection System" }).click();
+
   const tabList = page.getByRole("tablist", { name: "Homelab build milestones" });
   const tabs = tabList.getByRole("tab");
-  const panel = page.getByRole("tabpanel");
+  const panel = page.locator("#homelab-build-step-panel");
   const previousButton = page.getByRole("button", { name: "Show previous homelab milestone" });
   const nextButton = page.getByRole("button", { name: "Show next homelab milestone" });
 
@@ -71,10 +101,14 @@ test.describe("on narrow mobile screens", () => {
   test("keeps the milestone strip scrollable without clipping the detail panel", async ({ page }) => {
     await page.goto("/");
 
+    await page.getByRole("tablist", { name: "Homelab projects" })
+      .getByRole("tab", { name: "Detection System" })
+      .click();
+
     const tabList = page.getByRole("tablist", { name: "Homelab build milestones" });
     const tabs = tabList.getByRole("tab");
     const milestoneScroller = tabList.locator("..");
-    const panel = page.getByRole("tabpanel");
+    const panel = page.locator("#homelab-build-step-panel");
     const previousButton = page.getByRole("button", { name: "Show previous homelab milestone" });
     const nextButton = page.getByRole("button", { name: "Show next homelab milestone" });
 
