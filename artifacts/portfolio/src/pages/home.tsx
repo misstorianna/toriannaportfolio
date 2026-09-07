@@ -510,7 +510,7 @@ export default function Home() {
           <SectionLabel>Personal Project · Homelab</SectionLabel>
           <div className="mb-10 flex flex-col gap-4 md:mb-12 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
-              <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">One Homelab, Two Projects</h2>
+              <h2 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">Homelab</h2>
               <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Explore the infrastructure behind this website separately from the security detection system running on the same Ubuntu host.</p>
             </div>
             <Badge className="w-fit border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-xs text-primary">
