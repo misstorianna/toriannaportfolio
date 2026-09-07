@@ -367,28 +367,17 @@ export default function Home() {
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section id="hero" className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden text-right">
         <FairyLights />
-        <div className="pointer-events-none absolute inset-x-0 top-[18%] h-[48vh] min-h-[18rem] overflow-hidden" aria-hidden="true">
-          <img
-            src={heroStreet}
-            alt=""
-            className="h-full w-full scale-105 object-cover object-center opacity-90"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: [
-                "linear-gradient(90deg, rgba(25, 16, 8, 0.76) 0%, rgba(25, 16, 8, 0.16) 38%, rgba(25, 16, 8, 0.16) 62%, rgba(25, 16, 8, 0.76) 100%)",
-                "linear-gradient(180deg, rgba(25, 16, 8, 0.62) 0%, rgba(25, 16, 8, 0.02) 35%, rgba(25, 16, 8, 0.12) 65%, rgba(25, 16, 8, 0.78) 100%)",
-              ].join(", "),
-            }}
-          />
-        </div>
 
-        <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center">
           <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-8">
             Cybersecurity Graduate · Chicago, IL
           </p>
           <h1 className="text-7xl md:text-9xl font-bold text-foreground tracking-tight mb-6 leading-none">Torianna</h1>
+          <img
+            src={heroStreet}
+            alt="Warmly lit city street at night"
+            className="mx-auto my-6 h-auto w-full max-w-[1200px] object-contain"
+          />
           <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-lg mx-auto">
             Curious about how systems connect, alerts tell a story, and the right technical decisions quietly keep environments safe.
           </p>
