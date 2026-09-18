@@ -115,7 +115,7 @@ const experience = [
 const workExperience = [
   {
     company: "Geek Squad, Best Buy",
-    role: "Senior Repair Technician (Agent)",
+    role: "Senior Repair Technician",
     dates: "Aug 2026 – Present",
     location: "North Riverside, IL",
     responsibilities: [
@@ -130,6 +130,7 @@ const workExperience = [
     company: "Geek Squad, Best Buy",
     role: "Advanced Repair Agent",
     dates: "September – Present",
+    location: "Burbank, IL",
     responsibilities: [
       "Diagnosed and resolved hardware and software issues on customer devices using MRI diagnostic tools, including malware removal, disk repair, and OS restoration.",
       "Provided remote troubleshooting and support via AJU, resolving connectivity, performance, and software issues without requiring an in-store visit.",
