@@ -27,13 +27,13 @@ test("separates the website and detection system into focused Homelab panels", a
   await expect(websiteTab).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#homelab-panel-website")).toBeVisible();
   await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
-  await expect(page.getByText("Auto-Deploy Pipeline")).toBeVisible();
+  await expect(page.getByText("GitHub commit")).toBeVisible();
 
   await detectionTab.click();
   await expect(detectionTab).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#homelab-panel-detection")).toBeVisible();
   await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
-  await expect(page.getByText("Auto-Deploy Pipeline")).toHaveCount(0);
+  await expect(page.getByText("GitHub commit")).toHaveCount(0);
 });
 
 test("keeps all Homelab milestones selectable and keyboard accessible", async ({ page }) => {

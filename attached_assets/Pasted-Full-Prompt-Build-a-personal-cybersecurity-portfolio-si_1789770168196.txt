@@ -1,0 +1,24 @@
+Full Prompt:
+
+Build a personal cybersecurity portfolio site styled as a SOC (Security Operations Center) dashboard. Dark theme (near-black background, 
+#0d0f12-ish), with an orange/amber accent color for highlights, charts, and status indicators — no other bright colors. Use a monospace or technical sans-serif font (like JetBrains Mono or Inter) for that terminal/dashboard feel.
+
+Layout:
+
+Left sidebar (collapsible): nav items styled like dashboard sections — "Dashboard" (home/about), "Projects" (findings/incidents style list), "Homelab" (infrastructure), "Skills" (compliance/scan-style bars), "Contact"
+Top bar: small stat tiles like a real SOC dashboard — but instead of "Open Vulnerabilities" or "Active Incidents," use tiles like "Projects Shipped," "Certifications," "Homelab Uptime," "Detection Rules Written"
+Main panel: instead of a fake "threat map," show a network diagram of my actual homelab infrastructure — Internet → Cloudflare Tunnel → nginx → Ubuntu host, branching to CrowdSec, Suricata, and Loki+Grafana, ending at torianna.tech. Same dark background and glowing amber nodes/lines as a threat map would have, but it's a real, honest system diagram, not simulated live attack data.
+Right/side panel: "Recent Activity" feed populated with real portfolio updates (e.g., "Deployed CrowdSec on Ubuntu host," "Published Sigma rule to GitHub," "Completed Security+ cert")
+
+Project cards (core content):
+Each project renders as its own "dashboard card" styled like an incident/finding entry (severity-tag look, repurposed as a category tag: Homelab / Dev / Hardware / Research). Clicking a card expands into a detail view with description, tech stack, and links (GitHub, writeup, etc.). Use this content:
+
+Homelab Detection Lab — Category: Homelab, Status: Active. Self-hosted detection stack on a repurposed Surface laptop (Windows → Ubuntu 26.04 LTS). CrowdSec for log-based attack detection, Suricata for network IDS, Loki + Grafana for log storage/dashboarding. Hosted via nginx + Cloudflare Tunnel. Stack: Ubuntu, CrowdSec, Suricata, Loki, Promtail, Grafana, nginx, Cloudflare Tunnel.
+Custom Sigma Detection Rules — Category: Research, Status: Ongoing. Writing and publishing custom Sigma rules for the homelab detection lab, plus investigation and phishing analysis writeups. Stack: Sigma, GitHub.
+Custom PC Builds — Category: Hardware, Status: Complete. Built a high-end desktop (Ryzen 7 9800X3D, RX 9070 XT), a second build on a Gigabyte B850 AORUS Elite board (diagnosed/resolved a PSU and motherboard failure), and rebuilt an older Alienware machine with a clean Windows 11 install. Skills: Hardware diagnostics, PC assembly, troubleshooting.
+Java/Maven Plugin Development — Category: Dev, Status: Complete. Developed plugins using Java and Maven, building on internship experience with Active Directory and SSO systems. Stack: Java, Maven, Active Directory, SSO.
+Education & Certifications — Category: Research, Status: Complete. Cybersecurity degree from Bradley University. CompTIA Security+ certified. Credentials: B.S. Cybersecurity, CompTIA Security+.
+
+Interaction/tone: Keep real dashboard chrome — status dots (green/amber "healthy" indicators instead of alerts), progress bars for skills instead of compliance scores, a small "uptime" style counter. This should clearly read as a stylized portfolio, not a fake live SOC feed monitoring real attacks.
+
+Fully responsive, works well on desktop and tablet.
