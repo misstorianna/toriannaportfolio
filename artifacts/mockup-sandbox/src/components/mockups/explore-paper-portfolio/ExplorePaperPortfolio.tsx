@@ -1,0 +1,65 @@
+import { useState } from "react";
+
+const projects = [
+  { id: "detection", label: "01", type: "SECURITY / LAB", title: "Detection engineering lab", text: "Writing and publishing custom Sigma rules for a homelab detection system.", status: "active", tags: ["Sigma", "LEQL", "Ubuntu"] },
+  { id: "homelab", label: "02", type: "INFRASTRUCTURE", title: "Self-hosted homelab", text: "A documented Ubuntu host for learning, shipping, and breaking things on purpose.", status: "in progress", tags: ["Docker", "Linux", "Networking"] },
+  { id: "portfolio", label: "03", type: "INTERFACE", title: "Portfolio dashboard", text: "A working record of the decisions, tools, and experiments behind the system.", status: "complete", tags: ["React", "TypeScript", "UI"] },
+  { id: "cert", label: "04", type: "FOUNDATION", title: "Security+ study archive", text: "Notes, diagrams, and field guides from the certification process.", status: "complete", tags: ["CompTIA", "Research"] },
+];
+
+export function ExplorePaperPortfolio() {
+  const [active, setActive] = useState("detection");
+  const [tab, setTab] = useState("overview");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
+  return (
+    <div className="paper-shell">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+        .paper-shell{--ink:#28231d;--muted:#777064;--line:#d9d0c2;--paper:#f5f0e7;--paper2:#ebe3d5;--rust:#a84f32;--sage:#637565;min-height:100vh;background:var(--paper);color:var(--ink);font-family:'DM Mono',monospace;overflow:hidden}
+        .paper-shell *{box-sizing:border-box}.paper-shell button{font:inherit;color:inherit}.paper-shell a{color:inherit;text-decoration:none}
+        .paper-shell:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(#8c7d69 0.65px,transparent .65px);background-size:7px 7px;mix-blend-mode:multiply;z-index:0}
+        .paper-content{position:relative;z-index:1}.paper-nav{height:74px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,72px);background:rgba(245,240,231,.86);backdrop-filter:blur(12px);position:sticky;top:0;z-index:5}
+        .mark{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}.mark-dot{width:17px;height:17px;border-radius:50%;background:var(--rust);box-shadow:4px 4px 0 var(--sage)}
+        .nav-links{display:flex;gap:28px;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.nav-links button,.menu-button{border:0;background:none;cursor:pointer}.nav-links button:hover{color:var(--rust)}.menu-button{display:none}
+        .eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--rust)}.hero{max-width:1280px;margin:auto;padding:clamp(60px,10vw,136px) clamp(20px,5vw,72px) 74px;border-bottom:1px solid var(--line)}
+        .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(34px,8vw,130px);align-items:end}.hero h1{font-family:Newsreader,serif;font-size:clamp(64px,10vw,148px);font-weight:400;line-height:.8;letter-spacing:-.06em;margin:22px 0 34px}.hero h1 em{color:var(--rust);font-style:italic}.hero-copy{font-size:12px;line-height:1.9;color:var(--muted);max-width:480px}.hero-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.hero-actions button{cursor:pointer;padding:13px 17px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-size:10px;text-transform:uppercase;letter-spacing:.08em}.hero-actions button.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+        .profile-card{border:1px solid var(--line);background:rgba(235,227,213,.56);padding:22px;transform:rotate(1.4deg);box-shadow:8px 8px 0 rgba(168,79,50,.12)}.card-head{border-bottom:1px solid var(--line);padding-bottom:14px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);text-transform:uppercase}.profile-list{padding-top:18px;display:grid;gap:17px;font-size:11px}.profile-list div{display:flex;justify-content:space-between;gap:20px}.profile-list span{color:var(--muted)}.status{color:var(--sage)}.status:before{content:"●";font-size:8px;margin-right:8px}
+        .metrics{display:grid;grid-template-columns:repeat(4,1fr);margin-top:62px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.metric{padding:18px 15px;border-right:1px solid var(--line)}.metric:last-child{border:0}.metric b{display:block;font-family:Newsreader,serif;font-size:27px;font-weight:500}.metric span{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-top:8px}
+        .section{max-width:1280px;margin:auto;padding:90px clamp(20px,5vw,72px)}.section-intro{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}.section h2{font-family:Newsreader,serif;font-size:clamp(42px,5vw,72px);font-weight:400;line-height:.9;letter-spacing:-.04em;margin:14px 0 0}.section-intro p{max-width:330px;color:var(--muted);font-size:11px;line-height:1.8;margin:0}
+        .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.project{border:1px solid var(--line);background:rgba(245,240,231,.45);padding:24px;min-height:220px;text-align:left;cursor:pointer;transition:transform .25s,background .25s,border-color .25s}.project:hover,.project.selected{background:var(--paper2);border-color:var(--rust);transform:translateY(-4px)}.project-top{display:flex;justify-content:space-between;color:var(--rust);font-size:9px;letter-spacing:.08em}.project h3{font-family:Newsreader,serif;font-size:28px;font-weight:500;margin:38px 0 10px}.project p{font-family:Newsreader,serif;font-size:17px;line-height:1.35;max-width:450px;margin:0;color:#554d42}.project-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.tag{font-size:9px;color:var(--sage);border:1px solid #b8c2b4;padding:5px 7px}.detail{grid-column:1/-1;padding:20px 24px;border:1px solid var(--rust);background:rgba(168,79,50,.06);font-size:10px;line-height:1.8;color:var(--muted)}.detail strong{color:var(--ink)}
+        .archive{background:var(--ink);color:var(--paper);padding:90px max(20px,5vw)}.archive-inner{max-width:1136px;margin:auto}.archive .eyebrow{color:#d19b7d}.archive h2{font-family:Newsreader,serif;font-weight:400;font-size:clamp(44px,6vw,84px);line-height:.9;margin:16px 0 44px;letter-spacing:-.05em}.tabs{display:flex;border-bottom:1px solid #645a4f;gap:26px}.tabs button{background:none;border:0;padding:0 0 14px;color:#9b9081;cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:.1em}.tabs button.active{color:#f5f0e7;border-bottom:2px solid #d19b7d}.archive-body{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding-top:35px}.archive-body p{font-family:Newsreader,serif;font-size:24px;line-height:1.3;margin:0;color:#e6ddcf}.archive-body ul{list-style:none;padding:0;margin:0;font-size:11px;line-height:2.25;color:#b9ad9d}.archive-body li:before{content:"↳";color:#d19b7d;margin-right:10px}.contact{max-width:1280px;margin:auto;padding:96px clamp(20px,5vw,72px)}.contact-box{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:30px;align-items:end}.contact h2{font-family:Newsreader,serif;font-size:clamp(42px,6vw,75px);font-weight:400;line-height:.9;max-width:650px;margin:15px 0}.contact p{font-size:11px;color:var(--muted);line-height:1.8;max-width:440px}.contact a{border-bottom:1px solid var(--rust);padding-bottom:8px;font-size:10px;text-transform:uppercase;white-space:nowrap}.footer{border-top:1px solid var(--line);padding:20px clamp(20px,5vw,72px);display:flex;justify-content:space-between;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+        @media(max-width:760px){.nav-links{display:none}.menu-button{display:block;font-size:10px;text-transform:uppercase}.nav-links.open{display:flex;position:absolute;left:0;right:0;top:73px;padding:20px;background:var(--paper);border-bottom:1px solid var(--line);flex-direction:column;gap:18px}.hero-grid,.archive-body{grid-template-columns:1fr}.hero h1{font-size:22vw}.profile-card{margin-top:22px}.metrics{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--line)}.project-grid{grid-template-columns:1fr}.section-intro,.contact-box{display:block}.section-intro p{margin-top:22px}.contact a{display:inline-block;margin-top:18px}.footer{display:block;line-height:2.2}}
+      `}</style>
+      <div className="paper-content">
+        <nav className="paper-nav">
+          <div className="mark"><span className="mark-dot" /> Torianna / field notes</div>
+          <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)}>Index +</button>
+          <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+            <button onClick={() => scrollTo("work")}>01 / Work</button><button onClick={() => scrollTo("archive")}>02 / Archive</button><button onClick={() => scrollTo("contact")}>03 / Contact</button>
+          </div>
+        </nav>
+        <header className="hero">
+          <div className="hero-grid">
+            <div><div className="eyebrow">Security operations / personal record</div><h1>Portfolio<br /><em>Dashboard</em></h1><p className="hero-copy">I’m Torianna, a cybersecurity graduate who learns by building systems, breaking them, and understanding why. This is the working record.</p><div className="hero-actions"><button onClick={() => scrollTo("work")}>Inspect projects →</button><button className="secondary" onClick={() => scrollTo("archive")}>Open archive</button></div></div>
+            <aside className="profile-card"><div className="card-head"><span>/ operator profile</span><span>no. 024</span></div><div className="profile-list"><div><span>focus</span><b>defensive security</b></div><div><span>detection</span><b className="status">lab active</b></div><div><span>response loop</span><b>in progress</b></div><div><span>host</span><b>Ubuntu / dedicated</b></div></div></aside>
+          </div>
+          <div className="metrics"><div className="metric"><b>03</b><span>projects shipped</span></div><div className="metric"><b>01</b><span>certification earned</span></div><div className="metric"><b>24/7</b><span>self-hosted uptime</span></div><div className="metric"><b>LEQL + Σ</b><span>detection rules</span></div></div>
+        </header>
+        <main>
+          <section id="work" className="section"><div className="section-intro"><div><div className="eyebrow">01 / Findings index</div><h2>Projects</h2></div><p>A dashboard-style index of work shipped, still active, and documented as the system grows.</p></div><div className="project-grid">{projects.map((project) => <button key={project.id} className={`project ${active === project.id ? "selected" : ""}`} onClick={() => setActive(project.id)}><div className="project-top"><span>{project.label} / {project.type}</span><span>{project.status}</span></div><h3>{project.title}</h3><p>{project.text}</p><div className="project-foot">{project.tags.map(tag => <span className="tag" key={tag}>{tag}</span>)}</div></button>)}<div className="detail"><strong>Selected record / </strong>{projects.find(p => p.id === active)?.title} — click any project to inspect its field notes and tools.</div></div></section>
+          <section id="archive" className="archive"><div className="archive-inner"><div className="eyebrow">02 / Infrastructure</div><h2>Homelab<br /><em>control room</em></h2><div className="tabs">{["overview", "build log", "notes"].map(item => <button key={item} className={tab === item ? "active" : ""} onClick={() => setTab(item)}>{item}</button>)}</div><div className="archive-body"><p>{tab === "overview" ? "Explore the website infrastructure separately from the security detection system running on the same Ubuntu host." : tab === "build log" ? "A quiet history of systems assembled, tested, and made understandable." : "Short notes from the workbench: what changed, what failed, and what shipped."}</p><ul><li>Ubuntu host / dedicated</li><li>Detection lab / documented</li><li>Website infrastructure / active</li><li>No live attack telemetry</li></ul></div></div></section>
+          <section id="contact" className="contact"><div className="eyebrow">Contact / handoff</div><div className="contact-box"><div><h2>Want to inspect the work?</h2><p>The best conversations are about the decisions behind the system. Reach out for project context, write-ups, or a walkthrough of the lab.</p></div><a href="https://www.linkedin.com/in/torianna" target="_blank" rel="noreferrer">Connect on LinkedIn ↗</a></div></section>
+        </main>
+        <footer className="footer"><span>Portfolio / field notes</span><span>Chicago, IL / 2025</span></footer>
+      </div>
+    </div>
+  );
+}
+
+export default ExplorePaperPortfolio;
