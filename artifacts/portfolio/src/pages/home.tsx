@@ -123,7 +123,7 @@ function SectionLabel({ children }: { children: ReactNode }) {
 }
 
 function StatusDot() {
-  return <span className="pulse-dot inline-block h-2 w-2 rounded-full bg-primary" aria-hidden="true" />;
+  return <span className="pulse-dot inline-block h-2 w-2 rounded-full bg-secondary" aria-hidden="true" />;
 }
 
 function Sidebar({ activeSection, collapsed, mobileOpen, onNavigate, onToggle }: { activeSection: SectionId; collapsed: boolean; mobileOpen: boolean; onNavigate: (id: SectionId) => void; onToggle: () => void }) {
@@ -142,7 +142,7 @@ function Sidebar({ activeSection, collapsed, mobileOpen, onNavigate, onToggle }:
         <div className="px-3 py-5">
           <p className={`mb-3 px-3 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground ${collapsed ? "lg:hidden" : ""}`}>Workspace</p>
           <nav className="space-y-1">
-            {sidebarItems.map(item => { const Icon = item.icon; const selected = activeSection === item.id; return <button key={item.id} type="button" onClick={() => onNavigate(item.id)} aria-current={selected ? "page" : undefined} className={`group flex w-full items-center gap-3 rounded px-3 py-3 text-left font-mono text-[11px] uppercase tracking-wider transition-colors ${selected ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"} ${collapsed ? "lg:justify-center" : ""}`}><Icon className="h-4 w-4 shrink-0" /><span className={collapsed ? "lg:hidden" : ""}>{item.label}</span>{selected && <span className={`ml-auto h-1.5 w-1.5 rounded-full bg-primary ${collapsed ? "lg:hidden" : ""}`} />}</button>; })}
+            {sidebarItems.filter(item => item.id !== "skills").map(item => { const Icon = item.icon; const selected = activeSection === item.id; return <button key={item.id} type="button" onClick={() => onNavigate(item.id)} aria-current={selected ? "page" : undefined} className={`group flex w-full items-center gap-3 rounded px-3 py-3 text-left font-mono text-[11px] uppercase tracking-wider transition-colors ${selected ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"} ${collapsed ? "lg:justify-center" : ""}`}><Icon className="h-4 w-4 shrink-0" /><span className={collapsed ? "lg:hidden" : ""}>{item.label}</span>{selected && <span className={`ml-auto h-1.5 w-1.5 rounded-full bg-secondary ${collapsed ? "lg:hidden" : ""}`} />}</button>; })}
           </nav>
         </div>
         <div className={`mt-auto border-t border-border p-4 ${collapsed ? "lg:px-3" : ""}`}>
