@@ -218,7 +218,7 @@ export default function Home() {
   const selectBuildStep = (index: number, moveFocus = false) => { const next = Math.max(0, Math.min(index, buildLog.length - 1)); setSelectedBuildStep(next); if (moveFocus) buildStepRefs.current[next]?.focus(); };
   const selectHomelabTab = (id: HomelabTabId, moveFocus = false) => { setActiveHomelabTab(id); if (moveFocus) tabRefs.current[homelabTabs.findIndex(tab => tab.id === id)]?.focus(); };
 
-  return <div className="min-h-[100dvh] bg-background text-foreground">
+  return <div className="circuit-shell min-h-[100dvh] bg-background text-foreground">
     <Sidebar activeSection={activeSection} collapsed={sidebarCollapsed} mobileOpen={mobileOpen} onNavigate={navigate} onToggle={() => { if (window.innerWidth < 1024) setMobileOpen(open => !open); else setSidebarCollapsed(collapsed => !collapsed); }} />
     <div className={`min-h-[100dvh] transition-[padding] duration-300 ${sidebarCollapsed ? "lg:pl-[4.75rem]" : "lg:pl-64"}`}>
       <header className="sticky top-0 z-30 flex h-[4.5rem] items-center justify-between border-b border-border bg-background/90 px-5 backdrop-blur-xl sm:px-8">
