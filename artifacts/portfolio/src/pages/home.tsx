@@ -127,6 +127,18 @@ const workExperience = [
     ],
   },
   {
+    company: "Geek Squad, Best Buy",
+    role: "Advanced Repair Agent",
+    responsibilities: [
+      "Diagnosed and resolved hardware and software issues on customer devices using MRI diagnostic tools, including malware removal, disk repair, and OS restoration.",
+      "Provided remote troubleshooting and support via AJU, resolving connectivity, performance, and software issues without requiring an in-store visit.",
+      "Performed root-cause analysis on recurring hardware failures, reducing repeat service visits.",
+      "Advised customers on repair options, data backup, and security best practices, translating technical findings into clear, actionable guidance.",
+      "Maintained accurate service documentation and ticket records to support quality tracking and warranty compliance.",
+      "Collaborated with senior technicians and precinct leadership to escalate complex repairs and ensure timely turnaround.",
+    ],
+  },
+  {
     company: "Great Wolf Lodge — Corporate Team",
     role: "IT Corporate Support / Cybersecurity Intern",
     dates: "Jun 2025 – Aug 2025",
@@ -219,7 +231,7 @@ function HomelabPanel({ activeTab, onTabChange, selectedBuildStep, selectBuildSt
 }
 
 function WorkExperiencePanel() {
-  return <section id="experience" className="border-y border-border bg-card/35"><div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28"><SectionLabel>03 / Work history</SectionLabel><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Work Experience</h2><p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Technical support, identity, detection, security awareness, and audit experience across corporate and client-facing environments.</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">03 roles / experience index</span></div><div className="space-y-4">{workExperience.map((job, index) => <article key={`${job.company}-${job.role}`} className="group grid gap-6 border border-border bg-card p-6 transition-colors hover:border-primary/50 sm:p-8 lg:grid-cols-[.48fr_1fr] lg:gap-10"><div><div className="mb-8 flex items-start justify-between"><span className="font-mono text-xs text-primary">0{index + 1}</span><BriefcaseBusiness className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" /></div><p className="font-mono text-[10px] uppercase tracking-wider text-primary/80">{job.company}</p><h3 className="mt-2 text-2xl font-medium leading-tight">{job.role}</h3><div className="mt-5 space-y-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><p>{job.dates}</p><p>{job.location}</p></div></div><ul className="space-y-3 border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">{job.responsibilities.map(responsibility => <li key={responsibility} className="flex gap-3 text-sm leading-relaxed text-muted-foreground"><span aria-hidden="true" className="mt-[.55rem] h-1.5 w-1.5 shrink-0 bg-primary" /><span>{responsibility}</span></li>)}</ul></article>)}</div></div></section>;
+  return <section id="experience" className="border-y border-border bg-card/35"><div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28"><SectionLabel>03 / Work history</SectionLabel><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Work Experience</h2><p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Technical support, identity, detection, security awareness, and audit experience across corporate and client-facing environments.</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(workExperience.length).padStart(2, "0")} roles / experience index</span></div><div className="space-y-4">{workExperience.map((job, index) => <article key={`${job.company}-${job.role}`} className="group grid gap-6 border border-border bg-card p-6 transition-colors hover:border-primary/50 sm:p-8 lg:grid-cols-[.48fr_1fr] lg:gap-10"><div><div className="mb-8 flex items-start justify-between"><span className="font-mono text-xs text-primary">0{index + 1}</span><BriefcaseBusiness className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" /></div><p className="font-mono text-[10px] uppercase tracking-wider text-primary/80">{job.company}</p><h3 className="mt-2 text-2xl font-medium leading-tight">{job.role}</h3>{(job.dates || job.location) && <div className="mt-5 space-y-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{job.dates && <p>{job.dates}</p>}{job.location && <p>{job.location}</p>}</div>}</div><ul className="space-y-3 border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">{job.responsibilities.map(responsibility => <li key={responsibility} className="flex gap-3 text-sm leading-relaxed text-muted-foreground"><span aria-hidden="true" className="mt-[.55rem] h-1.5 w-1.5 shrink-0 bg-primary" /><span>{responsibility}</span></li>)}</ul></article>)}</div></div></section>;
 }
 
 function BuildLog({ selectedBuildStep, selectBuildStep, buildStepRefs }: { selectedBuildStep: number; selectBuildStep: (index: number, moveFocus?: boolean) => void; buildStepRefs: MutableRefObject<Array<HTMLButtonElement | null>> }) {
