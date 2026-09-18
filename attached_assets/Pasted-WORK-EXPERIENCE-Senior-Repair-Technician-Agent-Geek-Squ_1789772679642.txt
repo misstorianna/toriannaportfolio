@@ -1,0 +1,26 @@
+WORK EXPERIENCE
+Senior Repair Technician (Agent) — Geek Squad, Best Buy Aug 2026 – Present North Riverside, IL 
+• Diagnose and troubleshoot hardware and software issues across PCs, laptops, and consumer technology, determining root cause  and appropriate repair path. 
+• Perform hardware and software repairs and diagnostics spanning components, power, storage, displays, networking, and  peripherals. 
+• Use Repair Workbench to check devices in and out, document diagnostics and repairs, and track repair status through completion. • Coach and support a team of 7 Agents on repair procedures and technical troubleshooting, serving as a senior technical resource  for issues beyond entry-level scope. 
+• Communicate technical findings and repair timelines to customers in clear, non-technical terms, resolving more complex service  situations. 
+IT Corporate Support / Cybersecurity Intern Jun 2025 – Aug 2025 Great Wolf Lodge – Corporate Team, Remote 
+• Configured and deployed IdP-initiated SSO for business applications using Microsoft Entra ID, SAML, and application role mapping. • Troubleshooted access issues with application owners, validated SSO functionality, and documented rollout procedures. • Developed custom Rapid7 InsightIDR detection alerts for unauthorized password storage, excessive MFA failures, and repeated  VPN login attempts. 
+• Analyzed phishing campaign results to identify high-risk users, report trends, and drive targeted retraining plans. • Built phishing simulation campaigns in KnowBe4, designing realistic HTML/CSS email templates delivered to 3,000+ employees  across U.S. lodge and corporate environments. 
+• Delivered phishing-awareness guidance to high-risk users flagged by campaign results, reinforcing safe email handling and  reporting practices. 
+
+Cybersecurity Analyst 
+ Bradley Cybersecurity Clinic |  August 2025 – Present
+Contributing to the creation of the Bradley Cybersecurity Clinic, focused on developing and applying cybersecurity audit processes for small business assessments.              
+
+
+
+PROJECTS: 
+Cybersecurity Assessment Project — Bradley Red Team
+MIS 483: Advanced Ethical Hacking, Bradley University | Fall 2025
+Conducted OSINT and reconnaissance to support authorized cybersecurity and physical security assessments.
+Researched public domain records, archived web pages, exposed digital footprints, and other publicly available information to identify potential security gaps.
+Practiced ethical reconnaissance methods within a defined scope and organized findings for review.
+Participated in controlled social engineering and physical security testing to evaluate awareness, access control, and security procedures.
+Documented observations and translated findings into security improvement recommendations.
+Used the MITRE ATT&CK framework to connect findings to real-world adversary tactics, techniques, and procedures.
