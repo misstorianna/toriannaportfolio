@@ -116,15 +116,27 @@
     position: relative;
   }
   #root { position: relative; z-index: 1; }
-  .circuit-shell {
-    background-image:
-      var(--circuit-board-traces),
-      linear-gradient(hsl(var(--secondary) / .055) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--secondary) / .055) 1px, transparent 1px),
-      radial-gradient(circle at 1px 1px, hsl(var(--primary) / .22) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 1px 1px, hsl(var(--secondary) / .18) 0 1px, transparent 1.5px);
-    background-size: 512px 320px, 32px 32px, 32px 32px, 96px 96px, 128px 128px;
-    background-attachment: fixed;
+  .circuit-zone {
+    isolation: isolate;
+    overflow: hidden;
+    position: relative;
+  }
+  .circuit-zone::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: var(--circuit-board-traces);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 512px 320px;
+    opacity: .22;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 58%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 58%, transparent 100%);
+  }
+  .circuit-zone > * {
+    position: relative;
+    z-index: 1;
   }
   :focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 3px; }
   code, pre { @apply font-mono; }
