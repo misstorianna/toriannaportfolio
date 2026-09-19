@@ -3,5 +3,6 @@ type ModuleMap = Record<string, () => Promise<Record<string, unknown>>>;
 export const modules: ModuleMap = {
   "./components/mockups/explore-cobalt-portfolio/ExploreCobaltPortfolio.tsx": () => import("../components/mockups/explore-cobalt-portfolio/ExploreCobaltPortfolio.tsx"),
   "./components/mockups/explore-paper-portfolio/ExplorePaperPortfolio.tsx": () => import("../components/mockups/explore-paper-portfolio/ExplorePaperPortfolio.tsx"),
-  "./components/mockups/explore-radial-portfolio/ExploreRadialPortfolio.tsx": () => import("../components/mockups/explore-radial-portfolio/ExploreRadialPortfolio.tsx")
+  "./components/mockups/explore-radial-portfolio/ExploreRadialPortfolio.tsx": () => import("../components/mockups/explore-radial-portfolio/ExploreRadialPortfolio.tsx"),
+  "./components/mockups/portfolio-dashboard-redesign/QuietControlRoom.tsx": () => import("../components/mockups/portfolio-dashboard-redesign/QuietControlRoom.tsx")
 };
