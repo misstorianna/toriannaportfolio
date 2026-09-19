@@ -25,7 +25,7 @@
 .qcr-sidebar { position:fixed; z-index:20; inset:0 auto 0 0; width:218px; padding:22px 15px 16px; background:#0d130f; border-right:1px solid var(--line); display:flex; flex-direction:column; }
 .qcr-brand { display:flex; align-items:center; justify-content:space-between; }
 .qcr-brand>button:first-child { display:flex; align-items:center; gap:10px; color:var(--ink); background:none; border:0; padding:0; }
-.qcr-brand>button:first-child span:first-child { width:30px; height:30px; border:1px solid var(--olive); display:grid; place-items:center; color:var(--olive); font:500 14px "DM Mono"; }
+.qcr-brand>button:first-child > span:first-child { width:30px; height:30px; border:1px solid var(--olive); display:grid; place-items:center; color:var(--olive); font:500 14px "DM Mono"; }
 .qcr-brand b,.qcr-brand small { display:block; }
 .qcr-brand b { font:500 12px "DM Mono"; letter-spacing:.12em; }
 .qcr-brand small { color:var(--muted); font:9px "DM Mono"; margin-top:3px; text-transform:uppercase; letter-spacing:.08em; }
@@ -109,3 +109,6 @@
   .qcr-section-head { display:block; }.qcr-stamp { display:block; margin-top:14px; }.qcr-overview { padding-left:18px; padding-right:18px; }
   .qcr section[id] { padding-left:18px!important; padding-right:18px!important; }
 }
+
+.qcr #homelab h2 + p { font-size:0; }
+.qcr #homelab h2 + p::after { content:"A more in depth view of homelab projects."; font-size:1rem; line-height:1.625; }
