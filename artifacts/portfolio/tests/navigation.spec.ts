@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const navigationItems = ["Homelab", "Projects", "Work Experience", "Last Updated", "Contact"];
+const navigationItems = ["Background", "Work Experience", "Homelab", "Projects", "Last Updated", "Contact"];
 
 test.describe("workspace navigation", () => {
   test("shows the requested order without Skills or a Dashboard workspace item", async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe("workspace navigation", () => {
     await expect(navigation.getByRole("button", { name: /Dashboard/ })).toHaveCount(0);
 
     await expect(items.nth(0).locator(".qcr-nav-index")).toHaveText("01");
-    await expect(items.nth(4).locator(".qcr-nav-index")).toHaveText("05");
+    await expect(items.nth(5).locator(".qcr-nav-index")).toHaveText("06");
   });
 
   for (const [index, label] of navigationItems.entries()) {
@@ -28,7 +28,7 @@ test.describe("workspace navigation", () => {
       const item = navigation.getByRole("button", { name: label });
       await item.click();
 
-      await expect(page.locator(`#${["homelab", "projects", "experience", "updated", "contact"][index]}`)).toBeInViewport();
+      await expect(page.locator(`#${["background", "experience", "homelab", "projects", "updated", "contact"][index]}`)).toBeInViewport();
       await expect(item).toHaveAttribute("aria-current", "page");
       await expect(page.locator(".qcr-breadcrumb")).toContainText(label.toLowerCase());
     });

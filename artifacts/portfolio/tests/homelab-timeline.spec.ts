@@ -9,40 +9,30 @@ const milestones = [
   "Centralize logs and build views",
 ];
 
-test("separates the website and detection system into focused Homelab panels", async ({ page }) => {
+test("navigates to website and detection system pages from Homelab section", async ({ page }) => {
   await page.goto("/");
 
-  const projectTabs = page.getByRole("tablist", { name: "Homelab projects" });
-  const overviewTab = projectTabs.getByRole("tab", { name: "Overview" });
-  const websiteTab = projectTabs.getByRole("tab", { name: "This Website" });
-  const detectionTab = projectTabs.getByRole("tab", { name: "Detection System" });
+  const homelabSection = page.locator("#homelab");
+  await expect(homelabSection).toBeVisible();
 
-  await expect(overviewTab).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("#homelab-panel-overview")).toBeVisible();
-  await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
-  await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
+  const websiteLink = homelabSection.getByRole("link", { name: /This Website/ });
+  const detectionLink = homelabSection.getByRole("link", { name: /Detection System/ });
 
-  await overviewTab.press("ArrowRight");
-  await expect(websiteTab).toBeFocused();
-  await expect(websiteTab).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("#homelab-panel-website")).toBeVisible();
-  await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
-  await expect(page.getByText("GitHub commit")).toBeVisible();
+  await expect(websiteLink).toBeVisible();
+  await expect(detectionLink).toBeVisible();
 
-  await detectionTab.click();
-  await expect(detectionTab).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("#homelab-panel-detection")).toBeVisible();
-  await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
-  await expect(page.getByText("GitHub commit")).toHaveCount(0);
+  await websiteLink.click();
+  await expect(page).toHaveURL(/.*\/homelab\/website/);
+  await expect(page.getByText("Deployment Pipeline")).toBeVisible();
+  
+  await page.goto("/");
+  await detectionLink.click();
+  await expect(page).toHaveURL(/.*\/homelab\/detection/);
+  await expect(page.getByText("Stack at a glance")).toBeVisible();
 });
 
 test("keeps all Homelab milestones selectable and keyboard accessible", async ({ page }) => {
-  await page.goto("/");
-
-  const projectTabs = page.getByRole("tablist", { name: "Homelab projects" });
-  await expect(projectTabs.getByRole("tab")).toHaveCount(3);
-  await expect(projectTabs.getByRole("tab", { name: "Overview" })).toHaveAttribute("aria-selected", "true");
-  await projectTabs.getByRole("tab", { name: "Detection System" }).click();
+  await page.goto("/homelab/detection");
 
   const tabList = page.getByRole("tablist", { name: "Homelab build milestones" });
   const tabs = tabList.getByRole("tab");
@@ -99,11 +89,7 @@ test.describe("on narrow mobile screens", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
   test("keeps the milestone strip scrollable without clipping the detail panel", async ({ page }) => {
-    await page.goto("/");
-
-    await page.getByRole("tablist", { name: "Homelab projects" })
-      .getByRole("tab", { name: "Detection System" })
-      .click();
+    await page.goto("/homelab/detection");
 
     const tabList = page.getByRole("tablist", { name: "Homelab build milestones" });
     const tabs = tabList.getByRole("tab");

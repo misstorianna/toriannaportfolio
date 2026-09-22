@@ -53,8 +53,8 @@
 .qcr-eyebrow>span:first-child { color:var(--green); }
 .qcr-hero-grid { margin-top:35px; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(245px,.75fr); gap:44px; align-items:end; }
 .qcr-kicker { color:var(--olive); font:9px "DM Mono"; letter-spacing:.17em; text-transform:uppercase; margin:0 0 13px; }
-.qcr h1 { font-size:clamp(48px,7vw,92px); line-height:.86; letter-spacing:-.09em; margin:0; font-weight:700; }
-.qcr h1 em { font-style:normal; color:var(--olive); }
+.qcr-hero h1 { font-size:clamp(48px,7vw,92px); line-height:.86; letter-spacing:-.09em; margin:0; font-weight:700; }
+.qcr-hero h1 em { font-style:normal; color:var(--olive); }
 .qcr-intro { max-width:540px; color:#aab2a4; font-size:13px; line-height:1.7; margin:24px 0 0; }
 .qcr-actions { display:flex; gap:9px; margin-top:22px; }
 .qcr-primary,.qcr-quiet { height:37px; padding:0 13px; border:1px solid var(--olive); display:inline-flex; align-items:center; gap:9px; font:10px "DM Mono"; text-transform:uppercase; transition:background .2s,transform .2s; }
@@ -110,5 +110,3 @@
   .qcr section[id] { padding-left:18px!important; padding-right:18px!important; }
 }
 
-.qcr #homelab h2 + p { font-size:0; }
-.qcr #homelab h2 + p::after { content:"A more in depth view of homelab projects."; font-size:1rem; line-height:1.625; }

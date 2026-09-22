@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/hooks/use-theme";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
+import HomelabWebsite from "@/pages/homelab-website";
+import HomelabDetection from "@/pages/homelab-detection";
 
 const queryClient = new QueryClient();
 
@@ -12,6 +14,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/homelab/website" component={HomelabWebsite} />
+      <Route path="/homelab/detection" component={HomelabDetection} />
       <Route component={NotFound} />
     </Switch>
   );
