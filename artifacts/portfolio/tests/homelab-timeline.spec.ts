@@ -16,11 +16,13 @@ test("separates the website and detection system into focused Homelab panels", a
   const overviewTab = projectTabs.getByRole("tab", { name: "Overview" });
   const websiteTab = projectTabs.getByRole("tab", { name: "This Website" });
   const detectionTab = projectTabs.getByRole("tab", { name: "Detection System" });
+  const homelabSection = page.locator("#homelab");
 
   await expect(overviewTab).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#homelab-panel-overview")).toBeVisible();
   await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
   await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
+  const overviewHeight = Math.round(await homelabSection.evaluate(element => element.getBoundingClientRect().height));
 
   await overviewTab.press("ArrowRight");
   await expect(websiteTab).toBeFocused();
@@ -28,12 +30,17 @@ test("separates the website and detection system into focused Homelab panels", a
   await expect(page.locator("#homelab-panel-website")).toBeVisible();
   await expect(page.locator("#homelab-panel-detection")).toHaveCount(0);
   await expect(page.getByText("GitHub commit")).toBeVisible();
+  const websiteHeight = Math.round(await homelabSection.evaluate(element => element.getBoundingClientRect().height));
 
   await detectionTab.click();
   await expect(detectionTab).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#homelab-panel-detection")).toBeVisible();
   await expect(page.locator("#homelab-panel-website")).toHaveCount(0);
   await expect(page.getByText("GitHub commit")).toHaveCount(0);
+  const detectionHeight = Math.round(await homelabSection.evaluate(element => element.getBoundingClientRect().height));
+
+  expect(websiteHeight).toBe(overviewHeight);
+  expect(detectionHeight).toBe(overviewHeight);
 });
 
 test("keeps all Homelab milestones selectable and keyboard accessible", async ({ page }) => {
@@ -101,9 +108,14 @@ test.describe("on narrow mobile screens", () => {
   test("keeps the milestone strip scrollable without clipping the detail panel", async ({ page }) => {
     await page.goto("/");
 
+    const homelabSection = page.locator("#homelab");
+    const overviewHeight = Math.round(await homelabSection.evaluate(element => element.getBoundingClientRect().height));
+
     await page.getByRole("tablist", { name: "Homelab projects" })
       .getByRole("tab", { name: "Detection System" })
       .click();
+    const detectionHeight = Math.round(await homelabSection.evaluate(element => element.getBoundingClientRect().height));
+    expect(detectionHeight).toBe(overviewHeight);
 
     const tabList = page.getByRole("tablist", { name: "Homelab build milestones" });
     const tabs = tabList.getByRole("tab");

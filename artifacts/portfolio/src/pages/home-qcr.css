@@ -90,7 +90,7 @@
 .qcr section[id] { max-width:980px; margin-left:auto; margin-right:auto; }
 .qcr section[id] > div { max-width:none; }
 .qcr section[id] { padding-top:56px!important; padding-bottom:56px!important; padding-left:clamp(18px,5vw,64px)!important; padding-right:clamp(18px,5vw,64px)!important; }
-.qcr #homelab { min-height:1450px; }
+.qcr #homelab { min-height:1900px; }
 .qcr section[id] article { transition:border-color .2s, background-color .2s; }
 .qcr section[id] article:hover { border-color:#596348; }
 .qcr .font-mono { letter-spacing:.02em; }
@@ -100,7 +100,7 @@
 @media(max-width:900px) {
   .qcr-sidebar { transform:translateX(-100%); transition:transform .2s; }.qcr-sidebar.is-open { transform:translateX(0); }
   .qcr-close,.qcr-menu { display:block; }.qcr-scrim { display:block; position:fixed; inset:0; z-index:15; background:#080c09dd; border:0; }.qcr-main { margin-left:0; }
-  .qcr-mode { display:none; }.qcr-hero-grid,.qcr-overview-grid { grid-template-columns:1fr; }.qcr #homelab { min-height:1680px; }
+  .qcr-mode { display:none; }.qcr-hero-grid,.qcr-overview-grid { grid-template-columns:1fr; }.qcr #homelab { min-height:2100px; }
 }
 @media(max-width:600px) {
   .qcr-hero { padding-left:18px; padding-right:18px; }.qcr-eyebrow { display:block; line-height:1.8; }.qcr-eyebrow span:last-child { display:block; }
@@ -108,7 +108,7 @@
   .qcr-actions { flex-wrap:wrap; }.qcr-metrics { padding:0 18px; grid-template-columns:1fr 1fr; gap:18px; margin-top:34px; }
   .qcr-metrics div { padding:0 9px; }.qcr-metrics div:nth-child(3) { border-left:0; }.qcr-metrics div:last-child { border-right:0; }
   .qcr-section-head { display:block; }.qcr-stamp { display:block; margin-top:14px; }.qcr-overview { padding-left:18px; padding-right:18px; }
-  .qcr section[id] { padding-left:18px!important; padding-right:18px!important; }.qcr #homelab { min-height:2100px; }
+  .qcr section[id] { padding-left:18px!important; padding-right:18px!important; }.qcr #homelab { min-height:2850px; }
 }
 
 .qcr #homelab h2 + p { font-size:0; }
