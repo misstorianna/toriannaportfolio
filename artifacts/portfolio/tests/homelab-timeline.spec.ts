@@ -11,6 +11,8 @@ const milestones = [
 
 test("separates the website and detection system into focused Homelab panels", async ({ page }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: /Explore the infrastructure/ }).click();
+  await page.locator("#homelab-reveal").evaluate(element => Promise.all(element.getAnimations().map(animation => animation.finished)));
 
   const projectTabs = page.getByRole("tablist", { name: "Homelab projects" });
   const overviewTab = projectTabs.getByRole("tab", { name: "Overview" });
@@ -45,6 +47,8 @@ test("separates the website and detection system into focused Homelab panels", a
 
 test("keeps all Homelab milestones selectable and keyboard accessible", async ({ page }) => {
   await page.goto("/");
+  await page.getByRole("button", { name: /Explore the infrastructure/ }).click();
+  await page.locator("#homelab-reveal").evaluate(element => Promise.all(element.getAnimations().map(animation => animation.finished)));
 
   const projectTabs = page.getByRole("tablist", { name: "Homelab projects" });
   await expect(projectTabs.getByRole("tab")).toHaveCount(3);
@@ -107,6 +111,8 @@ test.describe("on narrow mobile screens", () => {
 
   test("keeps the milestone strip scrollable without clipping the detail panel", async ({ page }) => {
     await page.goto("/");
+    await page.getByRole("button", { name: /Explore the infrastructure/ }).click();
+    await page.locator("#homelab-reveal").evaluate(element => Promise.all(element.getAnimations().map(animation => animation.finished)));
 
     const homelabSection = page.locator("#homelab");
     const overviewHeight = Math.round(await homelabSection.evaluate(element => element.getBoundingClientRect().height));

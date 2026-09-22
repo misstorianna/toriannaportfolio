@@ -219,6 +219,7 @@ export default function Home() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [expandedProject, setExpandedProject] = useState<string | null>("homelab-detection");
   const [activeHomelabTab, setActiveHomelabTab] = useState<HomelabTabId>("overview");
+  const [homelabOpen, setHomelabOpen] = useState(false);
   const [selectedBuildStep, setSelectedBuildStep] = useState(0);
   const buildStepRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -247,6 +248,11 @@ export default function Home() {
   const navigate = (id: SectionId) => {
     setMobileOpen(false);
     setActiveSection(id);
+    if (id === "homelab") {
+      setHomelabOpen(true);
+      document.getElementById("homelab-disclosure")?.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
   const selectBuildStep = (index: number, moveFocus = false) => { const next = Math.max(0, Math.min(index, buildLog.length - 1)); setSelectedBuildStep(next); if (moveFocus) buildStepRefs.current[next]?.focus(); };
@@ -259,7 +265,17 @@ export default function Home() {
       <main>
         <section id="hero" className="qcr-hero"><div className="qcr-eyebrow"><span><StatusDot /> system / maintained record</span><span>Chicago, IL · last reviewed by Torianna</span></div><div className="qcr-hero-grid"><div><p className="qcr-kicker">Security operations / portfolio dashboard</p><h1>Homelab<br /><em>Dashboard</em></h1><p className="qcr-intro">I'm Torianna, a cybersecurity graduate who learns best through hands-on work. This site brings together my work experience, past and current projects, and everything I'm currently building in my homelab. Thanks for visiting!</p><div className="qcr-actions"><button className="qcr-primary" onClick={() => navigate("projects")}>Inspect projects <ChevronRight size={16} /></button><button className="qcr-quiet" onClick={() => navigate("homelab")}>Open homelab</button></div></div><div className="qcr-profile"><div className="qcr-profile-head"><span>/ operator profile</span><Terminal size={16} /></div><dl><dt>focus</dt><dd>defensive security</dd><dt>detection</dt><dd className="green"><StatusDot /> lab active</dd><dt>response loop</dt><dd>in progress</dd><dt>host</dt><dd>Ubuntu / dedicated</dd></dl><p className="qcr-note"><b>note</b> no live attack telemetry</p></div></div><div className="qcr-metrics"><div><b>03</b><span>projects complete</span></div><div><b>01</b><span>certification earned</span></div><div><b>04</b><span>work records</span></div><div><b>06</b><span>lab milestones</span></div></div></section>
         <section className="qcr-overview"><div className="qcr-section-head"><div><p className="qcr-kicker">At a glance</p><h2>Infrastructure Overview</h2></div><span className="qcr-stamp">record / 2025—present</span></div><div className="qcr-overview-grid"><NetworkDiagram /><ActivityFeed /></div></section>
-        <HomelabPanel activeTab={activeHomelabTab} onTabChange={selectHomelabTab} selectedBuildStep={selectedBuildStep} selectBuildStep={selectBuildStep} buildStepRefs={buildStepRefs} tabRefs={tabRefs} />
+        <div id="homelab-disclosure" className="homelab-disclosure">
+          <button type="button" className="homelab-reveal-toggle" aria-expanded={homelabOpen} aria-controls="homelab-reveal" onClick={() => setHomelabOpen(open => !open)}>
+            <span><span className="homelab-reveal-label">Explore the infrastructure</span><span className="homelab-reveal-title">Homelab</span></span>
+            <span className="homelab-reveal-action">{homelabOpen ? "Close homelab" : "Open homelab"}<ChevronDown size={20} className={homelabOpen ? "is-open" : ""} /></span>
+          </button>
+        </div>
+        <div id="homelab-reveal" className={`homelab-reveal ${homelabOpen ? "is-open" : ""}`} inert={!homelabOpen} aria-hidden={!homelabOpen}>
+          <div className="homelab-reveal-inner">
+            <HomelabPanel activeTab={activeHomelabTab} onTabChange={selectHomelabTab} selectedBuildStep={selectedBuildStep} selectBuildStep={selectBuildStep} buildStepRefs={buildStepRefs} tabRefs={tabRefs} />
+          </div>
+        </div>
         <ProjectsPanel expandedProject={expandedProject} onToggle={id => setExpandedProject(current => current === id ? null : id)} />
         <WorkExperiencePanel />
         <section id="cyber" className="border-y border-border bg-card/35"><div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24"><SectionLabel>Experience / Great Wolf Lodge</SectionLabel><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Applied work</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Security work across people, identity, and detection logic.</p></div><div className="grid gap-4 md:grid-cols-3">{experience.map((project, index) => <article key={project.title} className="group flex h-full flex-col border border-border bg-card p-6 transition-[border-color,transform] hover:-translate-y-1 hover:border-primary/50"><div className="mb-12 flex items-start justify-between"><span className="font-mono text-xs text-primary">0{index + 1}</span><Shield className="h-4 w-4 text-muted-foreground group-hover:text-primary" /></div><p className="font-mono text-[10px] uppercase tracking-wider text-primary/80">{project.sub}</p><h3 className="mt-2 text-xl font-medium leading-tight">{project.title}</h3><p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{project.body}</p><div className="mt-6 flex flex-wrap gap-2">{project.tags.map(tag => <Badge key={tag} variant="outline" className="font-mono text-[10px] font-normal text-muted-foreground">{tag}</Badge>)}</div></article>)}</div></div></section>

@@ -113,3 +113,17 @@
 
 .qcr #homelab h2 + p { font-size:0; }
 .qcr #homelab h2 + p::after { content:"A more in depth view of homelab projects."; font-size:1rem; line-height:1.625; }
+
+.homelab-disclosure { max-width:980px; margin:24px auto 0; padding:0 clamp(18px,5vw,64px); }
+.homelab-reveal-toggle { width:100%; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:24px; color:var(--ink); background:var(--panel); border:1px solid var(--line); text-align:left; }
+.homelab-reveal-toggle:hover { border-color:var(--olive); }
+.homelab-reveal-label { display:block; color:var(--muted); font:9px "DM Mono",monospace; text-transform:uppercase; letter-spacing:.1em; margin-bottom:10px; }
+.homelab-reveal-title { display:block; font-size:28px; letter-spacing:-.05em; }
+.homelab-reveal-action { display:flex; align-items:center; gap:12px; color:var(--olive); font:10px "DM Mono",monospace; text-transform:uppercase; }
+.homelab-reveal-action svg { flex-shrink:0; transition:transform .6s ease; }
+.homelab-reveal-action svg.is-open { transform:rotate(180deg); }
+.homelab-reveal { display:grid; grid-template-rows:0fr; opacity:0; visibility:hidden; transition:grid-template-rows .75s cubic-bezier(.22,1,.36,1), opacity .5s ease, visibility .75s; }
+.homelab-reveal.is-open { grid-template-rows:1fr; opacity:1; visibility:visible; }
+.homelab-reveal-inner { min-height:0; overflow:hidden; }
+@media(max-width:600px) { .homelab-disclosure { padding:0 18px; } .homelab-reveal-toggle { padding:20px 16px; } }
+@media(prefers-reduced-motion:reduce) { .homelab-reveal, .homelab-reveal-action svg { transition:none; } }
