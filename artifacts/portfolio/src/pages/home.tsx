@@ -11,14 +11,13 @@ import { Button } from "@/components/ui/button";
 import "./home-qcr.css";
 
 type SectionId = "hero" | "projects" | "experience" | "homelab" | "skills" | "updated" | "contact";
+type NavigationSectionId = Exclude<SectionId, "hero" | "skills">;
 type HomelabTabId = "overview" | "website" | "detection";
 
-const sidebarItems: Array<{ id: SectionId; label: string; icon: LucideIcon }> = [
-  { id: "hero", label: "Dashboard", icon: BarChart3 },
+const sidebarItems: Array<{ id: NavigationSectionId; label: string; icon: LucideIcon }> = [
+  { id: "homelab", label: "Homelab", icon: Server },
   { id: "projects", label: "Projects", icon: Layers3 },
   { id: "experience", label: "Work Experience", icon: BriefcaseBusiness },
-  { id: "homelab", label: "Homelab", icon: Server },
-  { id: "skills", label: "Skills", icon: Activity },
   { id: "updated", label: "Last Updated", icon: CalendarClock },
   { id: "contact", label: "Contact", icon: UserRound },
 ];
@@ -243,8 +242,12 @@ export default function Home() {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   useEffect(() => {
-    const ids: SectionId[] = ["hero", "projects", "experience", "homelab", "skills", "updated", "contact"];
+    const ids: NavigationSectionId[] = sidebarItems.map(item => item.id);
     const onScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1) {
+        setActiveSection(ids[ids.length - 1]);
+        return;
+      }
       const current = ids.find(id => { const element = document.getElementById(id); if (!element) return false; const rect = element.getBoundingClientRect(); return rect.top <= 150 && rect.bottom >= 150; });
       if (current) setActiveSection(current);
     };
@@ -261,6 +264,7 @@ export default function Home() {
 
   const navigate = (id: SectionId) => {
     setMobileOpen(false);
+    setActiveSection(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
   const selectBuildStep = (index: number, moveFocus = false) => { const next = Math.max(0, Math.min(index, buildLog.length - 1)); setSelectedBuildStep(next); if (moveFocus) buildStepRefs.current[next]?.focus(); };
@@ -269,7 +273,7 @@ export default function Home() {
   return <div className="qcr">
     <Sidebar activeSection={activeSection} collapsed={false} mobileOpen={mobileOpen} onNavigate={navigate} onToggle={() => setMobileOpen(false)} />
     <div className="qcr-main">
-      <header className="qcr-topbar"><button type="button" className="qcr-menu" onClick={() => setMobileOpen(true)} aria-label="Open navigation drawer"><Menu size={19} /></button><span className="qcr-breadcrumb"><i>workspace</i> / {sidebarItems.find(item => item.id === activeSection)?.label.toLowerCase()}</span><span className="qcr-mode"><StatusDot /> portfolio mode</span><a href="https://www.linkedin.com/in/torianna" target="_blank" rel="noreferrer" aria-label="LinkedIn"><ArrowRight size={17} /></a></header>
+      <header className="qcr-topbar"><button type="button" className="qcr-menu" onClick={() => setMobileOpen(true)} aria-label="Open navigation drawer"><Menu size={19} /></button><span className="qcr-breadcrumb"><i>workspace</i> / {sidebarItems.find(item => item.id === activeSection)?.label.toLowerCase() ?? "home"}</span><span className="qcr-mode"><StatusDot /> portfolio mode</span><a href="https://www.linkedin.com/in/torianna" target="_blank" rel="noreferrer" aria-label="LinkedIn"><ArrowRight size={17} /></a></header>
       <main>
         <section id="hero" className="qcr-hero"><div className="qcr-eyebrow"><span><StatusDot /> system / maintained record</span><span>Chicago, IL · last reviewed by Torianna</span></div><div className="qcr-hero-grid"><div><p className="qcr-kicker">Security operations / portfolio dashboard</p><h1>Homelab<br /><em>Dashboard</em></h1><p className="qcr-intro">I'm Torianna, a cybersecurity graduate who learns best through hands-on work. This site brings together my work experience, past and current projects, and everything I'm currently building in my homelab. Thanks for visiting!</p><div className="qcr-actions"><button className="qcr-primary" onClick={() => navigate("projects")}>Inspect projects <ChevronRight size={16} /></button><button className="qcr-quiet" onClick={() => navigate("homelab")}>Open homelab</button></div></div><div className="qcr-profile"><div className="qcr-profile-head"><span>/ operator profile</span><Terminal size={16} /></div><dl><dt>focus</dt><dd>defensive security</dd><dt>detection</dt><dd className="green"><StatusDot /> lab active</dd><dt>response loop</dt><dd>in progress</dd><dt>host</dt><dd>Ubuntu / dedicated</dd></dl><p className="qcr-note"><b>note</b> no live attack telemetry</p></div></div><div className="qcr-metrics"><div><b>03</b><span>projects complete</span></div><div><b>01</b><span>certification earned</span></div><div><b>04</b><span>work records</span></div><div><b>06</b><span>lab milestones</span></div></div></section>
         <section className="qcr-overview"><div className="qcr-section-head"><div><p className="qcr-kicker">At a glance</p><h2>Infrastructure Overview</h2></div><span className="qcr-stamp">record / 2025—present</span></div><div className="qcr-overview-grid"><NetworkDiagram /><ActivityFeed /></div></section>
