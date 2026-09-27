@@ -6,9 +6,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { projects, pcBuildSpec, workExperience, recentActivity } from "@/data/portfolio";
 import { LINKEDIN_URL, SectionLabel, StatusDot } from "./shared";
+import { ParallaxBackdrop } from "./parallax-backdrop";
 
 export function HeroSection({ onViewHomelab }: { onViewHomelab: () => void }) {
   return <section id="hero" className="qcr-hero">
+    <ParallaxBackdrop hero />
     <div className="qcr-eyebrow"><span><StatusDot /> system / maintained record</span><span>Chicago, IL</span></div>
     <div className="qcr-hero-grid">
       <div>
@@ -31,6 +33,7 @@ export function HeroSection({ onViewHomelab }: { onViewHomelab: () => void }) {
 
 export function AboutSection() {
   return <section id="about" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+    <ParallaxBackdrop />
     <SectionLabel>01 / About</SectionLabel>
     <h2 className="mb-10 text-4xl font-semibold tracking-tight sm:text-5xl">Hi, I'm Torianna.</h2>
     <div className="max-w-3xl space-y-6 text-base leading-relaxed text-foreground/90">
@@ -99,6 +102,7 @@ function PcSpecTable() {
 
 export function ProjectsSection() {
   return <section id="projects" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+    <ParallaxBackdrop />
     <SectionLabel>02 / Projects</SectionLabel>
     <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h2><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(projects.length + 1).padStart(2, "0")} projects</span></div>
     <HomelabSection />
@@ -122,6 +126,7 @@ const Bullet = ({ children }: { children: string }) => <li className="flex gap-3
 
 export function ExperienceSection() {
   return <section id="experience" className="border-y border-border bg-card/35">
+    <ParallaxBackdrop />
     <SectionLabel>03 / Experience</SectionLabel>
     <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Experience</h2><p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Technical support, identity, detection, security awareness, and audit work. Newest first.</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(workExperience.length).padStart(2, "0")} roles</span></div>
     <ol className="space-y-6">{workExperience.map((job, index) => <li key={`${job.company}-${job.role}`}><article className="grid gap-6 border border-border bg-card p-6 sm:p-8 lg:grid-cols-[.48fr_1fr] lg:gap-10" data-testid={`card-role-${index}`}>
@@ -146,6 +151,7 @@ export function ExperienceSection() {
 
 export function CredentialsSection() {
   return <section id="credentials" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+    <ParallaxBackdrop />
     <SectionLabel>04 / Credentials</SectionLabel>
     <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Credentials</h2>
     <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -158,6 +164,7 @@ export function CredentialsSection() {
 
 export function ContactSection() {
   return <section id="contact" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+    <ParallaxBackdrop />
     <div className="border border-primary/30 bg-primary/[.04] p-6 sm:p-8">
       <SectionLabel>05 / Contact</SectionLabel>
       <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">

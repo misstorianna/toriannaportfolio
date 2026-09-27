@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 /* Mission Control Bento — a quiet, evidence-first operations console. */
+html { position:relative; }
 .qcr {
   --ink: #d9decf;
   --muted: #778071;
@@ -17,6 +18,19 @@
   letter-spacing: -.012em;
 }
 .qcr *, .qcr *::before, .qcr *::after { box-sizing: border-box; }
+.qcr section[id] { position:relative; isolation:isolate; }
+.portfolio-parallax { position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
+.portfolio-parallax-glow { position:absolute; inset:-80px 0; background:radial-gradient(ellipse at 85% 20%,rgba(133,168,135,.10),transparent 65%); }
+.portfolio-parallax-grid { position:absolute; inset:-80px 0; background-image:linear-gradient(rgba(133,168,135,.065) 1px,transparent 1px),linear-gradient(90deg,rgba(133,168,135,.065) 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(115deg,transparent 25%,black 100%); }
+.portfolio-parallax-hero .portfolio-parallax-glow { background:radial-gradient(ellipse at 75% 35%,rgba(133,168,135,.20),transparent 65%); }
+.portfolio-parallax-hero .portfolio-parallax-grid { background-size:64px 64px; }
+@media(max-width:600px) {
+  .portfolio-parallax-grid { opacity:.45; }
+  .portfolio-parallax-glow { opacity:.6; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .portfolio-parallax-glow, .portfolio-parallax-grid { transform:none!important; }
+}
 .qcr button, .qcr a { font: inherit; }
 .qcr button { cursor: pointer; }
 .qcr button:focus-visible, .qcr a:focus-visible { outline: 1px solid var(--olive); outline-offset: 3px; }

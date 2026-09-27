@@ -1,0 +1,138 @@
+Examples
+/
+Scroll
+Parallax
+
+Scroll-linked parallax effect where background images move at a different speed to foreground content, creating a sense of depth.
+
+This parallax effect is scroll-linked: each background moves more slowly than the page, so it appears further away. useScroll tracks each section's progress through the viewport, and useTransform maps that progress to the image's y offset and the caption's opacity.
+Related effects
+Scroll Horizontal Gallery
+Scroll word reveal
+Carousel: Parallax
+Matt Perry
+January 13, 2025
+
+    React
+    MotionScoreA
+    Motion+
+
+On this page
+
+    Live example
+    Source code
+    Tutorial
+
+Built with
+motion
+useScroll
+useTransform
+Open fullscreen
+>Ship this
+Use this in your own site
+
+This is not just a demo to learn from. Motion+ unlocks the full, production-ready source so you can copy it straight into your own project and ship it.
+Get Motion+
+>Motion UI
+
+    Component docs
+    Composed section
+    Hero sections
+
+Source code
+Motion+
++One payment
+Lifetime updates
+Motion+ examples
+Unlock all 450+ examples
+
+Get source code for every Plus example, provide examples directly to your agent via Motion's MCP, and keep lifetime access to new examples and APIs.
+
+Examples
+    450+
+Source
+    Included
+Updates
+    Lifetime
+
+Get Motion+Get Motion+
+Sign in
+Tutorial
+
+Tutorial time
+    5 min
+Difficulty
+
+Introduction
+
+The Parallax example shows how to build a full-page scrolling gallery where background images move at a different speed to the foreground text, creating a sense of depth. It also fades text in and out as each section moves through the viewport.
+
+It uses three APIs from Motion:
+
+    useScroll to track how far each section has scrolled through the viewport
+    useTransform to map that scroll progress to image position and text opacity/position values
+    The motion component to apply those values as live styles
+
+Get started
+
+We'll build the page as a list of sections, each containing a background image and an overlay with a title and subtitle. Here's the starter markup:
+
+"use client"
+
+import { useRef } from "react"
+
+interface SectionData {
+    image: string
+    title: string
+    subtitle: string
+}
+
+const SECTIONS: SectionData[] = [
+    {
+        image: "your-image-1.jpg",
+        title: "Title 1",
+        subtitle: "Subtitle 1",
+    },
+    {
+        image: "your-image-2.jpg",
+        title: "Title 2",
+        subtitle: "Subtitle 2",
+    },
+]
+
+const ParallaxSection = ({
+    image,
+    title,
+    subtitle,
+}: SectionData) => {
+    const ref = useRef(null)
+
+    return (
+        <section ref={ref} className="parallax-section">
+            <div className="parallax-bg">
+                <img src={image} alt={title} />
+            </div>
+            <div className="parallax-overlay" />
+            <div className="parallax-content">
+                <h2 className="parallax-title">{title}</h2>
+                <p className="parallax-subtitle">{subtitle}</p>
+            </div>
+        </section>
+    )
+}
+
+export default function Parallax() {
+    return (
+        <div className="parallax-page">
+            {SECTIONS.map((section, i) => (
+                <ParallaxSection key={i} index={i} {...section} />
+            ))}
+        </div>
+    )
+}
+
+<style>
+    /** Copy styles from example source code */
+</style>
+
+Each section is 100vh tall and has overflow: hidden so that the background image - which is taller than the section - gets clipped as it moves. The parallax-overlay is a semi-transparent gradient layered over the image to make the t
