@@ -20,7 +20,7 @@ export default function HomelabWebsite() {
     <div className="qcr min-h-[100dvh] circuit-zone">
       <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="mb-12">
-          <Link href="/#homelab" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
+          <Link href="/#homelab" className="qcr-quiet mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to Homelab
           </Link>
           <div className="flex items-center gap-3 text-primary mb-4">

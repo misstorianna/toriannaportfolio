@@ -108,7 +108,7 @@ export default function HomelabDetection() {
     <div className="qcr min-h-[100dvh] circuit-zone">
       <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
         <div className="mb-12">
-          <Link href="/#homelab" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
+          <Link href="/#homelab" className="qcr-quiet mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to Homelab
           </Link>
           <div className="flex items-center gap-3 text-primary mb-4">
@@ -151,7 +151,7 @@ export default function HomelabDetection() {
               {stack.map(item => { 
                 const Icon = item.icon; 
                 return (
-                  <div key={item.name} className="flex gap-4 border border-border bg-card p-5 transition-[border-color,transform] hover:-translate-y-0.5 hover:border-primary/50">
+                  <div key={item.name} className="flex gap-4 border border-border bg-card p-5">
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-primary/25 bg-primary/10 text-primary">
                       <Icon className="h-4 w-4" />
                     </span>
