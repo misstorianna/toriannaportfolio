@@ -1,4 +1,4 @@
-import { Activity, Shield, Network, Server, Terminal, CheckCircle2 } from "lucide-react";
+import { Activity, Shield, Network, Server, Terminal } from "lucide-react";
 
 export const stack = [
   { name: "Ubuntu", role: "Dedicated host", icon: Server, detail: "A repurposed Surface laptop running Ubuntu hosts the portfolio and monitoring stack." },
@@ -18,26 +18,6 @@ export const buildLog = [
 
 export const projects = [
   {
-    id: "homelab-detection",
-    title: "Homelab Detection Lab",
-    category: "Homelab",
-    status: "Active",
-    summary: "Self-hosted detection stack on a repurposed Surface laptop running Ubuntu 26.04 LTS.",
-    detail: "CrowdSec handles log-based attack detection, Suricata provides network IDS coverage, and Loki + Grafana provide log storage and dashboards. The public surface is hosted via nginx + Cloudflare Tunnel.",
-    stack: ["Ubuntu", "CrowdSec", "Suricata", "Loki", "Promtail", "Grafana", "nginx", "Cloudflare Tunnel"],
-    link: "/homelab/detection"
-  },
-  {
-    id: "homelab-website",
-    title: "This Website",
-    category: "Homelab",
-    status: "Active",
-    summary: "Self-hosted portfolio with nginx, DNS, Cloudflare Tunnel, and a GitHub-based auto-deploy pipeline.",
-    detail: "The portfolio is a public site hosted through nginx on the Ubuntu machine, with Cloudflare Tunnel and DNS keeping the public surface narrow. A cron job automates deployment.",
-    stack: ["nginx", "Cloudflare Tunnel", "GitHub", "Ubuntu"],
-    link: "/homelab/website"
-  },
-  {
     id: "sigma-rules",
     title: "Custom Sigma Detection Rules",
     category: "Research",
@@ -55,36 +35,46 @@ export const projects = [
     detail: "Built a high-end desktop with a Ryzen 7 9800X3D and RX 9070 XT, a second build on a Gigabyte B850 AORUS Elite board where a PSU and motherboard failure was diagnosed and resolved, and rebuilt an older Alienware machine with a clean Windows 11 install.",
     stack: ["Hardware diagnostics", "PC assembly", "Troubleshooting", "Ryzen 7 9800X3D", "RX 9070 XT"],
   },
-  {
-    id: "education",
-    title: "Education & Certifications",
-    category: "Research",
-    status: "Complete",
-    summary: "Cybersecurity degree from Bradley University and CompTIA Security+ certification.",
-    detail: "Credentials: B.S. Cybersecurity, CompTIA Security+ (SY0-701), earned 2025.",
-    stack: ["Bradley University", "B.S. Cybersecurity", "CompTIA Security+"],
-  },
 ];
 
-export const experience = [
-  { title: "Phishing Awareness Campaigns", sub: "Security Awareness", body: "Orchestrated phishing simulations via KnowBe4 for 3,000+ employees. Designed realistic email templates, analyzed click rates, and delivered targeted retraining to flagged employees.", tags: ["KnowBe4", "HTML/CSS", "Reporting"] },
-  { title: "Detection & Alerting Logic", sub: "SIEM Engineering", body: "Built custom LEQL detection rules in Rapid7 InsightIDR to flag unauthorized password storage, excessive MFA failures, and repeated VPN login attempts.", tags: ["Rapid7 InsightIDR", "LEQL", "MFA Monitoring"] },
-  { title: "SSO & Identity Work", sub: "Identity & Access", body: "Configured and deployed SSO for core business apps via Microsoft Entra ID using SAML and IdP-initiated flows. Documented rollout steps and resolved access issues.", tags: ["Entra ID", "SAML", "SSO"] },
+export const pcBuildSpec = [
+  { label: "CPU", value: "AMD Ryzen 7 9800X3D", ready: true },
+  { label: "GPU", value: "RX 9070 XT", ready: true },
+  { label: "Motherboard", value: "Gigabyte B850 AORUS ELITE WIFI7", ready: true },
+  { label: "RAM", value: "32GB DDR5", ready: true },
+  { label: "Storage", value: "TBD", ready: false },
 ];
 
-export const workExperience = [
+export type WorkHighlight = { area: string; title: string; points: string[]; tags: string[] };
+export type WorkRole = { company: string; role: string; dates: string; location: string; responsibilities: string[]; highlights?: WorkHighlight[] };
+
+// Newest first.
+export const workExperience: WorkRole[] = [
   {
-    company: "Great Wolf Lodge — Corporate Team",
-    role: "IT Corporate Support / Cybersecurity Intern",
-    dates: "Jun 2025 – Aug 2025",
-    location: "Remote",
+    company: "Geek Squad, Best Buy",
+    role: "Advanced Repair Agent",
+    dates: "Sep 2026 – Present",
+    location: "Burbank, IL",
     responsibilities: [
-      "Configured and deployed IdP-initiated SSO for business applications using Microsoft Entra ID, SAML, and application role mapping.",
-      "Troubleshot access issues with application owners, validated SSO functionality, and documented rollout procedures.",
-      "Developed Rapid7 InsightIDR alerts for unauthorized password storage, excessive MFA failures, and repeated VPN login attempts.",
-      "Analyzed phishing campaign results to identify high-risk users, report trends, and guide targeted retraining plans.",
-      "Built KnowBe4 phishing simulations with realistic HTML/CSS email templates for 3,000+ employees across U.S. lodge and corporate environments.",
-      "Delivered phishing-awareness guidance to users flagged by campaign results, reinforcing safe email handling and reporting practices.",
+      "Diagnose and resolve hardware and software issues on customer devices using MRI diagnostic tools, including malware removal, disk repair, and OS restoration.",
+      "Provide remote troubleshooting and support via AJU, resolving connectivity, performance, and software issues without requiring an in-store visit.",
+      "Perform root-cause analysis on recurring hardware failures, reducing repeat service visits.",
+      "Advise customers on repair options, data backup, and security best practices, translating technical findings into clear, actionable guidance.",
+      "Maintain accurate service documentation and ticket records to support quality tracking and warranty compliance.",
+      "Collaborate with senior technicians and precinct leadership to escalate complex repairs and ensure timely turnaround.",
+    ],
+  },
+  {
+    company: "Geek Squad, Best Buy",
+    role: "Senior Repair Technician",
+    dates: "Aug 2026 – Sep 2026",
+    location: "North Riverside, IL",
+    responsibilities: [
+      "Diagnosed and troubleshot hardware and software issues across PCs, laptops, and consumer technology, determining root cause and the appropriate repair path.",
+      "Performed repairs and diagnostics across components, power, storage, displays, networking, and peripherals.",
+      "Used Repair Workbench to check devices in and out, document diagnostics and repairs, and track each repair through completion.",
+      "Coached and supported a team of 7 Agents on repair procedures and technical troubleshooting as a senior resource for issues beyond entry-level scope.",
+      "Communicated technical findings and repair timelines in clear, non-technical terms while resolving complex service situations.",
     ],
   },
   {
@@ -97,30 +87,39 @@ export const workExperience = [
     ],
   },
   {
-    company: "Geek Squad, Best Buy",
-    role: "Senior Repair Technician",
-    dates: "Aug 2026 – Present",
-    location: "North Riverside, IL",
-    responsibilities: [
-      "Diagnose and troubleshoot hardware and software issues across PCs, laptops, and consumer technology, determining root cause and the appropriate repair path.",
-      "Perform repairs and diagnostics across components, power, storage, displays, networking, and peripherals.",
-      "Use Repair Workbench to check devices in and out, document diagnostics and repairs, and track each repair through completion.",
-      "Coach and support a team of 7 Agents on repair procedures and technical troubleshooting as a senior resource for issues beyond entry-level scope.",
-      "Communicate technical findings and repair timelines in clear, non-technical terms while resolving complex service situations.",
-    ],
-  },
-  {
-    company: "Geek Squad, Best Buy",
-    role: "Advanced Repair Agent",
-    dates: "September – Present",
-    location: "Burbank, IL",
-    responsibilities: [
-      "Diagnosed and resolved hardware and software issues on customer devices using MRI diagnostic tools, including malware removal, disk repair, and OS restoration.",
-      "Provided remote troubleshooting and support via AJU, resolving connectivity, performance, and software issues without requiring an in-store visit.",
-      "Performed root-cause analysis on recurring hardware failures, reducing repeat service visits.",
-      "Advised customers on repair options, data backup, and security best practices, translating technical findings into clear, actionable guidance.",
-      "Maintained accurate service documentation and ticket records to support quality tracking and warranty compliance.",
-      "Collaborated with senior technicians and precinct leadership to escalate complex repairs and ensure timely turnaround.",
+    company: "Great Wolf Lodge — Corporate Team",
+    role: "IT Corporate Support / Cybersecurity Intern",
+    dates: "Jun 2025 – Aug 2025",
+    location: "Remote",
+    responsibilities: [],
+    highlights: [
+      {
+        area: "Identity & Access",
+        title: "SSO & Identity Work",
+        points: [
+          "Configured and deployed IdP-initiated SSO for core business applications via Microsoft Entra ID, using SAML and application role mapping.",
+          "Troubleshot access issues with application owners, validated SSO functionality, and documented rollout procedures.",
+        ],
+        tags: ["Entra ID", "SAML", "SSO"],
+      },
+      {
+        area: "SIEM Engineering",
+        title: "Detection & Alerting Logic",
+        points: [
+          "Built custom LEQL detection rules in Rapid7 InsightIDR to flag unauthorized password storage, excessive MFA failures, and repeated VPN login attempts.",
+        ],
+        tags: ["Rapid7 InsightIDR", "LEQL", "MFA Monitoring"],
+      },
+      {
+        area: "Security Awareness",
+        title: "Phishing Awareness Campaigns",
+        points: [
+          "Built KnowBe4 phishing simulations with realistic HTML/CSS email templates for 3,000+ employees across U.S. lodge and corporate environments.",
+          "Analyzed click rates and campaign results to identify high-risk users, report trends, and guide targeted retraining plans.",
+          "Delivered phishing-awareness guidance to flagged users, reinforcing safe email handling and reporting practices.",
+        ],
+        tags: ["KnowBe4", "HTML/CSS", "Reporting"],
+      },
     ],
   },
 ];
@@ -128,6 +127,7 @@ export const workExperience = [
 export const recentActivity = [
   { label: "Deployed CrowdSec on Ubuntu host", detail: "Homelab Detection Lab", status: "documented", icon: Shield },
   { label: "Published custom Sigma rule to GitHub", detail: "Detection research", status: "ongoing", icon: Terminal },
-  { label: "Completed CompTIA Security+", detail: "SY0-701 · earned 2025", status: "complete", icon: CheckCircle2 },
   { label: "Connected Loki / Promtail / Grafana", detail: "Visibility layer", status: "working", icon: Activity },
 ];
+
+export const lastUpdated = { iso: "2026-09-18", label: "September 18, 2026" };

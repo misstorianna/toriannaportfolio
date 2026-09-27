@@ -77,7 +77,8 @@
 .qcr-section-head { display:flex; justify-content:space-between; gap:18px; align-items:flex-end; margin-bottom:25px; }
 .qcr-section-head h2,.qcr section h2 { font-size:clamp(28px,4vw,48px); line-height:1; letter-spacing:-.075em; margin:0; }
 .qcr-stamp { color:#728070; font:9px "DM Mono"; text-transform:uppercase; }
-.qcr-overview-grid { display:grid; grid-template-columns:1.45fr .8fr; gap:10px; }
+.qcr-overview-grid { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,.8fr); gap:10px; }
+.qcr-overview-grid > * { min-width:0; }
 .qcr-overview .border,.qcr-overview [class*="bg-card"] { background:var(--panel); border-color:var(--line); }
 .qcr-overview h3 { color:var(--ink); }.qcr-overview p { color:var(--muted); }
 
