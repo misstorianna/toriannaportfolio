@@ -63,11 +63,11 @@ function ActivityFeed() {
 }
 
 export function HomelabSection() {
-  return <section id="homelab" className="border-y border-border bg-card/35">
-    <SectionLabel>02 / Homelab</SectionLabel>
+  return <article id="homelab" className="mb-8 border border-border bg-card/35 p-4 sm:p-6">
+    <SectionLabel>Project / Homelab</SectionLabel>
     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
       <div>
-        <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Homelab</h2>
+        <h3 className="text-3xl font-semibold tracking-tight">Homelab</h3>
         <p className="mt-5 max-w-3xl text-base leading-relaxed text-foreground/90">This website is part of that lab. It runs on a self-managed Ubuntu server behind a Cloudflare Tunnel and is actively monitored by a stack that includes CrowdSec, Suricata, Loki, and Grafana, meaning real traffic is logged, flagged, and visualized. Deployments are automated too: a cron job on the host polls GitHub every 5 minutes, so a push is picked up on the next check and rebuilt and redeployed without manual server work.</p>
       </div>
       <div className="flex shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-primary"><StatusDot /> documented / in progress</div>
@@ -75,19 +75,19 @@ export function HomelabSection() {
     <div className="grid gap-5 md:grid-cols-2">
       <Link href="/homelab/website" className="qcr-link-card group flex flex-col border bg-card p-6 text-left" data-testid="link-homelab-website">
         <Server className="h-5 w-5 text-primary" />
-        <h3 className="mt-8 text-xl font-medium">This Website</h3>
+        <h4 className="mt-8 text-xl font-medium">This Website</h4>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">A self-hosted portfolio with nginx, DNS, Cloudflare Tunnel, and a GitHub-based auto-deploy pipeline.</p>
         <span className="qcr-card-cta">View website configuration <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
       </Link>
       <Link href="/homelab/detection" className="qcr-link-card group flex flex-col border bg-card p-6 text-left" data-testid="link-homelab-detection">
         <Radar className="h-5 w-5 text-primary" />
-        <h3 className="mt-8 text-xl font-medium">Detection System</h3>
+        <h4 className="mt-8 text-xl font-medium">Detection System</h4>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">CrowdSec and Suricata feed a Loki and Grafana observability stack for network detection and response.</p>
         <span className="qcr-card-cta">View detection system <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
       </Link>
     </div>
     <div className="qcr-overview-grid mt-5"><NetworkDiagram /><ActivityFeed /></div>
-  </section>;
+  </article>;
 }
 
 function PcSpecTable() {
@@ -99,8 +99,9 @@ function PcSpecTable() {
 
 export function ProjectsSection() {
   return <section id="projects" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-    <SectionLabel>03 / Projects</SectionLabel>
-    <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h2><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(projects.length).padStart(2, "0")} projects</span></div>
+    <SectionLabel>02 / Projects</SectionLabel>
+    <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h2><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(projects.length + 1).padStart(2, "0")} projects</span></div>
+    <HomelabSection />
     <div className="grid items-start gap-4 lg:grid-cols-2">{projects.map(project => <article key={project.id} className="border border-border bg-card" data-testid={`card-project-${project.id}`}>
       <div className="p-5 sm:p-6">
         <div className="flex items-center gap-2"><span className="font-mono text-[10px] uppercase tracking-wider text-primary">{project.category}</span><span className="text-border">/</span><span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><StatusDot /> {project.status}</span></div>
@@ -121,7 +122,7 @@ const Bullet = ({ children }: { children: string }) => <li className="flex gap-3
 
 export function ExperienceSection() {
   return <section id="experience" className="border-y border-border bg-card/35">
-    <SectionLabel>04 / Experience</SectionLabel>
+    <SectionLabel>03 / Experience</SectionLabel>
     <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Experience</h2><p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Technical support, identity, detection, security awareness, and audit work. Newest first.</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(workExperience.length).padStart(2, "0")} roles</span></div>
     <ol className="space-y-6">{workExperience.map((job, index) => <li key={`${job.company}-${job.role}`}><article className="grid gap-6 border border-border bg-card p-6 sm:p-8 lg:grid-cols-[.48fr_1fr] lg:gap-10" data-testid={`card-role-${index}`}>
       <div>
@@ -145,7 +146,7 @@ export function ExperienceSection() {
 
 export function CredentialsSection() {
   return <section id="credentials" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-    <SectionLabel>05 / Credentials</SectionLabel>
+    <SectionLabel>04 / Credentials</SectionLabel>
     <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Credentials</h2>
     <div className="mt-10 grid gap-4 md:grid-cols-3">
       <div className="border-y border-l-2 border-r border-border border-l-primary bg-card p-6"><div className="flex items-center justify-between gap-3"><Badge className="rounded bg-primary px-3 py-1 font-mono text-sm text-primary-foreground">B.S.</Badge><span className="font-mono text-[10px] text-muted-foreground">Degree</span></div><h3 className="mt-10 text-lg font-medium">B.S. Cybersecurity</h3><p className="mt-2 text-sm text-primary">Bradley University</p></div>
@@ -158,7 +159,7 @@ export function CredentialsSection() {
 export function ContactSection() {
   return <section id="contact" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
     <div className="border border-primary/30 bg-primary/[.04] p-6 sm:p-8">
-      <SectionLabel>06 / Contact</SectionLabel>
+      <SectionLabel>05 / Contact</SectionLabel>
       <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
         <div><h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Want to inspect the work?</h2><p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">The best conversations are about the decisions behind the system. Reach out for the full project context, write-ups, or a walkthrough of the lab.</p></div>
         <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="qcr-contact-cta" data-testid="link-contact-linkedin">Connect on LinkedIn <ArrowRight className="h-4 w-4" /></a>

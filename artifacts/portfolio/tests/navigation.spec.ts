@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
-const navigationItems = ["About", "Homelab", "Projects", "Experience", "Credentials", "Contact"];
-const sectionIds = ["about", "homelab", "projects", "experience", "credentials", "contact"];
+const navigationItems = ["About", "Projects", "Experience", "Credentials", "Contact"];
+const sectionIds = ["about", "projects", "experience", "credentials", "contact"];
 
 test.describe("workspace navigation", () => {
   test("shows the requested order without Skills or a Dashboard workspace item", async ({ page }) => {
@@ -18,10 +18,11 @@ test.describe("workspace navigation", () => {
     await expect(navigation.getByRole("button", { name: /Dashboard/ })).toHaveCount(0);
 
     await expect(items.nth(0).locator(".qcr-nav-index")).toHaveText("01");
-    await expect(items.nth(5).locator(".qcr-nav-index")).toHaveText("06");
+    await expect(items.nth(4).locator(".qcr-nav-index")).toHaveText("05");
+    await expect(navigation.getByRole("button", { name: /Homelab/ })).toHaveCount(0);
     await expect(navigation.getByRole("button", { name: /Last Updated/ })).toHaveCount(0);
     await expect(page.locator("#updated")).toHaveCount(0);
-    await expect(page.locator("#projects #homelab")).toHaveCount(0);
+    await expect(page.locator("#projects #homelab")).toHaveCount(1);
     await expect(page.getByTestId("text-last-updated")).toContainText("September 18, 2026");
   });
 

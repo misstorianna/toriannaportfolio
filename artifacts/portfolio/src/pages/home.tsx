@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { ArrowRight, BriefcaseBusiness, CircleDot, FolderGit2, Github, GraduationCap, Linkedin, Menu, Server, User, UserRound, X, type LucideIcon } from "lucide-react";
 import { lastUpdated } from "@/data/portfolio";
 import { LINKEDIN_URL, SectionLabel, StatusDot } from "@/components/portfolio/shared";
-import { AboutSection, ContactSection, CredentialsSection, ExperienceSection, HeroSection, HomelabSection, ProjectsSection } from "@/components/portfolio/sections";
+import { AboutSection, ContactSection, CredentialsSection, ExperienceSection, HeroSection, ProjectsSection } from "@/components/portfolio/sections";
 import "./home-qcr.css";
 
 export { SectionLabel, StatusDot };
 
 type SectionId = "hero" | "about" | "homelab" | "projects" | "experience" | "credentials" | "contact";
-type NavigationSectionId = Exclude<SectionId, "hero">;
+type NavigationSectionId = Exclude<SectionId, "hero" | "homelab">;
 
 const sidebarItems: Array<{ id: NavigationSectionId; label: string; icon: LucideIcon }> = [
   { id: "about", label: "About", icon: User },
-  { id: "homelab", label: "Homelab", icon: Server },
   { id: "projects", label: "Projects", icon: FolderGit2 },
   { id: "experience", label: "Experience", icon: BriefcaseBusiness },
   { id: "credentials", label: "Credentials", icon: GraduationCap },
@@ -89,7 +88,7 @@ export default function Home() {
 
   const navigate = (id: SectionId) => {
     setMobileOpen(false);
-    setActiveSection(id);
+    setActiveSection(id === "homelab" ? "projects" : id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -100,7 +99,6 @@ export default function Home() {
       <main>
         <HeroSection onViewHomelab={() => navigate("homelab")} />
         <AboutSection />
-        <HomelabSection />
         <ProjectsSection />
         <ExperienceSection />
         <CredentialsSection />
