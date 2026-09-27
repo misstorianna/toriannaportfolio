@@ -12,13 +12,12 @@ import { stack, projects, experience, workExperience, recentActivity } from "@/d
 import "./home-qcr.css";
 
 type SectionId = "hero" | "background" | "experience" | "homelab" | "projects" | "updated" | "contact";
-type NavigationSectionId = Exclude<SectionId, "hero">;
+type NavigationSectionId = Exclude<SectionId, "hero" | "homelab">;
 
 const sidebarItems: Array<{ id: NavigationSectionId; label: string; icon: LucideIcon }> = [
   { id: "background", label: "Background", icon: User },
   { id: "experience", label: "Work Experience", icon: BriefcaseBusiness },
   { id: "projects", label: "Projects", icon: Layers3 },
-  { id: "homelab", label: "Homelab", icon: Server },
   { id: "updated", label: "Last Updated", icon: CalendarClock },
   { id: "contact", label: "Contact", icon: UserRound },
 ];
@@ -82,11 +81,11 @@ function WorkExperiencePanel() {
 }
 
 function HomelabHomepagePanel() {
-  return <section id="homelab" className="circuit-zone mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+  return <article id="homelab" className="mt-8 border border-border bg-card p-5 sm:p-6">
     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
       <div>
-        <SectionLabel>04 / Infrastructure</SectionLabel>
-        <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Homelab</h2>
+        <SectionLabel>Project / Infrastructure</SectionLabel>
+        <h3 className="text-2xl font-semibold tracking-tight">Homelab</h3>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">Explore the website infrastructure separately from the security detection system running on the same Ubuntu host.</p>
       </div>
       <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-primary"><StatusDot /> documented / in progress</div>
@@ -94,24 +93,24 @@ function HomelabHomepagePanel() {
     <div className="grid gap-5 md:grid-cols-2">
       <Link href="/homelab/website" className="qcr-link-card group flex flex-col border bg-card p-6 text-left">
         <Server className="h-5 w-5 text-primary" />
-        <h3 className="mt-8 text-2xl font-medium">This Website</h3>
+        <h4 className="mt-8 text-xl font-medium">This Website</h4>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">A self-hosted portfolio with nginx, DNS, Cloudflare Tunnel, and a GitHub-based auto-deploy pipeline.</p>
         <span className="qcr-card-cta">View website configuration <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
       </Link>
       <Link href="/homelab/detection" className="qcr-link-card group flex flex-col border bg-card p-6 text-left">
         <Radar className="h-5 w-5 text-primary" />
-        <h3 className="mt-8 text-2xl font-medium">Detection System</h3>
+        <h4 className="mt-8 text-xl font-medium">Detection System</h4>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">CrowdSec and Suricata feed a Loki and Grafana observability stack for network detection and response.</p>
         <span className="qcr-card-cta">View detection system <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
       </Link>
     </div>
-  </section>;
+  </article>;
 }
 
 function ProjectsPanel() {
   const filteredProjects = projects.filter(p => !p.link);
   
-  return <section id="projects" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28"><SectionLabel>03 / Findings index</SectionLabel><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h2><p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">A dashboard-style index of work shipped, still active, and documented as the system grows.</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">03 records / 02 complete</span></div><div className="grid gap-4 lg:grid-cols-2">{filteredProjects.map(project => { return <article key={project.id} className="border border-border bg-card"><div className="w-full p-5 text-left sm:p-6"><div className="flex items-start justify-between gap-4"><div className="flex items-center gap-2"><span className="font-mono text-[10px] uppercase tracking-wider text-primary">{project.category}</span><span className="text-border">/</span><span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><StatusDot /> {project.status}</span></div></div><h3 className="mt-6 text-xl font-medium">{project.title}</h3><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{project.summary}</p></div><div className="border-t border-primary/25 px-5 pb-6 pt-5 sm:px-6"><p className="text-sm leading-relaxed text-foreground/85">{project.detail}</p><div className="mt-5 flex flex-wrap gap-2">{project.stack.map(tag => <Badge key={tag} variant="outline" className="font-mono text-[10px] font-normal text-primary/85">{tag}</Badge>)}</div><div className="mt-5 flex items-center gap-2 border-t border-border pt-4 font-mono text-[9px] uppercase tracking-wider text-muted-foreground"><ExternalLink className="h-3 w-3 text-primary" /> External write-up / repository link not published here</div></div></article>; })}</div></section>;
+  return <section id="projects" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28"><SectionLabel>03 / Findings index</SectionLabel><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h2><p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">A dashboard-style index of work shipped, still active, and documented as the system grows.</p></div><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(filteredProjects.length + 1).padStart(2, "0")} projects / including Homelab</span></div><div className="grid gap-4 lg:grid-cols-2">{filteredProjects.map(project => { return <article key={project.id} className="border border-border bg-card"><div className="w-full p-5 text-left sm:p-6"><div className="flex items-start justify-between gap-4"><div className="flex items-center gap-2"><span className="font-mono text-[10px] uppercase tracking-wider text-primary">{project.category}</span><span className="text-border">/</span><span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><StatusDot /> {project.status}</span></div></div><h3 className="mt-6 text-xl font-medium">{project.title}</h3><p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{project.summary}</p></div><div className="border-t border-primary/25 px-5 pb-6 pt-5 sm:px-6"><p className="text-sm leading-relaxed text-foreground/85">{project.detail}</p><div className="mt-5 flex flex-wrap gap-2">{project.stack.map(tag => <Badge key={tag} variant="outline" className="font-mono text-[10px] font-normal text-primary/85">{tag}</Badge>)}</div><div className="mt-5 flex items-center gap-2 border-t border-border pt-4 font-mono text-[9px] uppercase tracking-wider text-muted-foreground"><ExternalLink className="h-3 w-3 text-primary" /> External write-up / repository link not published here</div></div></article>; })}</div><HomelabHomepagePanel /></section>;
 }
 
 function LastUpdatedPanel() {
@@ -166,7 +165,7 @@ export default function Home() {
 
   const navigate = (id: SectionId) => {
     setMobileOpen(false);
-    setActiveSection(id);
+    setActiveSection(id === "homelab" ? "projects" : id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -179,7 +178,6 @@ export default function Home() {
         <BackgroundPanel />
         <WorkExperiencePanel />
         <ProjectsPanel />
-        <HomelabHomepagePanel />
         <section className="qcr-overview"><div className="qcr-section-head"><div><p className="qcr-kicker">At a glance</p><h2>Infrastructure Overview</h2></div><span className="qcr-stamp">record / 2025—present</span></div><div className="qcr-overview-grid"><NetworkDiagram /><ActivityFeed /></div></section>
         <section id="cyber" className="border-y border-border bg-card/35"><div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24"><SectionLabel>Experience / Great Wolf Lodge</SectionLabel><div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Applied work</h2><p className="max-w-sm text-sm leading-relaxed text-muted-foreground">Security work across people, identity, and detection logic.</p></div><div className="grid gap-4 md:grid-cols-3">{experience.map((project, index) => <article key={project.title} className="flex h-full flex-col border border-border bg-card p-6"><div className="mb-12 flex items-start justify-between"><span className="font-mono text-xs text-primary">0{index + 1}</span><Shield className="h-4 w-4 text-muted-foreground" /></div><p className="font-mono text-[10px] uppercase tracking-wider text-primary/80">{project.sub}</p><h3 className="mt-2 text-xl font-medium leading-tight">{project.title}</h3><p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{project.body}</p><div className="mt-6 flex flex-wrap gap-2">{project.tags.map(tag => <Badge key={tag} variant="outline" className="font-mono text-[10px] font-normal text-muted-foreground">{tag}</Badge>)}</div></article>)}</div></div></section>
         <section id="pcbuild" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24"><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><SectionLabel>Hardware record</SectionLabel><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">PC Build <Cpu className="ml-2 inline h-7 w-7 text-primary" /></h2><p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">The current build is in progress and designed for gaming, virtual machines, cybersecurity labs, and research.</p></div><div className="overflow-hidden border border-border bg-card"><div className="flex items-center justify-between border-b border-border px-5 py-4"><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">system specification</span><Layers3 className="h-4 w-4 text-primary" /></div><table className="w-full text-left font-mono text-xs"><tbody className="divide-y divide-border">{[{ label: "CPU", value: "AMD Ryzen 7 9800X3D", ready: true }, { label: "GPU", value: "RX 9070 XT", ready: true }, { label: "Motherboard", value: "Gigabyte B850 AORUS ELITE WIFI7", ready: true }, { label: "RAM", value: "32GB DDR5", ready: true }, { label: "Storage", value: "TBD", ready: false }].map(row => <tr key={row.label}><td className="w-36 px-5 py-4 text-muted-foreground">{row.label}</td><td className={`px-5 py-4 text-right ${row.ready ? "text-foreground" : "text-muted-foreground/60 italic"}`}>{row.value}</td><td className="w-8 px-3">{row.ready ? <Check className="h-3 w-3 text-primary" /> : <span className="text-muted-foreground">—</span>}</td></tr>)}</tbody></table></div></div></section>
