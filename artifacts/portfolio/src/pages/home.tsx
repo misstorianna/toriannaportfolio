@@ -25,7 +25,7 @@ export function Sidebar({ activeSection, collapsed, mobileOpen, onNavigate, onTo
       <aside aria-label="Portfolio navigation" className={`qcr-sidebar ${mobileOpen ? "is-open" : ""}`}>
         <div className="qcr-brand">
           <button type="button" onClick={() => onNavigate("hero")} className={`flex items-center gap-3 text-left ${collapsed ? "lg:mx-auto" : ""}`}>
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded border border-primary/70 bg-primary/10 font-mono text-sm font-medium text-primary">T</span>
+            <img src={`${import.meta.env.BASE_URL}terminal-mark.png`} width="36" height="36" alt="" className="qcr-brand-mark" />
             <span className={`${collapsed ? "lg:hidden" : ""}`}><span className="block font-mono text-sm font-medium tracking-tight">TORIANNA</span><span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">Security portfolio</span></span>
           </button>
           <button type="button" onClick={onToggle} aria-label="Close navigation drawer" className="qcr-close"><X className="h-4 w-4" /></button>
