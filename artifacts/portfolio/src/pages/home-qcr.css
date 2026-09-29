@@ -127,3 +127,50 @@
   .qcr section[id] { padding-left:18px!important; padding-right:18px!important; }
 }
 
+
+/* Static background atmosphere — no motion, no traces. Decorative layers sit behind content and never take pointer events. */
+.qcr { position:relative; isolation:isolate; overflow-x:clip; }
+.qcr::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(ellipse 46% 38% at 88% 8%, rgba(197,201,108,.055), transparent 70%),
+    radial-gradient(ellipse 40% 34% at 22% 62%, rgba(133,168,135,.045), transparent 72%),
+    radial-gradient(ellipse 50% 40% at 78% 100%, rgba(197,201,108,.035), transparent 70%);
+}
+.qcr::before { z-index:-1; }
+.qcr-main { position:relative; }
+.qcr-hero { position:relative; background:
+  radial-gradient(ellipse at 80% 5%,#243423 0,transparent 33%),
+  radial-gradient(rgba(197,201,108,.13) .8px, transparent 1.2px) 0 0/18px 18px; }
+.qcr-hero::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    linear-gradient(var(--olive),var(--olive)) left 14px top 14px/12px 1px,
+    linear-gradient(var(--olive),var(--olive)) left 14px top 14px/1px 12px,
+    linear-gradient(var(--olive),var(--olive)) right 14px bottom 14px/12px 1px,
+    linear-gradient(var(--olive),var(--olive)) right 14px bottom 14px/1px 12px;
+  background-repeat:no-repeat; opacity:.35;
+  -webkit-mask-image:none; }
+.qcr-hero > * { position:relative; z-index:1; }
+.qcr-hero { -webkit-mask-image:none; }
+.qcr-hero::after { content:""; position:absolute; pointer-events:none; z-index:0; right:clamp(18px,4vw,48px); top:44%; width:64px; height:64px;
+  border:1px solid rgba(197,201,108,.16); border-radius:50%;
+  background:linear-gradient(rgba(197,201,108,.22),rgba(197,201,108,.22)) center/1px 100% no-repeat,
+             linear-gradient(90deg,rgba(197,201,108,.22),rgba(197,201,108,.22)) center/100% 1px no-repeat; }
+/* Hero dots fade out so text stays clean */
+.qcr-hero { background-blend-mode:normal; }
+.qcr section[id]:not(#hero) { position:relative; }
+.qcr section[id]:not(#hero)::before { content:""; position:absolute; pointer-events:none; z-index:-1; top:22px; right:clamp(18px,5vw,64px); width:10px; height:10px;
+  border-top:1px solid rgba(197,201,108,.35); border-right:1px solid rgba(197,201,108,.35); }
+.qcr section[id]:not(#hero)::after { content:""; position:absolute; pointer-events:none; z-index:-1; top:14px; right:calc(clamp(18px,5vw,64px) + 22px); width:84px; height:26px;
+  background:radial-gradient(rgba(197,201,108,.22) .8px, transparent 1.2px) 0 0/7px 7px; opacity:.7; }
+.qcr footer { position:relative; background:radial-gradient(ellipse 60% 100% at 50% 100%, rgba(197,201,108,.035), transparent 70%); }
+
+@media(max-width:900px) {
+  .qcr-hero::after { display:none; }
+}
+@media(max-width:600px) {
+  .qcr::after { background:radial-gradient(ellipse 80% 30% at 90% 4%, rgba(197,201,108,.045), transparent 70%); }
+  .qcr-hero { background:radial-gradient(ellipse at 80% 5%,#243423 0,transparent 33%); }
+  .qcr-hero::before { opacity:.25; }
+  .qcr section[id]:not(#hero)::after { display:none; }
+  .qcr section[id]:not(#hero)::before { right:18px; }
+}
