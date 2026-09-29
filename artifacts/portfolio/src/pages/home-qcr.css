@@ -84,6 +84,7 @@
 .qcr-overview h3 { color:var(--ink); }.qcr-overview p { color:var(--muted); }
 
 .qcr section:not(#hero) h2 { letter-spacing:-.075em; }
+.qcr #about h2 + div { margin-top:24px; }
 .qcr section:not(#hero) article,.qcr section:not(#hero)>div>div { border-color:var(--line); }
 .qcr section:not(#hero) [class*="bg-card"] { background:var(--panel); }
 .qcr section:not(#hero) [class*="text-muted"] { color:var(--muted); }
