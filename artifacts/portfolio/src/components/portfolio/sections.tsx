@@ -32,7 +32,7 @@ export function HeroSection({ onViewHomelab }: { onViewHomelab: () => void }) {
 export function AboutSection() {
   return <section id="about" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
     <SectionLabel>01 / About</SectionLabel>
-    <h2 className="mb-10 text-4xl font-semibold tracking-tight sm:text-5xl">Hi, I'm Torianna.</h2>
+    <h2 className="mb-10 text-4xl font-semibold tracking-tight sm:text-5xl">Beyond the textbook</h2>
     <div className="max-w-3xl space-y-6 text-base leading-relaxed text-foreground/90">
       <p>I am a cybersecurity graduate from Bradley University and a CompTIA Security+ holder based in Chicago. I started my homelab because I wanted more than just textbook knowledge. While my coursework and certifications laid a strong foundation, I wanted hands-on experience defending systems and understanding how attacks actually work.</p>
       <p>Having my own environment lets me set up defenses, test them, and see exactly what gets caught and what slips through. Learning from those gaps and seeing things from an attacker's perspective is the best way to learn how to stop them.</p>
