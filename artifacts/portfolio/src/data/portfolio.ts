@@ -80,7 +80,7 @@ export const workExperience: WorkRole[] = [
   {
     company: "Bradley Cybersecurity Clinic",
     role: "Cybersecurity Analyst",
-    dates: "2025–2026",
+    dates: "2024–2025",
     location: "Bradley University",
     responsibilities: [
       "Contributed to the creation of the Bradley Cybersecurity Clinic, focused on developing and applying cybersecurity audit processes for small-business assessments.",
