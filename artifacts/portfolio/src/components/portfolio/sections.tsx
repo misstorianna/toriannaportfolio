@@ -106,7 +106,7 @@ export function ProjectsSection() {
     <SectionLabel>02 / Projects</SectionLabel>
     <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">Projects</h2><span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{String(projects.length + 1).padStart(2, "0")} projects</span></div>
     <HomelabSection />
-    <div className="grid items-start gap-4 lg:grid-cols-2">{projects.map(project => <article key={project.id} className="border border-border bg-card" data-testid={`card-project-${project.id}`}>
+    <div className="grid items-stretch gap-4 lg:grid-cols-2">{projects.map(project => <article key={project.id} className="border border-border bg-card" data-testid={`card-project-${project.id}`}>
       <div className="p-5 sm:p-6">
         <div className="flex items-center gap-2"><span className="font-mono text-[10px] uppercase tracking-wider text-primary">{project.category}</span><span className="text-border">/</span><span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><StatusDot /> {project.status}</span></div>
         <h3 className="mt-6 text-xl font-medium">{project.title}</h3>
