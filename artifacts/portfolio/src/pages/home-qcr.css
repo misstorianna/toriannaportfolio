@@ -60,6 +60,7 @@ html { position:relative; }
 .qcr-mode { margin-left:auto; display:flex; gap:7px; align-items:center; color:var(--green); }
 .qcr-topbar a { color:var(--muted); border:1px solid var(--line); min-width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; }
 .qcr-topbar a:hover { color:var(--olive); border-color:var(--olive); }
+.qcr-topbar .qcr-linkedin { margin-left:auto; gap:7px; padding:0 10px; flex-shrink:0; color:var(--olive); }
 .qcr-menu { display:none; background:none; border:1px solid var(--line); color:var(--muted); width:44px; height:44px; }
 
 .qcr-hero { padding:24px clamp(18px,5vw,64px) 44px; border-bottom:1px solid var(--line); background:radial-gradient(ellipse at 80% 5%,#243423 0,transparent 33%); }

@@ -130,4 +130,8 @@ export const recentActivity = [
   { label: "Connected Loki / Promtail / Grafana", detail: "Visibility layer", status: "working", icon: Activity },
 ];
 
-export const lastUpdated = { iso: "2026-09-18", label: "September 18, 2026" };
+export const lastUpdated = {
+  iso: "2026-09-29",
+  label: "September 29, 2026",
+  note: "Added a few UI fixes. I've also been studying how to create custom detection rules and expect to release a few today.",
+};

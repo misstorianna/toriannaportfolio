@@ -95,7 +95,7 @@ export default function Home() {
   return <div className="qcr">
     <Sidebar activeSection={activeSection} collapsed={false} mobileOpen={mobileOpen} onNavigate={navigate} onToggle={() => setMobileOpen(false)} />
     <div className="qcr-main">
-      <header className="qcr-topbar"><button type="button" className="qcr-menu" onClick={() => setMobileOpen(true)} aria-label="Open navigation drawer"><Menu size={19} /></button><span className="qcr-breadcrumb"><i>workspace</i> / {sidebarItems.find(item => item.id === activeSection)?.label.toLowerCase() ?? "home"}</span><span className="qcr-mode"><StatusDot /> portfolio mode</span><a href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label="LinkedIn"><ArrowRight size={17} /></a></header>
+      <header className="qcr-topbar"><button type="button" className="qcr-menu" onClick={() => setMobileOpen(true)} aria-label="Open navigation drawer"><Menu size={19} /></button><span className="qcr-breadcrumb"><i>workspace</i> / {sidebarItems.find(item => item.id === activeSection)?.label.toLowerCase() ?? "home"}</span><a className="qcr-linkedin" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"><Linkedin size={14} /> LinkedIn <ArrowRight size={17} /></a></header>
       <main>
         <HeroSection onViewHomelab={() => navigate("homelab")} />
         <AboutSection />
@@ -104,7 +104,13 @@ export default function Home() {
         <CredentialsSection />
         <ContactSection />
       </main>
-      <footer className="border-t border-border"><div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-7 sm:px-8"><p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">© {new Date().getFullYear()} Torianna / Chicago, IL</p><p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground" data-testid="text-last-updated">Last updated <time dateTime={lastUpdated.iso}>{lastUpdated.label}</time></p><div className="flex items-center gap-3"><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="qcr-icon-link"><Linkedin className="h-4 w-4" /></a><a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="qcr-icon-link"><Github className="h-4 w-4" /></a></div></div></footer>
+      <footer className="border-t border-border">
+        <div className="px-5 pt-7 sm:px-8">
+          <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground" data-testid="text-last-updated">Last updated <time dateTime={lastUpdated.iso}>{lastUpdated.label}</time></p>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{lastUpdated.note}</p>
+        </div>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-7 sm:px-8"><p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">© {new Date().getFullYear()} Torianna / Chicago, IL</p><div className="flex items-center gap-3"><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="qcr-icon-link"><Linkedin className="h-4 w-4" /></a><a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="qcr-icon-link"><Github className="h-4 w-4" /></a></div></div>
+      </footer>
     </div>
   </div>;
 }

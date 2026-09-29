@@ -23,7 +23,7 @@ test.describe("workspace navigation", () => {
     await expect(navigation.getByRole("button", { name: /Last Updated/ })).toHaveCount(0);
     await expect(page.locator("#updated")).toHaveCount(0);
     await expect(page.locator("#projects #homelab")).toHaveCount(1);
-    await expect(page.getByTestId("text-last-updated")).toContainText("September 18, 2026");
+    await expect(page.getByTestId("text-last-updated")).toContainText("September 29, 2026");
   });
 
   for (const [index, label] of navigationItems.entries()) {
