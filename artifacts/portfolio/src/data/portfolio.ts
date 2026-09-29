@@ -80,10 +80,15 @@ export const workExperience: WorkRole[] = [
   {
     company: "Bradley Cybersecurity Clinic",
     role: "Cybersecurity Analyst",
-    dates: "Aug 2025 – Present",
+    dates: "2025–2026",
     location: "Bradley University",
     responsibilities: [
-      "Contribute to the creation of the Bradley Cybersecurity Clinic, focused on developing and applying cybersecurity audit processes for small-business assessments.",
+      "Contributed to the creation of the Bradley Cybersecurity Clinic, focused on developing and applying cybersecurity audit processes for small-business assessments.",
+      "Built three tiered security audits aligned with CIS Controls and NIST CSF, scaling from foundational practices to technical vulnerability assessment.",
+      "Tier 1: Assessed baseline security practices including access control, password policy, account management, and security awareness.",
+      "Tier 2: Reviewed network and firewall configurations to confirm secure settings, proper segmentation, and least-privilege rule sets.",
+      "Tier 3: Ran network and vulnerability scans to identify exposed services, missing patches, and misconfigurations, then prioritized findings by risk.",
+      "Mapped findings to NIST CSF functions and delivered remediation recommendations to support the organization's risk reduction.",
     ],
   },
   {
