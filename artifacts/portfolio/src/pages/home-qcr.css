@@ -112,7 +112,8 @@ html { position:relative; }
 .qcr .qcr-link-card { border:1px solid #586044; transition:border-color .2s, background-color .2s; }
 .qcr .qcr-link-card:hover, .qcr .qcr-link-card:focus-visible { border-color:var(--olive); background:var(--panel-2); }
 .qcr .qcr-link-card:focus-visible { outline:2px solid var(--olive); outline-offset:3px; }
-.qcr .qcr-card-cta { margin-top:auto; padding-top:0; display:inline-flex; align-self:flex-start; align-items:center; gap:10px; min-height:44px; padding:0 16px; margin-top:24px; background:var(--olive); color:#151b13; font:500 11px "DM Mono"; text-transform:uppercase; letter-spacing:.06em; border:1px solid var(--olive); transition:background .2s; }
+.qcr .qcr-link-card > p { margin-bottom:24px; }
+.qcr .qcr-card-cta { margin-top:auto; display:inline-flex; align-self:flex-start; align-items:center; gap:10px; min-height:44px; padding:0 16px; background:var(--olive); color:#151b13; font:500 11px "DM Mono"; text-transform:uppercase; letter-spacing:.06em; border:1px solid var(--olive); transition:background .2s; }
 .qcr .qcr-link-card:hover .qcr-card-cta, .qcr .qcr-link-card:focus-visible .qcr-card-cta { background:#dde28a; }
 .qcr .qcr-card-cta svg { transition:transform .2s; }
 .qcr .qcr-link-card:hover .qcr-card-cta svg { transform:translateX(3px); }
