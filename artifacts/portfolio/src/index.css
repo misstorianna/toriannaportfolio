@@ -75,6 +75,7 @@
 
 .dark { color-scheme: dark; }
 .light {
+  color-scheme: light;
   --background: 80 18% 96%;
   --foreground: 140 28% 12%;
   --border: 140 18% 78%;
@@ -84,7 +85,7 @@
   --popover: 80 22% 99%;
   --popover-foreground: 140 28% 12%;
   --popover-border: 140 18% 78%;
-  --primary: 43 78% 38%;
+  --primary: 65 40% 28%;
   --primary-foreground: 80 22% 98%;
   --primary-border: hsl(43 78% 38% / .5);
   --secondary: 148 58% 31%;
@@ -96,7 +97,8 @@
   --accent: 151 52% 34%;
   --accent-foreground: 80 22% 98%;
   --accent-border: hsl(151 52% 34% / .5);
-  --ring: 43 78% 38%;
+  --ring: 65 40% 28%;
+  --input: 140 18% 78%;
 }
 
 @layer base {

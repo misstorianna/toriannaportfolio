@@ -1,0 +1,45 @@
+/* Theme overrides use the root preference shared by every portfolio page. */
+.qcr .theme-toggle {
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:44px; min-width:44px; flex-shrink:0; padding:0 12px;
+  background:var(--panel); color:var(--olive); border:1px solid var(--line);
+  font:10px "DM Mono", monospace; text-transform:uppercase; letter-spacing:.03em;
+}
+.qcr .theme-toggle:hover { border-color:var(--olive); background:var(--panel-2); }
+
+.light .qcr {
+  --ink:#253126; --muted:#55634f; --faint:#687461;
+  --line:#c9d1bf; --panel:#fcfdf8; --panel-2:#e9eddc;
+  --olive:#596326; --green:#386343;
+  background:#f4f5ee; color:var(--ink);
+}
+.light .qcr-sidebar { background:#ebeee3; }
+.light .qcr-topbar { background:#f4f5eef2; }
+.light .qcr-sidebar nav button { color:var(--muted); }
+.light .qcr-sidebar nav button:hover,
+.light .qcr-sidebar nav button.active { background:#dde4cd; color:var(--olive); }
+.light .qcr-side-label, .light .qcr-nav-index,
+.light .qcr-profile dt, .light .qcr-note, .light .qcr-stamp { color:var(--muted); }
+.light .qcr-intro { color:#4d5d47; }
+.light .qcr-hero {
+  background:
+    radial-gradient(ellipse at 80% 5%,#e2e9d2 0,transparent 45%),
+    radial-gradient(rgba(80,100,50,.13) .8px,transparent 1.2px) 0 0/18px 18px;
+}
+.light .qcr .qcr-primary, .light .qcr .qcr-card-cta,
+.light .qcr .qcr-contact-cta { background:var(--olive)!important; color:#fffef5; }
+.light .qcr .qcr-primary:hover, .light .qcr .qcr-contact-cta:hover,
+.light .qcr .qcr-link-card:hover .qcr-card-cta,
+.light .qcr .qcr-link-card:focus-visible .qcr-card-cta { background:#434c1b!important; }
+.light .qcr .qcr-quiet, .light .qcr .qcr-link-card { border-color:#87986a; }
+.light .qcr section:not(#hero) [class*="bg-primary"] { background-color:#e6ebd7; }
+.light .qcr section:not(#hero) [class*="border-primary"] { border-color:#a5b28e; }
+.light .qcr-hero::after { border-color:#a5b28e; }
+
+@media(max-width:600px) {
+  .qcr .theme-toggle span { display:none; }
+  .qcr .theme-toggle { padding:0; }
+  .qcr .qcr-topbar { gap:8px; padding-inline:12px; }
+  .qcr .qcr-breadcrumb { min-width:0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
+  .light .qcr-hero { background:radial-gradient(ellipse at 80% 5%,#e2e9d2 0,transparent 45%); }
+}

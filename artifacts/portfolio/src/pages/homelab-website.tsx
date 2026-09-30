@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Server } from "lucide-react";
 import { SectionLabel } from "./home";
+import { ThemeToggle } from "@/components/portfolio/theme-toggle";
 
 export default function HomelabWebsite() {
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function HomelabWebsite() {
   return (
     <div className="qcr min-h-[100dvh] circuit-zone">
       <div className="mx-auto max-w-4xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mb-6 flex justify-end"><ThemeToggle /></div>
         <div className="mb-12">
           <Link href="/#homelab" className="qcr-quiet mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to Homelab

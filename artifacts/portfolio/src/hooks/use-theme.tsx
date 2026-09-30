@@ -14,8 +14,13 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem("portfolio-theme");
-    return (stored === "light" || stored === "dark") ? stored : "dark";
+    try {
+      const stored = localStorage.getItem("portfolio-theme");
+      return (stored === "light" || stored === "dark") ? stored : "dark";
+    } catch {
+      // Storage can be unavailable in restricted browsers; switching still works.
+      return "dark";
+    }
   });
 
   useEffect(() => {
@@ -27,7 +32,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.classList.add("dark");
       root.classList.remove("light");
     }
-    localStorage.setItem("portfolio-theme", theme);
+    try {
+      localStorage.setItem("portfolio-theme", theme);
+    } catch {
+      // Keep the in-memory preference when browser storage is unavailable.
+    }
   }, [theme]);
 
   const toggleTheme = () => setTheme(prev => (prev === "dark" ? "light" : "dark"));

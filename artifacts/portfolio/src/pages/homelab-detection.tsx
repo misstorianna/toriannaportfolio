@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, type MutableRefObject } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Radar, Zap, CheckCircle2, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import { SectionLabel } from "./home";
+import { ThemeToggle } from "@/components/portfolio/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { stack, buildLog } from "@/data/portfolio";
@@ -107,6 +108,7 @@ export default function HomelabDetection() {
   return (
     <div className="qcr min-h-[100dvh] circuit-zone">
       <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mb-6 flex justify-end"><ThemeToggle /></div>
         <div className="mb-12">
           <Link href="/#homelab" className="qcr-quiet mb-8">
             <ArrowLeft className="h-4 w-4" /> Back to Homelab

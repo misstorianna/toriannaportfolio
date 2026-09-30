@@ -4,6 +4,7 @@ import { lastUpdated } from "@/data/portfolio";
 import { LINKEDIN_URL, SectionLabel, StatusDot } from "@/components/portfolio/shared";
 import { AboutSection, ContactSection, CredentialsSection, ExperienceSection, HeroSection, ProjectsSection } from "@/components/portfolio/sections";
 import "./home-qcr.css";
+import { ThemeToggle } from "@/components/portfolio/theme-toggle";
 
 export { SectionLabel, StatusDot };
 
@@ -95,7 +96,7 @@ export default function Home() {
   return <div className="qcr">
     <Sidebar activeSection={activeSection} collapsed={false} mobileOpen={mobileOpen} onNavigate={navigate} onToggle={() => setMobileOpen(false)} />
     <div className="qcr-main">
-      <header className="qcr-topbar"><button type="button" className="qcr-menu" onClick={() => setMobileOpen(true)} aria-label="Open navigation drawer"><Menu size={19} /></button><span className="qcr-breadcrumb"><i>workspace</i> / {sidebarItems.find(item => item.id === activeSection)?.label.toLowerCase() ?? "home"}</span><a className="qcr-linkedin" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"><Linkedin size={14} /> LinkedIn <ArrowRight size={17} /></a></header>
+      <header className="qcr-topbar"><button type="button" className="qcr-menu" onClick={() => setMobileOpen(true)} aria-label="Open navigation drawer"><Menu size={19} /></button><span className="qcr-breadcrumb"><i>workspace</i> / {sidebarItems.find(item => item.id === activeSection)?.label.toLowerCase() ?? "home"}</span><a className="qcr-linkedin" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"><Linkedin size={14} /> LinkedIn <ArrowRight size={17} /></a><ThemeToggle /></header>
       <main>
         <HeroSection onViewHomelab={() => navigate("homelab")} />
         <AboutSection />

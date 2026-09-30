@@ -2,6 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      try {
+        document.documentElement.classList.add(localStorage.getItem("portfolio-theme") === "light" ? "light" : "dark");
+      } catch {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>Torianna Dixon | Cybersecurity Portfolio</title>
     <meta name="description" content="Cybersecurity portfolio for Torianna Dixon, featuring security projects, homelab work, and technical skills." />
