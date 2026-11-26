@@ -33,7 +33,7 @@ export function HomePage() {
       <div className="section-heading"><div><Eyebrow>Selected work</Eyebrow><h2 className="display">Built to understand.</h2></div><p>Technical work told through the decisions, systems, and lessons behind it—not just a list of tools.</p></div>
       <div className="feature-grid">{projectData.slice(0, 3).map(project => <Link key={project.href} href={project.href} className="feature-card">
         <div className="feature-card-body">
-          <div className="project-meta"><Eyebrow>{project.category}</Eyebrow><span className="status-badge" data-status={project.status}>{project.status}</span></div>
+          <div className="project-meta"><Eyebrow>{project.category}</Eyebrow>{project.status !== "Complete" && <span className="status-badge" data-status={project.status}>{project.status}</span>}</div>
           <h3>{project.title}</h3><p className="project-summary">{project.text}</p>
           <div className="tag-list">{project.tools.map(tool => <span className="tag" key={tool}>{tool}</span>)}</div>
           <span className="card-link">Explore case study <ArrowRight size={16} /></span>
@@ -52,10 +52,10 @@ export function HomePage() {
 
 export function ProjectsPage() {
   useEffect(() => { document.title = "Projects | Torianna"; }, []);
-  return <SiteShell><PageTitle label="Selected work / 01" title="Projects">Case studies grounded in documented work. Where the source does not provide a detail, it stays open rather than guessed.</PageTitle>
+  return <SiteShell><PageTitle label="Selected work / 01" title="Projects" />
     <section className="section"><div className="container project-list"><div className="project-grid">{projectData.map(project => <Link className="project-card" key={project.href} href={project.href}>
       <div className="project-copy">
-        <div className="project-meta"><Eyebrow>{project.category}</Eyebrow><span className="status-badge" data-status={project.status}>{project.status}</span></div>
+        <div className="project-meta"><Eyebrow>{project.category}</Eyebrow>{project.status !== "Complete" && <span className="status-badge" data-status={project.status}>{project.status}</span>}</div>
         <h2>{project.title}</h2><p className="project-summary">{project.text}</p>
         <div className="tag-list">{project.tools.map(tool => <span className="tag" key={tool}>{tool}</span>)}</div>
         <span className="project-card-link">Explore case study <ArrowRight size={16} /></span>
@@ -238,7 +238,7 @@ export function CaseStudyPage({ slug }: { slug?: string }) {
   useEffect(() => { document.title = `${study?.title ?? "Project"} | Torianna`; window.scrollTo(0, 0); }, [study?.title]);
   if (!study) return <SiteShell><PageTitle label="Project" title="Case study unavailable">This project page could not be found.</PageTitle><div className="container py-12"><ProjectLink href="/projects">Back to Projects</ProjectLink></div></SiteShell>;
   return <SiteShell>
-    <div className="container detail-header"><div className="detail-meta"><Eyebrow>{study.category}</Eyebrow><span className="status-badge" data-status={study.status}>{study.status}</span></div><h1 className="display">{study.title}</h1><p>{study.summary}</p><Link className="button-secondary" href="/projects"><ArrowLeft size={16} /> All projects</Link>
+     <div className="container detail-header"><div className="detail-meta"><Eyebrow>{study.category}</Eyebrow>{study.status !== "Complete" && <span className="status-badge" data-status={study.status}>{study.status}</span>}</div><h1 className="display">{study.title}</h1><p>{study.summary}</p><Link className="button-secondary" href="/projects"><ArrowLeft size={16} /> All projects</Link>
     </div>
     <div className="container case-study-sections">
       <CaseSection title="Overview" text={study.overview} />
