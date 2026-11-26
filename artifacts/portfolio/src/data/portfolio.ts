@@ -57,7 +57,6 @@ export const workExperience: WorkRole[] = [
     location: "Burbank, IL",
     responsibilities: [
       "Diagnose and resolve hardware and software issues on customer devices using MRI diagnostic tools, including malware removal, disk repair, and OS restoration.",
-      "Provide remote troubleshooting and support via AJU, resolving connectivity, performance, and software issues without requiring an in-store visit.",
       "Perform root-cause analysis on recurring hardware failures, reducing repeat service visits.",
       "Advise customers on repair options, data backup, and security best practices, translating technical findings into clear, actionable guidance.",
       "Maintain accurate service documentation and ticket records to support quality tracking and warranty compliance.",
