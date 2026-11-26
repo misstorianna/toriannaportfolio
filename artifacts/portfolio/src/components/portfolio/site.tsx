@@ -31,7 +31,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <header className="site-nav">
       <div className="nav-inner">
         <Link href="/" className="brand" aria-label="Torianna, home">
-          <img src={`${import.meta.env.BASE_URL}terminal-mark.png`} alt="" />
           <span>Torianna<small>Security portfolio</small></span>
         </Link>
         <nav id="mobile-navigation" className={`nav-links ${menuOpen ? "is-open" : ""}`} aria-label="Main navigation">

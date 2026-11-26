@@ -2,17 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, ArrowRight, ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { buildLog, stack, workExperience } from "@/data/portfolio";
-import heroImage from "@/assets/hero-street.jpg";
-import homelabImage from "@/assets/images/homelab.png";
-import cyberImage from "@/assets/images/cyber.png";
+import dashboardScreenshot from "@/assets/images/dashboard.png";
+import envScanScreenshot from "@/assets/images/env-scan-logs.png";
+import enforcementScreenshot from "@/assets/images/access-denied-cropped.png";
 import { Eyebrow, LINKEDIN_URL, PageTitle, ProjectLink, SiteShell, SocialAction } from "@/components/portfolio/site";
 
 const projectData = [
-  { href: "/projects/homelab-website", title: "Self-Hosted Portfolio", category: "Infrastructure", status: "Complete", image: homelabImage, text: "nginx on Ubuntu, Cloudflare Tunnel with no open ports, and a GitHub cron auto-deploy every five minutes.", tools: ["nginx", "Ubuntu", "Cloudflare Tunnel", "GitHub", "cron"] },
-  { href: "/projects/detection-system", title: "Detection Stack & Dashboard", category: "Detection engineering", status: "Complete", image: cyberImage, text: "Suricata, CrowdSec, Promtail, Loki, and Grafana with a custom dashboard for network and host signals.", tools: ["Suricata", "CrowdSec", "Promtail", "Loki", "Grafana"] },
-  { href: "/projects/incident-env-scan", title: "Incident: .env Scan", category: "Incident response", status: "Complete", image: cyberImage, text: "A forced-browsing scan returned 404s; nginx protections and trusted Cloudflare client-IP restoration followed.", tools: ["nginx", "Cloudflare", "CrowdSec", "MITRE ATT&CK"] },
-  { href: "/projects/verified-enforcement", title: "Verified Enforcement", category: "Detection & response", status: "Complete", image: cyberImage, text: "CrowdSec ban decisions enforced at the Cloudflare edge through a Worker bouncer, then verified.", tools: ["CrowdSec", "Cloudflare Workers", "Edge enforcement"] },
-  { href: "/projects/proxmox-lab", title: "Proxmox Virtualization Lab", category: "Virtualization", status: "In Progress", image: homelabImage, text: "A dedicated i7-10700K / 16GB server, ready for the next Active Directory and Splunk lab work.", tools: ["Proxmox", "i7-10700K", "VT-x / VT-d", "16GB RAM"] },
+  { href: "/projects/homelab-website", title: "Self-Hosted Portfolio", category: "Infrastructure", status: "Complete", text: "Ubuntu portfolio served by nginx and deployed every five minutes through Cloudflare Tunnel.", tools: ["nginx", "Ubuntu", "Cloudflare Tunnel", "GitHub", "cron"] },
+  { href: "/projects/detection-system", title: "Detection Stack & Dashboard", category: "Detection engineering", status: "Complete", text: "Centralized network and host signals from Suricata, CrowdSec, and Grafana.", tools: ["Suricata", "CrowdSec", "Promtail", "Loki", "Grafana"] },
+  { href: "/projects/incident-env-scan", title: "Incident: .env Scan", category: "Incident response", status: "Complete", text: "A forced-browsing scan probed for exposed .env and .git files; every request returned 404.", tools: ["nginx", "Cloudflare", "CrowdSec", "MITRE ATT&CK"] },
+  { href: "/projects/verified-enforcement", title: "Verified Enforcement", category: "Detection & response", status: "Complete", text: "CrowdSec bans verified at the Cloudflare edge through a Worker bouncer.", tools: ["CrowdSec", "Cloudflare Workers", "Edge enforcement"] },
+  { href: "/projects/proxmox-lab", title: "Proxmox Virtualization Lab", category: "Virtualization", status: "In Progress", text: "A dedicated Proxmox host prepared for Active Directory, Splunk, and virtual security labs.", tools: ["Proxmox", "i7-10700K", "VT-x / VT-d", "16GB RAM"] },
 ];
 
 export function HomePage() {
@@ -28,12 +28,16 @@ export function HomePage() {
           <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="button-secondary">LinkedIn <ArrowUpRight size={16} /></a>
         </div>
       </div>
-      <div className="hero-art"><img src={heroImage} alt="A quiet city street at dusk" /><span className="hero-caption">Curiosity, made practical</span></div>
     </section>
     <section className="section"><div className="container">
       <div className="section-heading"><div><Eyebrow>Selected work</Eyebrow><h2 className="display">Built to understand.</h2></div><p>Technical work told through the decisions, systems, and lessons behind it—not just a list of tools.</p></div>
-      <div className="feature-grid">{[projectData[0], projectData[1], projectData[2]].map((project, index) => <Link key={project.href} href={project.href} className="feature-card">
-        <img src={project.image} alt={`${project.title} project`} /><div className="feature-card-body"><Eyebrow>{project.category} · {project.status} · 0{index + 1}</Eyebrow><h3>{project.title}</h3><p>{project.text}</p><span className="card-link">Explore case study <ArrowRight size={16} /></span></div>
+      <div className="feature-grid">{projectData.slice(0, 3).map(project => <Link key={project.href} href={project.href} className="feature-card">
+        <div className="feature-card-body">
+          <div className="project-meta"><Eyebrow>{project.category}</Eyebrow><span className="status-badge" data-status={project.status}>{project.status}</span></div>
+          <h3>{project.title}</h3><p className="project-summary">{project.text}</p>
+          <div className="tag-list">{project.tools.map(tool => <span className="tag" key={tool}>{tool}</span>)}</div>
+          <span className="card-link">Explore case study <ArrowRight size={16} /></span>
+        </div>
       </Link>)}</div>
       <div className="mt-8"><ProjectLink href="/projects">View all projects</ProjectLink></div>
     </div></section>
@@ -50,12 +54,11 @@ export function ProjectsPage() {
   useEffect(() => { document.title = "Projects | Torianna"; }, []);
   return <SiteShell><PageTitle label="Selected work / 01" title="Projects">Case studies grounded in documented work. Where the source does not provide a detail, it stays open rather than guessed.</PageTitle>
     <section className="section"><div className="container project-list"><div className="project-grid">{projectData.map(project => <Link className="project-card" key={project.href} href={project.href}>
-      <img src={project.image} alt={`${project.title} project`} />
       <div className="project-copy">
         <div className="project-meta"><Eyebrow>{project.category}</Eyebrow><span className="status-badge" data-status={project.status}>{project.status}</span></div>
-        <h2>{project.title}</h2><p>{project.text}</p>
+        <h2>{project.title}</h2><p className="project-summary">{project.text}</p>
         <div className="tag-list">{project.tools.map(tool => <span className="tag" key={tool}>{tool}</span>)}</div>
-        <span className="project-card-link">Read case study <ArrowRight size={16} /></span>
+        <span className="project-card-link">Explore case study <ArrowRight size={16} /></span>
       </div>
     </Link>)}</div></div></section>
   </SiteShell>;
@@ -113,7 +116,6 @@ type CaseStudy = {
   title: string;
   category: string;
   status: "Complete" | "In Progress";
-  image: string;
   summary: string;
   overview: string;
   problem: string;
@@ -121,12 +123,16 @@ type CaseStudy = {
   broke: string;
   result: string;
   tools: string[];
-  screenshot: string;
+  screenshot?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
 };
 
 const caseStudyContent: Record<string, CaseStudy> = {
   "homelab-website": {
-    title: "Self-Hosted Portfolio", category: "Infrastructure", status: "Complete", image: homelabImage, screenshot: "Portfolio deployment",
+    title: "Self-Hosted Portfolio", category: "Infrastructure", status: "Complete",
     summary: "nginx on Ubuntu, published through a Cloudflare Tunnel with no open ports and automated GitHub deployments.",
     overview: "A public portfolio hosted on a self-managed Ubuntu server and served through nginx.",
     problem: "The existing project notes describe the hosting and deployment setup but do not record a separate initial problem statement.",
@@ -136,7 +142,7 @@ const caseStudyContent: Record<string, CaseStudy> = {
     tools: ["nginx", "Ubuntu", "Cloudflare Tunnel", "GitHub", "cron", "DNS"],
   },
   "detection-system": {
-    title: "Detection Stack & Dashboard", category: "Detection engineering", status: "Complete", image: cyberImage, screenshot: "Detection dashboard",
+    title: "Detection Stack & Dashboard", category: "Detection engineering", status: "Complete",
     summary: "A Suricata, CrowdSec, Promtail, Loki, and Grafana stack with a custom security dashboard.",
     overview: "A self-hosted network detection and observability stack, now documented as complete.",
     problem: "The existing project notes do not specify a separate initial problem statement for the detection stack.",
@@ -144,9 +150,14 @@ const caseStudyContent: Record<string, CaseStudy> = {
     broke: "No separate break/fix is recorded for the dashboard itself. The CrowdSec Worker bouncer issue and its resolution are documented in the Verified Enforcement case study.",
     result: "The completed dashboard brings web, network-detection, ban, SSH, and log-health signals into one view.",
     tools: ["Suricata", "CrowdSec", "Promtail", "Loki", "Grafana", "Ubuntu"],
+    screenshot: {
+      src: dashboardScreenshot,
+      alt: "Custom Grafana dashboard showing web requests, Suricata signals, sensitive-file probes, and CrowdSec bans.",
+      caption: "Custom Grafana dashboard: web traffic, sensitive-file probes, and CrowdSec bans in one view.",
+    },
   },
   "incident-env-scan": {
-    title: "Incident: .env Scan", category: "Incident response", status: "Complete", image: cyberImage, screenshot: "Nginx and request handling",
+    title: "Incident: .env Scan", category: "Incident response", status: "Complete",
     summary: "A bot probed dozens of paths for exposed .env files; every request returned 404.",
     overview: "A forced-browsing scan targeted hidden .env files across dozens of paths (MITRE ATT&CK T1595.003).",
     problem: "The scan required validating that hidden files stayed inaccessible and that CrowdSec could attribute requests to their real visitor IPs behind Cloudflare.",
@@ -154,9 +165,14 @@ const caseStudyContent: Record<string, CaseStudy> = {
     broke: "The proxy-observed address did not identify the real visitor behind Cloudflare. The real visitor IP was restored using CF-Connecting-IP only when forwarded by localhost.",
     result: "All scan requests returned 404, and CrowdSec could attribute the attacker using the restored client IP.",
     tools: ["nginx", "Cloudflare Tunnel", "CF-Connecting-IP", "CrowdSec", "MITRE ATT&CK T1595.003"],
+    screenshot: {
+      src: envScanScreenshot,
+      alt: "Log viewer showing automated requests for hidden .env and .git files returning 404.",
+      caption: "Automated scan probing for exposed .env and .git files. Every request returned 404.",
+    },
   },
   "verified-enforcement": {
-    title: "Verified Enforcement", category: "Detection & response", status: "Complete", image: cyberImage, screenshot: "Cloudflare edge enforcement",
+    title: "Verified Enforcement", category: "Detection & response", status: "Complete",
     summary: "A Cloudflare Worker bouncer enforces CrowdSec ban decisions at the network edge.",
     overview: "Connected CrowdSec ban decisions to enforcement at Cloudflare’s edge through a Worker bouncer.",
     problem: "The Worker bouncer received ban decisions but did not write them to Cloudflare.",
@@ -164,9 +180,14 @@ const caseStudyContent: Record<string, CaseStudy> = {
     broke: "The bouncer accepted ban decisions but did not send them to Cloudflare. The integration was fixed so decisions are now written to the edge.",
     result: "Verified end to end by banning my own phone’s IP and confirming it received “Access Denied.”",
     tools: ["CrowdSec", "Cloudflare Workers", "Edge enforcement"],
+    screenshot: {
+      src: enforcementScreenshot,
+      alt: "Mobile browser showing an Access Denied response from torianna.tech.",
+      caption: "End-to-end test: after banning my own phone's IP, the site returned Access Denied.",
+    },
   },
   "proxmox-lab": {
-    title: "Proxmox Virtualization Lab", category: "Virtualization", status: "In Progress", image: homelabImage, screenshot: "Proxmox host",
+    title: "Proxmox Virtualization Lab", category: "Virtualization", status: "In Progress",
     summary: "A dedicated i7-10700K / 16GB server prepared for virtualization and future security lab work.",
     overview: "A Proxmox virtualization host being set up for the next phase of the homelab.",
     problem: "The current project notes describe the server baseline and planned lab, but do not specify a separate problem statement.",
@@ -227,7 +248,14 @@ export function CaseStudyPage({ slug }: { slug?: string }) {
       <CaseSection title="What Broke & How I Fixed It" text={study.broke} />
       <CaseSection title="Result" text={study.result} />
       <section className="case-part"><Eyebrow>Project details</Eyebrow><h2>Tools Used</h2><div className="tag-list">{study.tools.map(tool => <span key={tool} className="tag">{tool}</span>)}</div></section>
-      <section className="screenshot-section"><Eyebrow>Project media</Eyebrow><h2>Screenshots</h2><div className="screenshot-placeholder" role="img" aria-label={`Screenshot placeholder for ${study.title}`}><span>Screenshot placeholder</span><strong>{study.screenshot}</strong><small>Image can be added when ready</small></div></section>
+      {study.screenshot && <section className="screenshot-section"><Eyebrow>Project media</Eyebrow><h2>Screenshots</h2>
+        <figure className="case-screenshot-figure">
+          <a className="case-screenshot-link" href={study.screenshot.src} target="_blank" rel="noopener noreferrer" aria-label="Open full-size screenshot in a new tab">
+            <img className="case-screenshot" src={study.screenshot.src} alt={study.screenshot.alt} />
+          </a>
+          <figcaption>{study.screenshot.caption}</figcaption>
+        </figure>
+      </section>}
       {key === "detection-system" && <p className="case-note">Dashboard scope: activity observed in this self-hosted homelab.</p>}
     </div>
   </SiteShell>;
