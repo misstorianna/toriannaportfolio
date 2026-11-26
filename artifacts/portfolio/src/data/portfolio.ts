@@ -1,19 +1,19 @@
-import { Activity, Shield, Network, Server, Terminal } from "lucide-react";
+import { Activity, Shield, Network, Server } from "lucide-react";
 
 export const stack = [
   { name: "Ubuntu", role: "Dedicated host", icon: Server, detail: "A repurposed Surface laptop running Ubuntu hosts the portfolio and monitoring stack." },
   { name: "Suricata", role: "Network detection", icon: Network, detail: "An intrusion detection layer that watches network traffic and produces security events." },
-  { name: "CrowdSec", role: "Threat intelligence", icon: Shield, detail: "Adds community-powered threat intelligence and a path toward automated blocking." },
+  { name: "CrowdSec", role: "Threat intelligence", icon: Shield, detail: "Adds community-powered threat intelligence; ban decisions are enforced at the Cloudflare edge through a Worker bouncer." },
   { name: "Loki / Grafana", role: "Logs and views", icon: Activity, detail: "Centralizes logs and turns detection activity into views that are easier to inspect." },
 ];
 
 export const buildLog = [
   { number: "01", title: "Build the Linux foundation", status: "Foundation", summary: "Started with Raspberry Pi OS, terminal work, file management, and SSH access from the local network.", detail: "Those early experiments made the command line and remote administration familiar before moving the monitoring stack onto a more capable dedicated Ubuntu host.", tags: ["Raspberry Pi OS", "Linux", "SSH"] },
   { number: "02", title: "Understand the home network", status: "Foundation", summary: "Worked through router and switch concepts, LAN connectivity, IP addressing, and local troubleshooting.", detail: "This networking context is the foundation for understanding what a network sensor can see, where events originate, and how the host fits into the larger environment.", tags: ["DNS / DHCP", "TCP/IP", "Networking"] },
-  { number: "03", title: "Move the stack to Ubuntu", status: "Configured", summary: "Set up a dedicated Ubuntu machine as the home for the portfolio and security monitoring work.", detail: "Keeping the services on one dedicated host makes the system easier to reason about while the lab is still being built and documented.", tags: ["Ubuntu", "Nginx", "Dedicated host"] },
-  { number: "04", title: "Add network detection with Suricata", status: "Working", summary: "Added Suricata as the intrusion detection layer for observing network activity and generating events.", detail: "Suricata answers the visibility question: what is happening on the network? Its detections become useful input for the rest of the observability stack.", tags: ["Suricata", "Intrusion detection", "Events"] },
-  { number: "05", title: "Add threat intelligence with CrowdSec", status: "Working", summary: "Added CrowdSec to provide threat intelligence and identify behavior that should eventually drive a response.", detail: "Detection is working, but the response loop is not complete yet. The next milestone is a CrowdSec bouncer so flagged IPs are actually blocked instead of only logged.", tags: ["CrowdSec", "Threat intelligence", "Bouncer next"] },
-  { number: "06", title: "Centralize logs and build views", status: "In progress", summary: "Connected the monitoring story to Loki, Promtail, and Grafana for centralized logs and visualization.", detail: "The current dashboard makes the activity inspectable. The next pass is to turn that foundation into more meaningful views and alerting for real security events.", tags: ["Loki", "Promtail", "Grafana"] },
+  { number: "03", title: "Move the stack to Ubuntu", status: "Complete", summary: "Set up a dedicated Ubuntu machine as the home for the portfolio and security monitoring work.", detail: "Keeping the services on one dedicated host makes the system easier to reason about while the lab is being built and documented.", tags: ["Ubuntu", "Nginx", "Dedicated host"] },
+  { number: "04", title: "Add network detection with Suricata", status: "Complete", summary: "Added Suricata as the intrusion detection layer for observing network activity and generating events.", detail: "Suricata answers the visibility question: what is happening on the network? Its detections become useful input for the rest of the observability stack.", tags: ["Suricata", "Intrusion detection", "Events"] },
+  { number: "05", title: "Add threat intelligence with CrowdSec", status: "Complete", summary: "Added CrowdSec to provide threat intelligence and identify behavior that should drive a response.", detail: "CrowdSec ban decisions are enforced at the Cloudflare edge through a Worker bouncer. I verified enforcement by banning my own phone IP and receiving “Access Denied.”", tags: ["CrowdSec", "Threat intelligence", "Cloudflare Worker"] },
+  { number: "06", title: "Centralize logs and build views", status: "Complete", summary: "Connected the monitoring story to Loki, Promtail, and Grafana for centralized logs and visualization.", detail: "The custom Grafana dashboard covers web traffic by status, sensitive-file probes, top IPs, paths, and user agents, Suricata alerts by severity, CrowdSec bans, SSH logins, and log health.", tags: ["Loki", "Promtail", "Grafana", "Custom dashboard"] },
 ];
 
 export const projects = [
@@ -128,14 +128,8 @@ export const workExperience: WorkRole[] = [
   },
 ];
 
-export const recentActivity = [
-  { label: "Deployed CrowdSec on Ubuntu host", detail: "Homelab Detection Lab", status: "documented", icon: Shield },
-  { label: "Published custom Sigma rule to GitHub", detail: "Detection research", status: "ongoing", icon: Terminal },
-  { label: "Connected Loki / Promtail / Grafana", detail: "Visibility layer", status: "working", icon: Activity },
-];
-
 export const lastUpdated = {
-  iso: "2026-09-29",
-  label: "September 29, 2026",
-  note: "Added a few UI fixes. I've also been studying how to create custom detection rules and expect to release a few today.",
+  iso: "2026-11",
+  label: "November 2026",
+  note: "The detection dashboard and Cloudflare edge enforcement are complete. Proxmox lab setup is in progress.",
 };

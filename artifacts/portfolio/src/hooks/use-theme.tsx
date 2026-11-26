@@ -8,7 +8,7 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
 });
 
@@ -16,10 +16,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
       const stored = localStorage.getItem("portfolio-theme");
-      return (stored === "light" || stored === "dark") ? stored : "dark";
+      return (stored === "light" || stored === "dark") ? stored : "light";
     } catch {
       // Storage can be unavailable in restricted browsers; switching still works.
-      return "dark";
+      return "light";
     }
   });
 

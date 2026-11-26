@@ -1,10 +1,10 @@
 import { Link } from "wouter";
 import {
-  Activity, ArrowRight, BarChart3, BriefcaseBusiness, Check, ChevronRight, Cloud, Cpu, ExternalLink,
+  ArrowRight, BarChart3, BriefcaseBusiness, Check, ChevronRight, Cloud, Cpu, ExternalLink,
   Globe2, Layers3, Linkedin, Radar, Radio, Server, Shield, Terminal, type LucideIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { projects, pcBuildSpec, workExperience, recentActivity } from "@/data/portfolio";
+import { projects, pcBuildSpec, workExperience } from "@/data/portfolio";
 import { LINKEDIN_URL, SectionLabel, StatusDot } from "./shared";
 
 export function HeroSection({ onViewHomelab }: { onViewHomelab: () => void }) {
@@ -22,7 +22,7 @@ export function HeroSection({ onViewHomelab }: { onViewHomelab: () => void }) {
       </div>
       <div className="qcr-profile">
         <div className="qcr-profile-head"><span>/ operator profile</span><Terminal size={16} /></div>
-        <dl><dt>focus</dt><dd>defensive security</dd><dt>detection</dt><dd className="green"><StatusDot /> lab active</dd><dt>response loop</dt><dd>in progress</dd><dt>host</dt><dd>Ubuntu / dedicated</dd></dl>
+        <dl><dt>focus</dt><dd>defensive security</dd><dt>detection</dt><dd className="green"><StatusDot /> lab active</dd><dt>response loop</dt><dd>edge enforcement verified</dd><dt>host</dt><dd>Ubuntu / dedicated</dd></dl>
         <p className="qcr-note"><b>note</b> lab is live; dashboards are not public</p>
       </div>
     </div>
@@ -45,20 +45,12 @@ function NetworkDiagram() {
   const Leaf = ({ icon: Icon, label, sub, w = "w-28" }: { icon: LucideIcon; label: string; sub: string; w?: string }) => <div className={`${w} border border-dashed border-primary/35 bg-background p-3`}><Icon className="mb-2 h-4 w-4 text-primary" /><p className="font-mono text-[10px]">{label}</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">{sub}</p></div>;
   return <div className="border border-border bg-card/60 p-4 sm:p-6">
     <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><div><SectionLabel>Infrastructure map</SectionLabel><h3 className="text-xl font-medium">Portfolio hosting path</h3></div><span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-wider text-muted-foreground"><StatusDot /> documented topology</span></div>
-    <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">A view of how this site and the home detection stack fit together. Lines describe relationships, not live traffic.</p>
+    <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">A view of how this site and the home detection stack fit together.</p>
     <div className="overflow-x-auto pb-2"><div className="min-w-[42rem]">
       <div className="flex items-center gap-2"><Node icon={Globe2} label="Internet" sub="public edge" /><ArrowRight className="h-4 w-4 shrink-0 text-primary" /><Node icon={Cloud} label="Cloudflare Tunnel" sub="narrow public surface" wide /><ArrowRight className="h-4 w-4 shrink-0 text-primary" /><Node icon={Radio} label="nginx" sub="reverse proxy" /><ArrowRight className="h-4 w-4 shrink-0 text-primary" /><Node icon={Server} label="Ubuntu host" sub="dedicated machine" wide /><ArrowRight className="h-4 w-4 shrink-0 text-primary" /><Node icon={Globe2} label="torianna.tech" sub="portfolio endpoint" wide /></div>
       <div className="ml-[28rem] mt-3 h-5 w-px bg-primary/50" />
       <div className="ml-[17rem] flex items-start justify-center gap-3 border-t border-primary/35 pt-4"><Leaf icon={Shield} label="CrowdSec" sub="threat intel" /><Leaf icon={Radar} label="Suricata" sub="network IDS" /><Leaf icon={BarChart3} label="Loki + Grafana" sub="logs + views" w="w-36" /></div>
     </div></div>
-  </div>;
-}
-
-function ActivityFeed() {
-  return <div className="border border-border bg-card/60 p-5">
-    <div className="mb-5 flex items-center justify-between"><div><SectionLabel>Lab log</SectionLabel><h3 className="text-xl font-medium">Recent activity</h3></div><Activity className="h-4 w-4 text-primary" /></div>
-    <ul className="space-y-1">{recentActivity.map(item => { const Icon = item.icon; return <li key={item.label} className="flex gap-3 border-t border-border py-4 first:border-t-0 first:pt-0"><span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center bg-primary/10 text-primary"><Icon className="h-3.5 w-3.5" /></span><div className="min-w-0"><p className="text-sm leading-snug text-foreground">{item.label}</p><p className="mt-1 font-mono text-[10px] text-muted-foreground">{item.detail}</p></div><span className="ml-auto shrink-0 font-mono text-[9px] uppercase tracking-wider text-primary/80">{item.status}</span></li>; })}</ul>
-    <p className="mt-4 border-t border-border pt-4 font-mono text-[9px] uppercase tracking-wider text-muted-foreground">Lab milestones, not live SOC events</p>
   </div>;
 }
 
@@ -70,7 +62,7 @@ export function HomelabSection() {
         <h3 className="text-3xl font-semibold tracking-tight">Homelab</h3>
         <p className="mt-5 max-w-3xl text-base leading-relaxed text-foreground/90">This website is part of that lab. It runs on a self-managed Ubuntu server behind a Cloudflare Tunnel and is actively monitored by a stack that includes CrowdSec, Suricata, Loki, and Grafana, meaning real traffic is logged, flagged, and visualized. Deployments are automated too: a cron job on the host polls GitHub every 5 minutes, so a push is picked up on the next check and rebuilt and redeployed without manual server work.</p>
       </div>
-      <div className="flex shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-primary"><StatusDot /> documented / in progress</div>
+      <div className="flex shrink-0 items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-primary"><StatusDot /> documented / complete</div>
     </div>
     <div className="grid gap-5 md:grid-cols-2">
       <Link href="/homelab/website" className="qcr-link-card group flex flex-col border bg-card p-6 text-left" data-testid="link-homelab-website">
@@ -86,13 +78,13 @@ export function HomelabSection() {
         <span className="qcr-card-cta">View detection system <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
       </Link>
     </div>
-    <div className="qcr-overview-grid mt-5"><NetworkDiagram /><ActivityFeed /></div>
+    <div className="qcr-overview-grid mt-5"><NetworkDiagram /></div>
   </article>;
 }
 
 function PcSpecTable() {
   return <div className="mt-5 overflow-hidden border border-border bg-background/40">
-    <div className="flex items-center justify-between border-b border-border px-4 py-3"><span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><Cpu className="h-3.5 w-3.5 text-primary" /> current build / in progress</span><Layers3 className="h-4 w-4 text-primary" /></div>
+    <div className="flex items-center justify-between border-b border-border px-4 py-3"><span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground"><Cpu className="h-3.5 w-3.5 text-primary" /> current build specification</span><Layers3 className="h-4 w-4 text-primary" /></div>
     <table className="w-full text-left font-mono text-xs"><caption className="sr-only">Current PC build specification</caption><tbody className="divide-y divide-border">{pcBuildSpec.map(row => <tr key={row.label}><th scope="row" className="w-28 px-4 py-3 font-normal text-muted-foreground">{row.label}</th><td className={`px-4 py-3 text-right ${row.ready ? "text-foreground" : "italic text-muted-foreground/60"}`}>{row.value}</td><td className="w-8 px-3">{row.ready ? <Check className="h-3 w-3 text-primary" /> : <span className="text-muted-foreground">—</span>}</td></tr>)}</tbody></table>
   </div>;
 }
